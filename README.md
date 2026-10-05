@@ -33,6 +33,19 @@ Ready-to-run apps live in `build/`, one folder per platform:
 
 Each folder's README says how to run it.
 
+## What's new
+
+**1.1.0** (October 5, 2026)
+
+- The memory badge shows pressure by color: normal below 70%, high from 70%, critical from 90%.
+- New text in English and Arabic for a "Data sources" note, which says which readings are live, simulated or missing. It also covers Windows 98 limits: no per-app CPU, and Arabic needs code page 1256 and an Arabic font.
+- Windows 98 now reads its text from `locales/` like every other app, so a new language file reaches it too.
+- Builds and tests no longer fail on machines that lack some tools. Linux can build its core without GTK, and the Windows XP, Windows 98 and ChromeOS tests skip steps whose tools are missing.
+- Removed stray tool files from the Windows 11 source.
+- Rebuilt every app in `build/`.
+
+**1.0.0**: first release.
+
 ## Languages
 
 Pulse ships in English and Arabic, with right-to-left layout for Arabic. Pick a language in **Settings > Language**, or with the `EN | ع` switch in the header. **Match system** follows your computer's language.

@@ -186,7 +186,16 @@
     "listSep": " · ",
     "endFailed": "Couldn't end {app}",
     "acPower": "On AC power",
-    "noBattery": "No battery"
+    "noBattery": "No battery",
+    "srcTitle": "Data sources",
+    "srcLive": "Live",
+    "srcSim": "Simulated",
+    "srcNone": "Not available",
+    "srcLine9x": "Data: {list}",
+    "srcLineNt": "NT host: no {missing}. Using {api}.",
+    "notOnNt": "Not used on NT",
+    "perAppNa": "Per-app CPU is not available on Windows 9x",
+    "arabicNa": "Arabic needs code page 1256 and an Arabic font"
   },
   "hardware": {
     "coreP": "P-Cores",

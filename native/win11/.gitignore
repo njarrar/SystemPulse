@@ -4,3 +4,4 @@ artifacts/
 src/Pulse.App/Strings/
 *.user
 .vs/
+.mono/

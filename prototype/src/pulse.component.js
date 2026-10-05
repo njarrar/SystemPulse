@@ -576,6 +576,11 @@ class Component extends DCLogic {
       pcW: Math.max(2, uS.a) + '%', ecW: Math.max(2, uS.b) + '%', gpuW: Math.max(2, gp) + '%', pcVal: pct(uS.a), ecVal: pct(uS.b), gpuVal: pct(gp), gpuNow: gp,
       cpuCard: { high: cpuHigh, ink: cpuHigh ? 'var(--warn-ink)' : 'var(--ink)', border: cpuHigh ? 'var(--warn-line)' : 'var(--card-b)' },
       memOf: tt('memOf', { used: memC.used + ' ' + M.u, total: memC.total + ' ' + M.u }),
+      memP: L.ram >= 90
+        ? { label: tt('pressureCritical'), bg: 'var(--thm-tint)', ink: 'var(--crit-ink)', dot: 'var(--crit)' }
+        : L.ram >= 70
+          ? { label: tt('pressureHigh'), bg: 'var(--warn-tint)', ink: 'var(--warn-ink)', dot: 'var(--warn)' }
+          : { label: tt('pressure'), bg: 'var(--cpu-tint)', ink: 'var(--cpu-ink)', dot: 'var(--cpu)' },
       mem: { w1: (appV / M.total * 100).toFixed(1) + '%', w2: (M.seg[1] / M.total * 100).toFixed(1) + '%', w3: (M.seg[2] / M.total * 100).toFixed(1) + '%', v1: memC.app + ' ' + M.u, v2: memC.s2 + ' ' + M.u, v3: memC.s3 + ' ' + M.u, v4: memC.free + ' ' + M.u, l2: R(M.l2), l3: R(M.l3) },
       disk: { name: R(pf.disk.name), usedTxt: tt('used', { pct: pct(49) }), freeTxt: tt('free', { value: pf.disk.free }) },
       netName: R(pf.net.name),

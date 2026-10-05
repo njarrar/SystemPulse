@@ -3,8 +3,8 @@
 1 ICON "pulse.ico"
 
 1 VERSIONINFO
-FILEVERSION 1,0,0,0
-PRODUCTVERSION 1,0,0,0
+FILEVERSION 1,1,0,0
+PRODUCTVERSION 1,1,0,0
 FILEOS VOS_NT_WINDOWS32
 FILETYPE VFT_APP
 BEGIN
@@ -14,7 +14,7 @@ BEGIN
     BEGIN
       VALUE "FileDescription", "Pulse system vitals"
       VALUE "ProductName", "Pulse"
-      VALUE "FileVersion", "1.0.0"
+      VALUE "FileVersion", "1.1.0"
       VALUE "OriginalFilename", "pulse.exe"
     END
   END

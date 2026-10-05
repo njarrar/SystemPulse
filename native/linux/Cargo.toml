@@ -1,6 +1,6 @@
 [package]
 name = "pulse"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2021"
 description = "Pulse system vitals for GNOME: a top bar entry and a 420px flyout"
 license = "MIT"
@@ -9,6 +9,7 @@ build = "build.rs"
 [[bin]]
 name = "pulse"
 path = "src/main.rs"
+required-features = ["gui"]
 
 [[bin]]
 name = "pulse-catalog"
@@ -18,13 +19,17 @@ path = "src/bin/pulse-catalog.rs"
 name = "pulse"
 path = "src/lib.rs"
 
+[features]
+default = ["gui"]
+gui = ["dep:gtk", "dep:adw", "dep:gdk4-x11", "dep:pangocairo", "dep:async-channel", "dep:zbus"]
+
 [dependencies]
-gtk = { package = "gtk4", version = "0.11", features = ["v4_14"] }
-adw = { package = "libadwaita", version = "0.9", features = ["v1_5"] }
-gdk4-x11 = { version = "0.11", features = ["xlib"] }
-pangocairo = "0.22"
-async-channel = "2"
-zbus = { version = "5", default-features = false, features = ["blocking-api", "async-io"] }
+gtk = { package = "gtk4", version = "0.11", features = ["v4_14"], optional = true }
+adw = { package = "libadwaita", version = "0.9", features = ["v1_5"], optional = true }
+gdk4-x11 = { version = "0.11", features = ["xlib"], optional = true }
+pangocairo = { version = "0.22", optional = true }
+async-channel = { version = "2", optional = true }
+zbus = { version = "5", default-features = false, features = ["blocking-api", "async-io"], optional = true }
 serde_json = "1"
 libc = "0.2"
 

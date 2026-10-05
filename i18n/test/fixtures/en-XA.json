@@ -186,7 +186,16 @@
     "listSep": " · ",
     "endFailed": "[Cóúldñ't éñd {app} ẋẋẋ]",
     "acPower": "[Óñ ÁC pówér ẋẋ]",
-    "noBattery": "[Nó báttérý ẋ]"
+    "noBattery": "[Nó báttérý ẋ]",
+    "srcTitle": "[Dátá šóúrçéš ẋẋ]",
+    "srcLive": "[Lívé ẋ]",
+    "srcSim": "[Símúlátéd ẋ]",
+    "srcNone": "[Nót áváíláblé ẋẋẋ]",
+    "srcLine9x": "[Dátá: {list} ẋ]",
+    "srcLineNt": "[NT hóšt: ñó {missing}. Úšíñg {api}. ẋẋẋẋẋẋ]",
+    "notOnNt": "[Nót úšéd óñ NT ẋẋẋ]",
+    "perAppNa": "[Pér-ápp CPÚ íš ñót áváíláblé óñ Wíñdówš 9x ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+    "arabicNa": "[Árábíç ñéédš çódé págé 1256 áñd áñ Árábíç fóñt ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]"
   },
   "hardware": {
     "coreP": "[P-Córéš ẋ]",

@@ -32,9 +32,9 @@ DEPS     := $(SRC) src/i18n.h src/plural.h src/text.h src/telemetry.h
 
 all: $(BUILD)/pulse98.exe
 
-$(BUILD)/catalog.c: tools/gen_catalog.py $(wildcard $(LOCALES)/*.json) $(wildcard locales-native/*.json)
+$(BUILD)/catalog.c: tools/gen_catalog.py $(wildcard $(LOCALES)/*.json)
 	@mkdir -p $(BUILD)
-	$(PYTHON) tools/gen_catalog.py $(LOCALES) locales-native $@
+	$(PYTHON) tools/gen_catalog.py $(LOCALES) $@
 
 $(BUILD)/vectors.h: tools/gen_vectors.py $(VECTORS)
 	@mkdir -p $(BUILD)
@@ -56,9 +56,11 @@ $(BUILD)/test_i18n: tests/test_i18n.c src/i18n.c src/plural.c $(BUILD)/catalog.c
 $(BUILD)/test_i18n.exe: tests/test_i18n.c src/i18n.c src/plural.c $(BUILD)/catalog.c $(BUILD)/vectors.h
 	$(WINCC) $(WARN) -march=pentium2 -Isrc -I$(BUILD) -o $@ tests/test_i18n.c src/i18n.c src/plural.c $(BUILD)/catalog.c
 
-test: $(BUILD)/test_i18n $(BUILD)/test_i18n.exe
+test: $(BUILD)/test_i18n
 	$(BUILD)/test_i18n
-	$(WINE) $(BUILD)/test_i18n.exe
+	@if command -v $(WINCC) >/dev/null 2>&1 && command -v $(WINE) >/dev/null 2>&1; then \
+		$(MAKE) $(BUILD)/test_i18n.exe && $(WINE) $(BUILD)/test_i18n.exe; \
+	fi
 
 dist: $(BUILD)/pulse98.exe
 	@mkdir -p dist

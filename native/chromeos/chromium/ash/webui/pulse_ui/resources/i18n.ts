@@ -283,6 +283,8 @@ export function isolate(s: string): string {
 type Section = 'strings'|'hardware';
 
 export class Locale {
+  readonly data: LocaleData;
+  readonly fallback: Locale|null;
   readonly code: string;
   readonly label: string;
   readonly name: string;
@@ -293,10 +295,12 @@ export class Locale {
   private readonly nf_ = new Map<number, Intl.NumberFormat>();
   private readonly warned_ = new Set<string>();
 
-  constructor(readonly data: LocaleData, readonly fallback: Locale|null) {
+  constructor(data: LocaleData, fallback: Locale|null) {
     if (!data || !data.code) {
       throw new Error('Locale file needs a "code"');
     }
+    this.data = data;
+    this.fallback = fallback;
     this.code = data.code;
     this.label = data.label || data.code.toUpperCase();
     this.name = data.name || data.code;
@@ -433,10 +437,13 @@ export interface LocaleEntry {
 }
 
 export class LocaleRegistry {
+  private readonly baseCode: string;
   private readonly data_ = new Map<string, LocaleData>();
   private readonly built_ = new Map<string, Locale>();
 
-  constructor(private readonly baseCode = 'en') {}
+  constructor(baseCode = 'en') {
+    this.baseCode = baseCode;
+  }
 
   static fromCatalog(catalog: Catalog): LocaleRegistry {
     const r = new LocaleRegistry(catalog.base || 'en');

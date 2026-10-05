@@ -40,6 +40,8 @@ def load_locales(with_fixtures=False):
         if os.path.basename(path) == 'schema.json':
             continue
         data = json.loads(read(path))
+        if not isinstance(data, dict) or not isinstance(data.get('code'), str):
+            continue
         data.pop('$schema', None)
         locales.append(data)
     return locales

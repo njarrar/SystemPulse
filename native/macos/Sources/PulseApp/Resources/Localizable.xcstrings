@@ -1789,6 +1789,23 @@
         }
       }
     },
+    "strings.arabicNa" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "العربية تحتاج صفحة الترميز 1256 وخطاً عربياً"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arabic needs code page 1256 and an Arabic font"
+          }
+        }
+      }
+    },
     "strings.back" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2620,6 +2637,23 @@
         }
       }
     },
+    "strings.notOnNt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير مستخدم في NT"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not used on NT"
+          }
+        }
+      }
+    },
     "strings.now" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2756,6 +2790,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Peak %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "strings.perAppNa" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "استهلاك المعالج لكل تطبيق غير متاح في Windows 9x"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Per-app CPU is not available on Windows 9x"
           }
         }
       }
@@ -3152,6 +3203,110 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "These switches turn on demo data."
+          }
+        }
+      }
+    },
+    "strings.srcLine9x" : {
+      "comment" : "Arguments: 1=list",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "البيانات: %1$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data: %1$@"
+          }
+        }
+      }
+    },
+    "strings.srcLineNt" : {
+      "comment" : "Arguments: 1=missing 2=api",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مضيف NT: لا يوجد %1$@. يُستخدم %2$@."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NT host: no %1$@. Using %2$@."
+          }
+        }
+      }
+    },
+    "strings.srcLive" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مباشر"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live"
+          }
+        }
+      }
+    },
+    "strings.srcNone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير متاح"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not available"
+          }
+        }
+      }
+    },
+    "strings.srcSim" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محاكاة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simulated"
+          }
+        }
+      }
+    },
+    "strings.srcTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مصادر البيانات"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data sources"
           }
         }
       }

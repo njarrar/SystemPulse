@@ -213,11 +213,11 @@ export class Locale {
     nf_ = new Map();
     warned_ = new Set();
     constructor(data, fallback) {
-        this.data = data;
-        this.fallback = fallback;
         if (!data || !data.code) {
             throw new Error('Locale file needs a "code"');
         }
+        this.data = data;
+        this.fallback = fallback;
         this.code = data.code;
         this.label = data.label || data.code.toUpperCase();
         this.name = data.name || data.code;

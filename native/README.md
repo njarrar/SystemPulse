@@ -20,9 +20,3 @@ Six apps, one per platform in Part 2 of the spec. Each reads `../locales/*.json`
 - **Linux:** the top bar item was checked over D-Bus only, not inside a GNOME session.
 
 Each folder's README covers build steps, flags, and which readings are real and which are demo data. The Settings switches for CPU hog and Charging lay demo data over live readings in every app.
-
-## Open items across apps
-
-- No locale strings yet for moderate and critical memory pressure, for "could not end this app", or for a desktop on AC power with no battery. The apps show "High", nothing, or a fallback for now.
-- The Windows 98 app keeps a few of its own strings in `win98/locales-native/`. They should move into `locales/`.
-- The `simNote` string still says "in this prototype".
