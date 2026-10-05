@@ -4,6 +4,19 @@ Your system's vitals, in a flash. صحة جهازك بنظرة واحدة.
 
 Pulse is a small, local-only system monitor (no network use) with one native app per platform: macOS, Windows 11, Linux (GNOME), ChromeOS, Windows XP and Windows 98 SE. A tray or menu bar readout opens a 420px panel with CPU, memory, energy, thermal, GPU, storage, network and top apps, each with a 10-minute history.
 
+## Screenshots
+
+From the design page (`build/prototype`), in English and Arabic.
+
+| Platform | English | العربية |
+|---|---|---|
+| **macOS** | <img src="docs/screenshots/macos-en.png" width="300" alt="Pulse on macOS, English"> | <img src="docs/screenshots/macos-ar.png" width="300" alt="Pulse on macOS, Arabic"> |
+| **Windows 11** | <img src="docs/screenshots/windows-11-en.png" width="300" alt="Pulse on Windows 11, English"> | <img src="docs/screenshots/windows-11-ar.png" width="300" alt="Pulse on Windows 11, Arabic"> |
+| **Linux (GNOME)** | <img src="docs/screenshots/linux-en.png" width="300" alt="Pulse on Linux (GNOME), English"> | <img src="docs/screenshots/linux-ar.png" width="300" alt="Pulse on Linux (GNOME), Arabic"> |
+| **ChromeOS** | <img src="docs/screenshots/chromeos-en.png" width="300" alt="Pulse on ChromeOS, English"> | <img src="docs/screenshots/chromeos-ar.png" width="300" alt="Pulse on ChromeOS, Arabic"> |
+| **Windows XP** | <img src="docs/screenshots/windows-xp-en.png" width="300" alt="Pulse on Windows XP, English"> | <img src="docs/screenshots/windows-xp-ar.png" width="300" alt="Pulse on Windows XP, Arabic"> |
+| **Windows 98 SE** | <img src="docs/screenshots/windows-98-en.png" width="300" alt="Pulse on Windows 98 SE, English"> | <img src="docs/screenshots/windows-98-ar.png" width="300" alt="Pulse on Windows 98 SE, Arabic"> |
+
 ## Download
 
 Ready-to-run apps live in `build/`, one folder per platform:
@@ -34,6 +47,7 @@ i18n/          shared language engine, checks and tests
 native/        one app per platform (see native/README.md)
 prototype/     source of the design page
 build/         ready-to-run apps
+docs/          screenshots
 .github/       builds and checks that run on every push
 ```
 
