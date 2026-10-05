@@ -65,8 +65,8 @@ final class PulseStore: ObservableObject {
     var endedCount: Int { endedApps.count }
 
     // Demo switches (Settings): drawn over real data, never saved.
-    @Published var simHog = false { didSet { if simHog != oldValue { if simHog { hogDismissed = false }; publish(record: true) } } }
-    @Published var simCharging = false { didSet { if simCharging != oldValue { publish(record: true) } } }
+    @Published var simHog = false { didSet { if simHog != oldValue { if simHog { hogDismissed = false }; publish(recordHistory: true) } } }
+    @Published var simCharging = false { didSet { if simCharging != oldValue { publish(recordHistory: true) } } }
     @Published var contentHeight: CGFloat = 600
 
     private let defaults = UserDefaults.standard
@@ -95,7 +95,7 @@ final class PulseStore: ObservableObject {
         scheduleTimer()
         // Follow a change to the system language while "Match system" is on.
         NotificationCenter.default.addObserver(forName: NSLocale.currentLocaleDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
                 guard let self, self.languageChoice == nil else { return }
                 self.localeCode = PulseStore.systemCode(self.registry)
             }
@@ -159,7 +159,7 @@ final class PulseStore: ObservableObject {
         timer = nil
         guard live else { return }
         let t = Timer(timeInterval: PulseStore.interval, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.tick() }
+            Task { @MainActor [weak self] in self?.tick() }
         }
         t.tolerance = 0.2
         RunLoop.main.add(t, forMode: .common)
@@ -173,7 +173,7 @@ final class PulseStore: ObservableObject {
             .filter { $0.activationPolicy == .regular && !$0.isTerminated }
             .map { AppIdentity(pid: $0.processIdentifier, name: $0.localizedName ?? $0.bundleIdentifier ?? "pid \($0.processIdentifier)", bundleID: $0.bundleIdentifier) }
         engine.sample(apps: apps) { [weak self] snap, hotspot in
-            Task { @MainActor in self?.ingest(snap, hotspot: hotspot) }
+            Task { @MainActor [weak self] in self?.ingest(snap, hotspot: hotspot) }
         }
     }
 
@@ -189,20 +189,20 @@ final class PulseStore: ObservableObject {
         // Drop ended apps from the list once they are really gone.
         let alive = Set(s.apps.flatMap { $0.pids })
         for i in endedApps.indices { endedApps[i].pids = endedApps[i].pids.filter { alive.contains($0) } }
-        publish(record: true, fresh: true)
+        publish(recordHistory: true, fresh: true)
         hasData = hasData || s.cpu.perCore.count > 0
     }
 
     /// Applies the demo overlay and ended apps to the last real sample and
     /// publishes it. Switch, End and Restore call this at once, so CPU,
     /// power, temperature and sparklines move even while polling is paused.
-    private func publish(record: Bool, fresh: Bool = false) {
+    private func publish(recordHistory: Bool, fresh: Bool = false) {
         let ended = Set(endedApps.flatMap { $0.pids })
         let r = DemoOverlay(hog: simHog, charging: simCharging).apply(raw, ended: ended)
         let s = r.snapshot
         let t = s.time
         // The first CPU reading has no previous ticks to compare with.
-        if record && (hasData || s.cpu.perCore.count > 0) {
+        if recordHistory && (hasData || s.cpu.perCore.count > 0) {
             record("cpu", s.cpu.total, at: t)
             record("mem", s.memory.usedPercent, at: t)
             record("nrg", s.power.drawWatts, at: t)
@@ -285,7 +285,7 @@ final class PulseStore: ObservableObject {
         // A hog that was just ended stops counting toward the alert.
         if hogID == a.id { hogDismissed = false }
         if case .detail(.app(a.id)) = route { route = .overview }
-        publish(record: true)
+        publish(recordHistory: true)
         showToast(t("toastEnded", ["app": .text(name)]))
     }
 
@@ -303,7 +303,7 @@ final class PulseStore: ObservableObject {
             }
         }
         endedApps = []
-        publish(record: true)
+        publish(recordHistory: true)
         showToast(t("toastRestored"))
         // Pick up the relaunched apps without waiting for the next poll.
         Task { @MainActor [weak self] in

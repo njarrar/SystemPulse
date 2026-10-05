@@ -24,8 +24,8 @@ final class StatusItemController: NSObject {
             button.image = image
             FlyoutController.statusButton = button
         }
-        store.$snapshot.sink { [weak self] _ in Task { @MainActor in self?.render() } }.store(in: &bag)
-        store.$localeCode.sink { [weak self] _ in Task { @MainActor in self?.render() } }.store(in: &bag)
+        store.$snapshot.sink { [weak self] _ in Task { @MainActor [weak self] in self?.render() } }.store(in: &bag)
+        store.$localeCode.sink { [weak self] _ in Task { @MainActor [weak self] in self?.render() } }.store(in: &bag)
         render()
     }
 

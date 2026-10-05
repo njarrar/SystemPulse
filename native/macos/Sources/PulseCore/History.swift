@@ -124,7 +124,7 @@ public struct HogDetector {
 
 /// Chart geometry shared by sparklines and detail charts.
 public enum ChartMath {
-    public struct Point: Equatable { public var x: Double; public var y: Double }
+    public struct Point: Equatable, Sendable { public var x: Double; public var y: Double }
 
     /// Catmull-Rom to cubic Bezier: returns (control1, control2, end) per segment.
     public static func smooth(_ p: [Point]) -> [(Point, Point, Point)] {

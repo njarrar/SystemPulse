@@ -68,10 +68,10 @@ final class FlyoutController {
         panel.onCancel = { [weak self] in self?.handleCancel() }
 
         store.$contentHeight.removeDuplicates().sink { [weak self] _ in
-            Task { @MainActor in self?.reposition() }
+            Task { @MainActor [weak self] in self?.reposition() }
         }.store(in: &bag)
-        store.$themeOverride.sink { [weak self] t in Task { @MainActor in self?.applyTheme(t) } }.store(in: &bag)
-        store.$localeCode.sink { [weak self] _ in Task { @MainActor in self?.reposition() } }.store(in: &bag)
+        store.$themeOverride.sink { [weak self] t in Task { @MainActor [weak self] in self?.applyTheme(t) } }.store(in: &bag)
+        store.$localeCode.sink { [weak self] _ in Task { @MainActor [weak self] in self?.reposition() } }.store(in: &bag)
         FlyoutController.shared = self
     }
 
@@ -113,7 +113,7 @@ final class FlyoutController {
         }
         button.highlight(true)
         outsideMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] _ in
-            Task { @MainActor in self?.close() }
+            Task { @MainActor [weak self] in self?.close() }
         }
     }
 
@@ -128,7 +128,7 @@ final class FlyoutController {
             ctx.duration = 0.12
             panel.animator().alphaValue = 0
         }, completionHandler: { [weak self] in
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
                 self?.panel.orderOut(nil)
                 self?.panel.alphaValue = 1
                 self?.store.route = .overview
