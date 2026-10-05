@@ -217,7 +217,16 @@ fn libc_sigterm() -> i32 {
 fn launch_info_reads_argv_and_cwd() {
     let mut child = std::process::Command::new("sleep").arg("30").current_dir("/tmp").spawn().unwrap();
     let pid = child.id() as i32;
-    let l = procs::launch_info(std::path::Path::new("/"), "sleep", &[pid]).unwrap();
+    // Right after spawn the child may not have run exec yet, so wait for it.
+    let mut l = None;
+    for _ in 0..200 {
+        l = procs::launch_info(std::path::Path::new("/"), "sleep", &[pid]).filter(|l| l.argv.first().map(String::as_str) == Some("sleep"));
+        if l.is_some() {
+            break;
+        }
+        std::thread::sleep(std::time::Duration::from_millis(10));
+    }
+    let l = l.unwrap();
     assert_eq!(l.argv, vec!["sleep".to_string(), "30".to_string()]);
     assert_eq!(l.cwd.as_deref(), Some(std::path::Path::new("/tmp")));
     procs::terminate(&[pid]);
