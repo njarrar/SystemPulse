@@ -1,0 +1,105 @@
+# Pulse for Windows 11: test the platform-neutral library, then build and
+# publish the WinUI 3 app for x64 and ARM64 with Native AOT.
+name: win11
+
+on:
+  push:
+    paths:
+      - "native/win11/**"
+      - "locales/**"
+      - ".github/workflows/win11.yml"
+  pull_request:
+    paths:
+      - "native/win11/**"
+      - "locales/**"
+      - ".github/workflows/win11.yml"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: pwsh
+    working-directory: native/win11
+
+env:
+  DOTNET_NOLOGO: "1"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Unit tests (i18n engine, plural vectors, .resw round trip, formatting, history)
+        run: dotnet test tests/Pulse.Core.Tests -c Release --logger "trx;LogFileName=core.trx" --results-directory TestResults
+      - name: Catalog generator (locales/*.json to Strings/<lang>/Resources.resw)
+        run: |
+          dotnet run --project tools/Pulse.CatalogGen -c Release -- ../../locales $env:RUNNER_TEMP/strings
+          Get-ChildItem -Recurse $env:RUNNER_TEMP/strings
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: native/win11/TestResults
+
+  build:
+    needs: test
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: x64
+            rid: win-x64
+          - platform: ARM64
+            rid: win-arm64
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Build (${{ matrix.platform }})
+        run: dotnet build src/Pulse.App/Pulse.App.csproj -c Release -p:Platform=${{ matrix.platform }} -r ${{ matrix.rid }}
+      - name: Publish with Native AOT (${{ matrix.platform }})
+        run: dotnet publish src/Pulse.App/Pulse.App.csproj -c Release -p:Platform=${{ matrix.platform }} -r ${{ matrix.rid }} -o publish/${{ matrix.rid }}
+      - name: Check the published app
+        run: |
+          $exe = "publish/${{ matrix.rid }}/Pulse.exe"
+          if (-not (Test-Path $exe)) { throw "Pulse.exe missing" }
+          if (-not (Test-Path "publish/${{ matrix.rid }}/resources.pri") -and -not (Test-Path "publish/${{ matrix.rid }}/Pulse.pri")) { Write-Warning "no .pri found; the app will fall back to Strings/*.resw" }
+          Get-ChildItem publish/${{ matrix.rid }} | Sort-Object Length -Descending | Select-Object -First 15 Name, Length
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Pulse-win11-${{ matrix.rid }}
+          path: native/win11/publish/${{ matrix.rid }}
+
+  publish:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: Pulse-win11-*
+          path: /tmp/win
+      - name: Put the app in build/windows-11
+        run: |
+          sudo apt-get install -y zip >/dev/null
+          for rid in win-x64 win-arm64; do
+            (cd /tmp/win/Pulse-win11-$rid && zip -qr $GITHUB_WORKSPACE/build/windows-11/Pulse-$rid.zip .)
+          done
+          git config user.name "njarrar"
+          git config user.email "njarrar@gmail.com"
+          git add build/windows-11
+          git diff --cached --quiet && exit 0
+          git commit -m "Update Windows 11 app in build/windows-11"
+          for i in 1 2 3 4; do git pull --rebase origin main && git push origin HEAD:main && break; sleep $((i*5)); done

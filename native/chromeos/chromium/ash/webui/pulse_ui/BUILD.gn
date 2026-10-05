@@ -1,0 +1,123 @@
+# Copyright 2026 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//build/config/locales.gni")
+import("//tools/grit/grit_rule.gni")
+
+assert(is_chromeos, "Pulse is ChromeOS only")
+
+declare_args() {
+  # Where the Pulse locale files (en.json, ar.json, ...) live. Adding a file
+  # here adds a language; no build file changes.
+  pulse_locales_dir = "//ash/webui/pulse_ui/locales"
+}
+
+_catalog_dir = "$target_gen_dir/catalog"
+
+# locales/*.json -> pulse_catalog.json (served to the page), a GRIT .grd
+# with one .xtb per Chrome pak locale, and the IDS table. The depfile names
+# the locales directory itself, so a new locale file reruns the action.
+action("pulse_catalog") {
+  script = "tools/gen_pulse_catalog.py"
+  depfile = "$target_gen_dir/pulse_catalog.d"
+  _stamp = "$target_gen_dir/pulse_catalog.stamp"
+  outputs = [
+    _stamp,
+    "$_catalog_dir/pulse_catalog.json",
+    "$_catalog_dir/pulse_strings.grd",
+    "$_catalog_dir/pulse_strings_ids.inc",
+  ]
+  foreach(locale, platform_pak_locales) {
+    outputs += [ "$_catalog_dir/translations/pulse_strings_${locale}.xtb" ]
+  }
+  args = [
+    "--locales-dir",
+    rebase_path(pulse_locales_dir, root_build_dir),
+    "--out-dir",
+    rebase_path(_catalog_dir, root_build_dir),
+    "--pak-locales",
+    string_join(",", platform_pak_locales),
+    "--stamp",
+    rebase_path(_stamp, root_build_dir),
+    "--depfile",
+    rebase_path(depfile, root_build_dir),
+  ]
+}
+
+# Packs the generated strings into pulse_strings_<locale>.pak, which
+# chrome_repack_locales merges into each locale pak (see patches/).
+grit("pulse_strings") {
+  source = "$_catalog_dir/pulse_strings.grd"
+  source_is_generated = true
+  output_dir = "$root_gen_dir/ash/webui/pulse_ui"
+  outputs = [ "grit/pulse_strings.h" ]
+  foreach(locale, platform_pak_locales) {
+    outputs += [ "pulse_strings_${locale}.pak" ]
+  }
+  deps = [ ":pulse_catalog" ]
+}
+
+source_set("telemetry") {
+  sources = [
+    "telemetry/proc_parsers.cc",
+    "telemetry/proc_parsers.h",
+    "telemetry/process_grouper.cc",
+    "telemetry/process_grouper.h",
+    "telemetry/pulse_sampler.cc",
+    "telemetry/pulse_sampler.h",
+  ]
+  public_deps = [ "//ash/webui/pulse_ui/mojom" ]
+  deps = [
+    "//base",
+    "//chromeos/ash/services/cros_healthd/public/cpp",
+    "//chromeos/ash/services/cros_healthd/public/mojom",
+    "//chromeos/dbus/power",
+    "//chromeos/dbus/power:power_manager_proto",
+    "//chromeos/services/network_health/public/mojom",
+    "//content/public/browser",
+    "//gpu/config",
+  ]
+}
+
+static_library("pulse_ui") {
+  sources = [
+    "pulse_page_handler.cc",
+    "pulse_page_handler.h",
+    "pulse_prefs.h",
+    "pulse_ui.cc",
+    "pulse_ui.h",
+    "pulse_ui_delegate.h",
+    "url_constants.cc",
+    "url_constants.h",
+  ]
+  public_deps = [
+    ":pulse_strings",
+    ":telemetry",
+    "//ash/webui/pulse_ui/mojom",
+  ]
+  deps = [
+    "//ash/webui/common:trusted_types_util",
+    "//ash/webui/pulse_ui/resources:resources",
+    "//ash/webui/system_apps/public:system_web_app_config",
+    "//ash/webui/system_apps/public:system_web_app_type",
+    "//components/prefs",
+    "//content/public/browser",
+    "//mojo/public/cpp/bindings",
+    "//ui/webui",
+  ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+  sources = [
+    "telemetry/proc_parsers_unittest.cc",
+    "telemetry/process_grouper_unittest.cc",
+  ]
+  deps = [
+    ":telemetry",
+    "//base",
+    "//testing/gtest",
+  ]
+}

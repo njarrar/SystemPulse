@@ -1,0 +1,76 @@
+<!doctype html>
+<!-- Dev harness for chrome://pulse. Serves the same page code against a mock
+     Mojo handler, inside a frame that looks like a ChromeOS app window.
+     Query: ?lang=ar  ?theme=dark  ?view=mem|settings  ?hog=0  ?charging=1  ?live=0
+            ?sim=hog,charging (Settings demo switches)  ?end=1  ?menu=1  ?catalog=xa
+            ?pref=ar (saved language)  ?reset=1  ?battery=0  ?pressure=high|critical
+            ?fail=1&endfail=1 (ending an app fails) -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulse</title>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="pulse_tokens.css">
+  <style>
+    html, body { block-size: 100%; }
+    body.harness {
+      margin: 0; min-block-size: 100vh; display: grid; place-items: end;
+      padding: 24px 24px 72px; box-sizing: border-box;
+      background: var(--pulse-desk);
+    }
+    .window {
+      inline-size: 420px; border-radius: var(--pulse-shape-window); overflow: hidden;
+      background: var(--pulse-sys-surface);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 30px 70px -12px rgba(14,30,25,0.24), 0 4px 14px rgba(14,30,25,0.06);
+    }
+    .caption {
+      block-size: 32px; display: flex; align-items: center; justify-content: flex-end; gap: 4px;
+      padding-inline: 12px 6px; background: var(--pulse-sys-surface); color: var(--pulse-sys-on-surface-variant);
+    }
+    .caption span { inline-size: 26px; block-size: 26px; display: grid; place-items: center; border-radius: 50%; font: 400 15px/1 sans-serif; }
+    .window[hidden] { display: none; }
+    /* Shelf with the Tier 1 readout (harness copy of ash PulseTray). */
+    .shelf {
+      position: fixed; inset-inline: 0; inset-block-end: 0; block-size: 48px;
+      display: flex; align-items: center; justify-content: space-between; padding-inline: 8px;
+      background: color-mix(in srgb, var(--pulse-sys-surface) 70%, transparent); backdrop-filter: blur(20px);
+      font: 600 13px/1 var(--pulse-type-family-text); color: var(--pulse-sys-on-surface);
+    }
+    .shelf .launcher { inline-size: 32px; block-size: 32px; border-radius: 50%; display: grid; place-items: center; }
+    .shelf .launcher::before { content: ""; inline-size: 14px; block-size: 14px; border-radius: 50%; border: 2px solid currentColor; }
+    .shelf-end { display: flex; align-items: center; gap: 6px; }
+    .pulse-tray {
+      display: flex; align-items: center; gap: 8px; block-size: 32px; padding-inline: 12px; border: 0;
+      border-radius: 999px; background: var(--pulse-sys-track); color: inherit; font: inherit; cursor: pointer;
+      font-variant-numeric: tabular-nums;
+    }
+    .pulse-tray.active { background: var(--pulse-sys-track-strong); }
+    .pulse-tray .dot { inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--pulse-cpu); animation: beat 1.5s ease-in-out infinite; }
+    .pulse-tray .wave { display: flex; align-items: center; gap: 2px; block-size: 14px; }
+    .pulse-tray .wave i { inline-size: 2px; border-radius: 1px; background: var(--pulse-cpu); }
+    .pulse-tray.alert .dot, .pulse-tray.alert .wave i { background: var(--pulse-warn); }
+    .pulse-tray.alert .cpu { color: var(--pulse-warn-ink); }
+    .pulse-tray .watts { color: var(--pulse-sys-on-surface-variant); }
+    .status-area { display: flex; align-items: center; gap: 8px; block-size: 32px; padding-inline: 12px; border-radius: 999px; background: var(--pulse-sys-track); }
+    .status-area .wifi { inline-size: 12px; block-size: 10px; background: currentColor; clip-path: polygon(50% 100%, 0 25%, 20% 5%, 50% 0, 80% 5%, 100% 25%); }
+    .status-area .batt { inline-size: 7px; block-size: 12px; border-radius: 2px; background: linear-gradient(to top, currentColor 84%, transparent 84%); box-shadow: inset 0 0 0 1.5px currentColor; }
+    @keyframes beat { 50% { opacity: .45; } }
+    @media (prefers-reduced-motion: reduce) { .pulse-tray .dot { animation: none; } }
+  </style>
+  <script>
+    // The real page gets lang and dir from loadTimeData ($i18n{language}).
+    const q = new URLSearchParams(location.search);
+    document.documentElement.lang = q.get('lang') || 'en';
+    if (q.get('theme')) document.documentElement.dataset.theme = q.get('theme');
+  </script>
+  <script type="module" src="dev_main.js"></script>
+</head>
+<body class="harness">
+  <div class="window" id="window">
+    <div class="caption" aria-hidden="true"><span>&#8211;</span><span>&#9633;</span><span>&#10005;</span></div>
+    <pulse-app></pulse-app>
+  </div>
+  <div class="shelf" aria-hidden="true"></div>
+</body>
+</html>

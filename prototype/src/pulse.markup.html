@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="6fb80ad1-f0f4-46b4-842d-b864fdbcc5a0"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("243853b6-9dcf-4ab6-a685-6af7c37d2ee6") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("48de1d2b-c26b-456f-b01d-9287ad371aef") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("35bb7c07-669d-445b-adcf-fea12f0b16cc") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8d6d64e8-9a6d-4ae2-90f8-fb78d459212d") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("1d3f73fb-c56c-4d3b-ad76-4e956db4ce06") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("15338912-5b17-4264-b42e-72fb86659a2b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9daad2c9-9e2d-4bf7-8702-d493e77d1a33") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("4ba2fae6-94e0-450c-85ea-c8866b317049") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("618a3761-666c-45ce-b919-38fcbda97a41") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9b7dcc24-3c66-4bac-aa93-8a08968d0e13") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("c7146454-bd53-4007-abbc-4f55f5c46b87") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("5add7d41-07ba-4d9c-9bd0-1c4ece8694b2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("bff9280d-61e5-41b9-a40f-03cc3e9cfa32") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("cf47952e-18a0-4f92-ad8b-d3f6d3cf1918") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("796d7a38-8c8c-4031-83b3-5b686eb1002c") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("5d63e5b8-c35f-48be-a03a-1fcd22d84432") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("7f178cdb-f71b-4ff3-adc8-ef654b975f59") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("0614a3ba-24cf-4df4-b835-53fff89b8df4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9812ef02-b64c-4b33-982a-5bfe61db54f0") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("06a27cb2-f71b-4737-a88d-13fe38097b59") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("153f9be5-93c3-4d48-8210-a2a745776b04") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("2df7829b-76a7-4c84-bcb0-03fe5daa552f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("866d487c-e284-486e-828d-3703b837a97f") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("4751ecb5-14c1-4189-ba8c-e5fd3f12022d") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("4748d55e-b87c-41f7-bafa-01e12c328c29") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ea97e685-7461-4667-8556-f34c3849bdd2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("151b306c-159a-46a6-9bca-ad1042f207e2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("1f25f6eb-27d6-468e-8ccc-e28342363443") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("df283401-c391-436e-ba23-e767a3cc5f1d") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("5c123c06-a472-40d4-9244-a3b1a4869b3b") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fb96d95c-ceb8-4bd8-bf33-8177e6d15b61") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("408299db-4929-48a7-a3b7-bafafaaa0ee2") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* math */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("2068dc29-6a73-409e-831b-07b3e2361775") format('woff2');
+  unicode-range: U+0302-0303, U+0305, U+0307-0308, U+0310, U+0312, U+0315, U+031A, U+0326-0327, U+032C, U+032F-0330, U+0332-0333, U+0338, U+033A, U+0346, U+034D, U+0391-03A1, U+03A3-03A9, U+03B1-03C9, U+03D1, U+03D5-03D6, U+03F0-03F1, U+03F4-03F5, U+2016-2017, U+2034-2038, U+203C, U+2040, U+2043, U+2047, U+2050, U+2057, U+205F, U+2070-2071, U+2074-208E, U+2090-209C, U+20D0-20DC, U+20E1, U+20E5-20EF, U+2100-2112, U+2114-2115, U+2117-2121, U+2123-214F, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211, U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336-237A, U+237C, U+2395, U+239B-23B7, U+23D0, U+23DC-23E1, U+2474-2475, U+25AF, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+27C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+3030, U+FF5B, U+FF5D, U+1D400-1D7FF, U+1EE00-1EEFF;
+}
+/* symbols */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("d86a2b9f-02f8-4f58-9abf-cb52f585d1d0") format('woff2');
+  unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("f105c994-7ef6-48fc-8f16-71b9cbcd85c0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("1aae0a14-d605-46e5-96ed-7f1be2214042") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("408299db-4929-48a7-a3b7-bafafaaa0ee2") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* math */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("2068dc29-6a73-409e-831b-07b3e2361775") format('woff2');
+  unicode-range: U+0302-0303, U+0305, U+0307-0308, U+0310, U+0312, U+0315, U+031A, U+0326-0327, U+032C, U+032F-0330, U+0332-0333, U+0338, U+033A, U+0346, U+034D, U+0391-03A1, U+03A3-03A9, U+03B1-03C9, U+03D1, U+03D5-03D6, U+03F0-03F1, U+03F4-03F5, U+2016-2017, U+2034-2038, U+203C, U+2040, U+2043, U+2047, U+2050, U+2057, U+205F, U+2070-2071, U+2074-208E, U+2090-209C, U+20D0-20DC, U+20E1, U+20E5-20EF, U+2100-2112, U+2114-2115, U+2117-2121, U+2123-214F, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211, U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336-237A, U+237C, U+2395, U+239B-23B7, U+23D0, U+23DC-23E1, U+2474-2475, U+25AF, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+27C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+3030, U+FF5B, U+FF5D, U+1D400-1D7FF, U+1EE00-1EEFF;
+}
+/* symbols */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("d86a2b9f-02f8-4f58-9abf-cb52f585d1d0") format('woff2');
+  unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("f105c994-7ef6-48fc-8f16-71b9cbcd85c0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("1aae0a14-d605-46e5-96ed-7f1be2214042") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("408299db-4929-48a7-a3b7-bafafaaa0ee2") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* math */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("2068dc29-6a73-409e-831b-07b3e2361775") format('woff2');
+  unicode-range: U+0302-0303, U+0305, U+0307-0308, U+0310, U+0312, U+0315, U+031A, U+0326-0327, U+032C, U+032F-0330, U+0332-0333, U+0338, U+033A, U+0346, U+034D, U+0391-03A1, U+03A3-03A9, U+03B1-03C9, U+03D1, U+03D5-03D6, U+03F0-03F1, U+03F4-03F5, U+2016-2017, U+2034-2038, U+203C, U+2040, U+2043, U+2047, U+2050, U+2057, U+205F, U+2070-2071, U+2074-208E, U+2090-209C, U+20D0-20DC, U+20E1, U+20E5-20EF, U+2100-2112, U+2114-2115, U+2117-2121, U+2123-214F, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211, U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336-237A, U+237C, U+2395, U+239B-23B7, U+23D0, U+23DC-23E1, U+2474-2475, U+25AF, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+27C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+3030, U+FF5B, U+FF5D, U+1D400-1D7FF, U+1EE00-1EEFF;
+}
+/* symbols */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("d86a2b9f-02f8-4f58-9abf-cb52f585d1d0") format('woff2');
+  unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("f105c994-7ef6-48fc-8f16-71b9cbcd85c0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("1aae0a14-d605-46e5-96ed-7f1be2214042") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* arabic */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("408299db-4929-48a7-a3b7-bafafaaa0ee2") format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;
+}
+/* math */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("2068dc29-6a73-409e-831b-07b3e2361775") format('woff2');
+  unicode-range: U+0302-0303, U+0305, U+0307-0308, U+0310, U+0312, U+0315, U+031A, U+0326-0327, U+032C, U+032F-0330, U+0332-0333, U+0338, U+033A, U+0346, U+034D, U+0391-03A1, U+03A3-03A9, U+03B1-03C9, U+03D1, U+03D5-03D6, U+03F0-03F1, U+03F4-03F5, U+2016-2017, U+2034-2038, U+203C, U+2040, U+2043, U+2047, U+2050, U+2057, U+205F, U+2070-2071, U+2074-208E, U+2090-209C, U+20D0-20DC, U+20E1, U+20E5-20EF, U+2100-2112, U+2114-2115, U+2117-2121, U+2123-214F, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211, U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336-237A, U+237C, U+2395, U+239B-23B7, U+23D0, U+23DC-23E1, U+2474-2475, U+25AF, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+27C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+3030, U+FF5B, U+FF5D, U+1D400-1D7FF, U+1EE00-1EEFF;
+}
+/* symbols */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("d86a2b9f-02f8-4f58-9abf-cb52f585d1d0") format('woff2');
+  unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("f105c994-7ef6-48fc-8f16-71b9cbcd85c0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("1aae0a14-d605-46e5-96ed-7f1be2214042") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("b436d790-9de9-4a40-a142-322e02779f40") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("c08d835f-6f08-46ec-b021-7a1c646a26a5") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("dee02cd4-4077-4afe-bb89-9e9ee9f03e00") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("19be5ee6-fac1-447b-916f-a7fcd08ec754") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("9bb2f71d-0b89-4364-97b1-074d26cdd55a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("b436d790-9de9-4a40-a142-322e02779f40") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("c08d835f-6f08-46ec-b021-7a1c646a26a5") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("dee02cd4-4077-4afe-bb89-9e9ee9f03e00") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("19be5ee6-fac1-447b-916f-a7fcd08ec754") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("9bb2f71d-0b89-4364-97b1-074d26cdd55a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("b436d790-9de9-4a40-a142-322e02779f40") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("c08d835f-6f08-46ec-b021-7a1c646a26a5") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("dee02cd4-4077-4afe-bb89-9e9ee9f03e00") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("19be5ee6-fac1-447b-916f-a7fcd08ec754") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("9bb2f71d-0b89-4364-97b1-074d26cdd55a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("b17cc7c8-a559-4ac1-8387-03f2afe73c52") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("d3a000df-2595-4340-a555-f3b6f8a1d7b3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fb44d2f9-9868-47dd-a41d-bc5912f9c0a6") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("a6429cea-3631-4772-ba5a-3964bd1bfad6") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("b17cc7c8-a559-4ac1-8387-03f2afe73c52") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("d3a000df-2595-4340-a555-f3b6f8a1d7b3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fb44d2f9-9868-47dd-a41d-bc5912f9c0a6") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("a6429cea-3631-4772-ba5a-3964bd1bfad6") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("b17cc7c8-a559-4ac1-8387-03f2afe73c52") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("d3a000df-2595-4340-a555-f3b6f8a1d7b3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fb44d2f9-9868-47dd-a41d-bc5912f9c0a6") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("a6429cea-3631-4772-ba5a-3964bd1bfad6") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("b17cc7c8-a559-4ac1-8387-03f2afe73c52") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("d3a000df-2595-4340-a555-f3b6f8a1d7b3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fb44d2f9-9868-47dd-a41d-bc5912f9c0a6") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("a6429cea-3631-4772-ba5a-3964bd1bfad6") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("b17cc7c8-a559-4ac1-8387-03f2afe73c52") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("d3a000df-2595-4340-a555-f3b6f8a1d7b3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("fb44d2f9-9868-47dd-a41d-bc5912f9c0a6") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("a6429cea-3631-4772-ba5a-3964bd1bfad6") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+html,body{margin:0;padding:0}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+*{scrollbar-width:thin}
+a{color:#047857;text-decoration:none}
+a:hover{color:#10B981}
+button{font-family:inherit}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 currentColor}80%{box-shadow:0 0 0 5px transparent}100%{box-shadow:0 0 0 0 transparent}}
+</style>
+</helmet>
+
+<div style="{{ vars }}">
+<div style="min-height:100vh;background:var(--page);color:var(--ink);font-family:var(--f-text);padding:14px clamp(8px, 3vw, 20px) 24px;box-sizing:border-box;transition:background .4s, color .4s">
+
+  <div dir="ltr" style="max-width:1280px;margin:0 auto 10px;display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;font-family:'Plus Jakarta Sans', sans-serif">
+    <div style="display:flex;align-items:center;gap:12px;min-width:0">
+      <span style="position:relative;width:36px;height:36px;border-radius:11px;background:linear-gradient(150deg,#FFFFFF,#E2F2EB);border:1px solid rgba(14,30,25,0.06);flex:none;overflow:hidden;box-sizing:border-box">
+        <span style="position:absolute;left:6px;top:9px;width:13px;height:13px;border-radius:50%;border:2px solid #10B981;box-shadow:0 0 9px rgba(16,185,129,0.6)"></span>
+        <span style="position:absolute;left:13px;top:9px;width:13px;height:13px;border-radius:50%;border:2px solid #0EA5E9;box-shadow:0 0 9px rgba(14,165,233,0.6)"></span>
+      </span>
+      <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+        <span style="font:800 20px/1 'Plus Jakarta Sans', sans-serif;letter-spacing:-0.01em;color:var(--page-ink)">Pulse</span>
+        <div style="font-size:12.5px;color:var(--page-ink2);display:flex;gap:2px 8px;flex-wrap:wrap"><span style="white-space:nowrap">Your system’s vitals, in a flash</span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic', sans-serif;white-space:nowrap">صحة جهازك بنظرة واحدة</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:2px;padding:3px;border-radius:12px;background:var(--page-track)">
+      <sc-for list="{{ platforms }}" as="p" hint-placeholder-count="6">
+        <button sc-camel-on-click="{{ p.onClick }}" aria-pressed="{{ p.on }}" style="height:30px;padding:0 12px;border:0;border-radius:9px;background:{{ p.bg }};color:{{ p.ink }};box-shadow:{{ p.sh }};font:600 12.5px 'Plus Jakarta Sans', sans-serif;white-space:nowrap;cursor:pointer;transition:background .2s, color .2s">{{ p.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div dir="{{ dir }}" lang="{{ lang }}" style="position:relative;max-width:1280px;height:clamp(760px, calc(100vh - 76px), 1240px);margin:0 auto;border-radius:20px;overflow:hidden;background:var(--wall);box-shadow:0 20px 60px -30px rgba(14,30,25,0.35);transition:background .4s">
+
+    <sc-if value="{{ isMac }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 10px;box-sizing:border-box;background:var(--menubar);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--hair);font-size:13px;z-index:3">
+        <div style="display:flex;align-items:center;gap:18px;min-width:0;overflow:hidden;flex:1 1 auto">
+          <span style="width:13px;height:13px;border-radius:50%;background:var(--ink);opacity:0.75;flex:none"></span>
+          <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="5"><span style="font-weight:{{ m.w }};white-space:nowrap">{{ m.label }}</span></sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;height:100%;min-width:0;overflow:hidden;flex:0 1 auto">
+          <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}">
+            <button sc-camel-on-click="{{ toggleOpen }}" aria-label="Pulse" dir="ltr" style="height:22px;display:flex;align-items:center;gap:8px;padding:0 8px;border:0;border-radius:6px;background:{{ barPress }};color:var(--ink);cursor:pointer;transition:background .15s;flex:none">
+              <span style="width:6px;height:6px;border-radius:50%;color:var(--cpu);background:currentColor;animation:pulseDot 2s ease-out infinite"></span>
+              <span style="display:flex;align-items:flex-end;gap:1.5px;height:14px">
+                <sc-for list="{{ wave }}" as="b" hint-placeholder-count="6"><span style="width:2.5px;height:{{ b.h }}px;border-radius:2px;background:var(--cpu);transition:height .5s"></span></sc-for>
+              </span>
+              <span style="min-width:54px;text-align:left;font:600 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:var(--ink2);font-weight:500">{{ t.barCpu }}</span> {{ cpuPct }}</span>
+              <span style="min-width:56px;text-align:left;font:600 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:var(--ink2);font-weight:500">{{ t.barRam }}</span> {{ ramPct }}</span>
+              <span style="min-width:44px;text-align:left;font:600 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:var(--nrg-ink)">⚡</span>{{ wattShort }}</span>
+              <span style="min-width:74px;text-align:left;font:600 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:var(--mem-ink)">↓</span> {{ netDown }}</span>
+            </button>
+          </sc-if>
+          <svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"></path><circle cx="12" cy="19.5" r="1"></circle></svg>
+          <span style="font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">{{ t.macClock }}</span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isWin }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;bottom:0;left:0;right:0;height:48px;display:flex;align-items:center;gap:6px;padding:0 10px;box-sizing:border-box;background:var(--taskbar);backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%);border-top:1px solid var(--hair);z-index:3">
+        <div style="flex:1 1 0;min-width:0"></div>
+        <div style="display:flex;gap:4px;min-width:0;overflow:hidden;flex:0 1 auto">
+          <span style="width:40px;height:40px;display:grid;place-items:center;flex:none"><span style="width:22px;height:22px;border-radius:5px;background:var(--ph)"></span></span>
+          <span style="width:40px;height:40px;display:grid;place-items:center;flex:none"><span style="width:22px;height:22px;border-radius:5px;background:var(--ph)"></span></span>
+          <span style="width:40px;height:40px;display:grid;place-items:center;flex:none"><span style="width:22px;height:22px;border-radius:5px;background:var(--ph)"></span></span>
+          <span style="width:40px;height:40px;display:grid;place-items:center;flex:none"><span style="width:22px;height:22px;border-radius:5px;background:var(--ph)"></span></span>
+        </div>
+        <div style="flex:1 1 0;min-width:0;overflow:hidden;display:flex;justify-content:flex-end;align-items:center;gap:6px">
+          <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}">
+            <button sc-camel-on-click="{{ toggleOpen }}" aria-label="Pulse" dir="ltr" style="height:36px;display:flex;align-items:center;gap:6px;padding:0 9px;border:0;border-radius:8px;background:{{ barPress }};color:var(--ink);cursor:pointer;transition:background .15s;flex:none">
+              <span style="width:6px;height:6px;border-radius:50%;color:var(--cpu);background:currentColor;animation:pulseDot 2s ease-out infinite"></span>
+              <span style="display:flex;align-items:flex-end;gap:1.5px;height:14px">
+                <sc-for list="{{ wave }}" as="b" hint-placeholder-count="6"><span style="width:2.5px;height:{{ b.h }}px;border-radius:2px;background:var(--cpu);transition:height .5s"></span></sc-for>
+              </span>
+              <span style="height:20px;display:inline-flex;align-items:center;padding:0 6px;border-radius:4px;background:var(--cpu-tint);color:var(--cpu-ink);font:600 11px var(--f-hero);font-variant-numeric:tabular-nums;min-width:52px;box-sizing:border-box">{{ barCpuText }}</span>
+              <span style="height:20px;display:inline-flex;align-items:center;padding:0 6px;border-radius:4px;background:var(--mem-tint);color:var(--mem-ink);font:600 11px var(--f-hero);font-variant-numeric:tabular-nums;min-width:54px;box-sizing:border-box">{{ barRamText }}</span>
+              <span style="height:20px;display:inline-flex;align-items:center;padding:0 6px;border-radius:4px;background:var(--nrg-tint);color:var(--nrg-ink);font:600 11px var(--f-hero);font-variant-numeric:tabular-nums;min-width:48px;box-sizing:border-box">⚡{{ wattShort }}</span>
+              <span style="height:20px;display:inline-flex;align-items:center;padding:0 6px;border-radius:4px;background:var(--track);color:var(--ink);font:600 11px var(--f-hero);font-variant-numeric:tabular-nums;min-width:66px;box-sizing:border-box">↓ {{ netDown }}</span>
+            </button>
+          </sc-if>
+          <svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"></path><circle cx="12" cy="19.5" r="1"></circle></svg>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;padding:0 6px;font-size:11.5px;line-height:1.3;font-variant-numeric:tabular-nums;white-space:nowrap;flex:none"><span>{{ t.winTime }}</span><span>{{ t.winDate }}</span></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isChrome }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;bottom:0;left:0;right:0;height:56px;display:flex;align-items:center;gap:8px;padding:0 8px;box-sizing:border-box;z-index:3">
+        <span style="width:40px;height:40px;border-radius:50%;background:var(--pod);backdrop-filter:blur(20px);display:grid;place-items:center;flex:none"><span style="width:14px;height:14px;border-radius:50%;border:2px solid var(--ink)"></span></span>
+        <div style="flex:1 1 auto;min-width:0;overflow:hidden;display:flex;justify-content:center">
+          <div style="display:flex;gap:6px;padding:4px 8px;border-radius:999px;background:var(--pod);backdrop-filter:blur(20px)">
+            <span style="width:32px;height:32px;border-radius:50%;background:var(--ph);flex:none"></span>
+            <span style="width:32px;height:32px;border-radius:50%;background:var(--ph);flex:none"></span>
+            <span style="width:32px;height:32px;border-radius:50%;background:var(--ph);flex:none"></span>
+          </div>
+        </div>
+        <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}">
+          <button sc-camel-on-click="{{ toggleOpen }}" aria-label="Pulse" dir="ltr" style="height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;border:0;border-radius:999px;background:{{ podBg }};backdrop-filter:blur(20px);color:var(--ink);cursor:pointer;transition:background .15s;flex:none">
+            <span style="width:7px;height:7px;border-radius:50%;color:var(--cpu);background:currentColor;animation:pulseDot 2s ease-out infinite"></span>
+            <span style="display:flex;align-items:flex-end;gap:1.5px;height:16px">
+              <sc-for list="{{ wave }}" as="b" hint-placeholder-count="6"><span style="width:3px;height:{{ b.h }}px;border-radius:2px;background:var(--cpu);transition:height .5s"></span></sc-for>
+            </span>
+            <span style="font:600 12.5px var(--f-hero);font-variant-numeric:tabular-nums;min-width:34px">{{ cpuPct }}</span>
+            <span style="display:inline-flex;align-items:center;gap:2px;font:600 12px var(--f-hero);font-variant-numeric:tabular-nums;color:var(--nrg-ink);min-width:48px"><span>⚡</span>{{ wattShort }}</span>
+          </button>
+        </sc-if>
+        <div style="height:40px;display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:999px;background:var(--pod);backdrop-filter:blur(20px);font-size:13px;font-weight:500;font-variant-numeric:tabular-nums;flex:none">
+          <span>{{ t.chromeTime }}</span>
+          <svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"></path><circle cx="12" cy="19.5" r="1"></circle></svg>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isLinux }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:0;left:0;right:0;height:30px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px;padding:0 6px;box-sizing:border-box;background:rgba(10,12,12,0.92);color:#F4F6F5;font:700 13px var(--f-ui-latin);z-index:3">
+        <div style="display:flex;align-items:center;min-width:0">
+          <span style="height:22px;display:flex;align-items:center;gap:5px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,0.08)"><span style="width:22px;height:7px;border-radius:999px;background:#F4F6F5"></span><span style="width:7px;height:7px;border-radius:50%;background:rgba(244,246,245,0.55)"></span><span style="width:7px;height:7px;border-radius:50%;background:rgba(244,246,245,0.55)"></span></span>
+        </div>
+        <span style="padding:0 6px;white-space:nowrap;font-variant-numeric:tabular-nums">{{ t.macClock }}</span>
+        <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px;min-width:0;overflow:hidden">
+          <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}">
+            <button sc-camel-on-click="{{ toggleOpen }}" aria-label="Pulse" dir="ltr" style="height:24px;display:flex;align-items:center;gap:7px;padding:0 10px;border:0;border-radius:999px;background:{{ linuxPress }};color:#F4F6F5;cursor:pointer;transition:background .15s;flex:none">
+              <span style="width:6px;height:6px;border-radius:50%;color:#34D399;background:currentColor;animation:pulseDot 2s ease-out infinite"></span>
+              <span style="display:flex;align-items:flex-end;gap:1.5px;height:14px">
+                <sc-for list="{{ wave }}" as="b" hint-placeholder-count="6"><span style="width:2.5px;height:{{ b.h }}px;border-radius:2px;background:#34D399;transition:height .5s"></span></sc-for>
+              </span>
+              <span style="min-width:54px;text-align:left;font:700 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:rgba(244,246,245,0.7);font-weight:500">{{ t.barCpu }}</span> {{ cpuPct }}</span>
+              <span style="min-width:56px;text-align:left;font:700 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:rgba(244,246,245,0.7);font-weight:500">{{ t.barRam }}</span> {{ ramPct }}</span>
+              <span style="min-width:44px;text-align:left;font:700 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:#FBBF24">⚡</span>{{ wattShort }}</span>
+              <span style="min-width:74px;text-align:left;font:700 12px var(--f-hero);font-variant-numeric:tabular-nums"><span style="color:#38BDF8">↓</span> {{ netDown }}</span>
+            </button>
+          </sc-if>
+          <span style="height:24px;display:flex;align-items:center;gap:9px;padding:0 10px;flex:none">
+            <svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"></path><circle cx="12" cy="19.5" r="1"></circle></svg>
+            <svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v9M6.3 6.3a8 8 0 1 0 11.4 0"></path></svg>
+          </span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isXp }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;bottom:0;left:0;right:0;height:30px;display:flex;align-items:stretch;background:linear-gradient(180deg,#3168D5 0%,#4993E6 4%,#2157D7 9%,#2663E0 14%,#245DDB 88%,#1941A5 100%);z-index:3;font-family:Tahoma, Verdana, sans-serif">
+        <span style="display:flex;align-items:center;gap:6px;padding-inline:10px 22px;border-start-end-radius:12px;border-end-end-radius:12px;background:linear-gradient(180deg,#3C9A3C 0%,#5DBA5D 10%,#3A9C3A 45%,#2E8B2E 90%,#246F24 100%);box-shadow:inset -1px 0 2px rgba(0,0,0,0.35);color:#FFFFFF;font:italic 700 16px 'Trebuchet MS', Tahoma, sans-serif;text-shadow:1px 1px 1px rgba(0,0,0,0.45);white-space:nowrap;flex:none"><span style="width:15px;height:15px;border-radius:3px;background:rgba(255,255,255,0.85)"></span>{{ t.startXp }}</span>
+        <div style="flex:1;display:flex;align-items:center;gap:3px;padding:0 8px;min-width:0;overflow:hidden">
+          <span style="width:150px;height:22px;border-radius:3px;background:rgba(255,255,255,0.16);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.25);flex:none"></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:0 10px;background:linear-gradient(180deg,#0C59B9 0%,#139EE9 6%,#18B5F2 12%,#139BEB 18%,#1290E8 30%,#0D8DEA 88%,#0D6BCB 100%);border-inline-start:1px solid #092E8C;color:#FFFFFF;font-size:11px;white-space:nowrap;flex:none">
+          <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}">
+            <button sc-camel-on-click="{{ toggleOpen }}" aria-label="Pulse" dir="ltr" style="height:22px;display:flex;align-items:center;gap:5px;padding:0 6px;border:0;border-radius:3px;background:{{ barPress }};color:#FFFFFF;cursor:pointer;font:11px Tahoma, sans-serif">
+              <span style="display:flex;align-items:flex-end;gap:1.5px;height:13px">
+                <sc-for list="{{ wave }}" as="b" hint-placeholder-count="6"><span style="width:2.5px;height:{{ b.h }}px;background:#B6F5C9;transition:height .5s"></span></sc-for>
+              </span>
+              <span style="min-width:52px;text-align:left;font-variant-numeric:tabular-nums">{{ barCpuText }}</span>
+            </button>
+          </sc-if>
+          <span>{{ t.winTime }}</span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ is98 }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;bottom:0;left:0;right:0;height:28px;display:flex;align-items:center;gap:4px;padding:0 2px;box-sizing:border-box;background:#C0C0C0;box-shadow:inset 0 1px #DFDFDF, inset 0 2px #FFFFFF;z-index:3;font:11px Tahoma, sans-serif;color:#000000">
+        <span style="height:22px;display:flex;align-items:center;gap:4px;padding:0 6px;font-weight:700;background:#C0C0C0;box-shadow:inset -1px -1px #0A0A0A, inset 1px 1px #FFFFFF, inset -2px -2px #808080, inset 2px 2px #DFDFDF;flex:none"><span style="width:14px;height:12px;background:#808080"></span>{{ t.start98 }}</span>
+        <span style="width:1px;height:20px;background:#808080;box-shadow:1px 0 #FFFFFF;margin:0 2px;flex:none"></span>
+        <span style="height:22px;width:150px;display:flex;align-items:center;gap:4px;padding:0 6px;box-sizing:border-box;font-weight:700;background:#DFDFDF;box-shadow:inset 1px 1px #0A0A0A, inset -1px -1px #FFFFFF, inset 2px 2px #808080;flex:0 1 auto;min-width:0;overflow:hidden">Pulse</span>
+        <div style="flex:1"></div>
+        <div style="height:22px;display:flex;align-items:center;gap:6px;padding:0 6px;box-shadow:inset 1px 1px #808080, inset -1px -1px #FFFFFF;white-space:nowrap;flex:none">
+          <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}">
+            <button sc-camel-on-click="{{ toggleOpen }}" aria-label="Pulse" dir="ltr" style="height:18px;display:flex;align-items:center;gap:4px;padding:0 3px;border:0;background:{{ barPress }};color:#000000;cursor:pointer;font:11px Tahoma, sans-serif">
+              <span style="display:flex;align-items:flex-end;gap:1px;height:12px;background:#000000;padding:1px">
+                <sc-for list="{{ wave }}" as="b" hint-placeholder-count="6"><span style="width:2px;height:{{ b.h98 }}px;background:#00FF00"></span></sc-for>
+              </span>
+              <span style="min-width:50px;text-align:left;font-variant-numeric:tabular-nums">{{ barCpuText }}</span>
+            </button>
+          </sc-if>
+          <span>{{ t.winTime }}</span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ closed.show }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;display:flex;align-items:center;justify-content:center;gap:10px 12px;flex-wrap:wrap;width:max-content;max-width:calc(100% - 32px);box-sizing:border-box;padding:10px 10px 10px 16px;padding-inline:16px 10px;border-radius:var(--r-fly);background:var(--fly-bg);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--fly-border);box-shadow:var(--fly-shadow);font-size:12.5px;color:var(--ink);text-wrap:pretty">
+        <span>{{ closed.text }}</span>
+        <button sc-camel-on-click="{{ closed.action }}" style="height:30px;padding:0 14px;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--card-hover)">{{ closed.btn }}</button>
+      </div>
+    </sc-if>
+
+    <div style="position:absolute;top:var(--fly-top);bottom:var(--fly-bottom);inset-inline-end:var(--fly-end);width:420px;max-width:calc(100% - 16px);max-height:calc(100% - var(--fly-reserve));overflow-y:auto;box-sizing:border-box;padding:10px;border-radius:var(--r-fly);background:var(--fly-bg);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);border:1px solid var(--fly-border);box-shadow:var(--fly-shadow);transform-origin:var(--fly-origin);line-height:1.3;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:6px;z-index:4;transition:opacity .22s ease, transform .3s cubic-bezier(.2,.8,.2,1), border-radius .3s, background .4s;opacity:{{ flyOp }};transform:{{ flyTf }};pointer-events:{{ flyPe }};visibility:{{ flyVis }}">
+
+      <sc-if value="{{ isXp }}" hint-placeholder-val="{{ false }}">
+        <div style="margin:-10px -10px 0;min-height:28px;display:flex;align-items:center;gap:6px;padding-inline:8px 4px;border-radius:7px 7px 0 0;background:linear-gradient(180deg,#0997FF 0%,#0053EE 8%,#0050EE 40%,#0066FF 88%,#005BFF 95%,#003DD7 96%,#003DD7 100%);color:#FFFFFF;font:700 13px 'Trebuchet MS', Tahoma, sans-serif;text-shadow:1px 1px #0F1089">
+          <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.winTitle }}</span>
+          <button sc-camel-on-click="{{ toggleOpen }}" aria-label="{{ t.aClose }}" title="{{ t.aClose }}" style="width:21px;height:21px;border-radius:3px;border:1px solid #FFFFFF;background:linear-gradient(180deg,#E97E5F,#CB4423);color:#FFFFFF;font:700 13px/1 Tahoma, sans-serif;padding:0;cursor:pointer">×</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ is98 }}" hint-placeholder-val="{{ false }}">
+        <div style="margin:-8px -8px 0;min-height:18px;display:flex;align-items:center;gap:4px;padding-inline:4px 2px;background:#000080;color:#FFFFFF;font:700 11px Tahoma, sans-serif">
+          <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.winTitle }}</span>
+          <button sc-camel-on-click="{{ toggleOpen }}" aria-label="{{ t.aClose }}" title="{{ t.aClose }}" style="width:16px;height:14px;padding:0;border:0;background:#C0C0C0;box-shadow:inset -1px -1px #0A0A0A, inset 1px 1px #FFFFFF, inset -2px -2px #808080, inset 2px 2px #DFDFDF;color:#000000;font:700 10px/1 Tahoma, sans-serif;cursor:pointer">×</button>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 auto">
+          <span style="position:relative;width:32px;height:32px;border-radius:var(--r-logo);background:var(--badge-bg);border:1px solid var(--card-b);box-shadow:var(--btn-sh);flex:none;overflow:hidden;box-sizing:border-box">
+            <span style="position:absolute;left:5px;top:8px;width:12px;height:12px;border-radius:50%;border:2px solid var(--cpu);box-shadow:0 0 8px var(--cpu-glow)"></span>
+            <span style="position:absolute;left:11px;top:8px;width:12px;height:12px;border-radius:50%;border:2px solid var(--mem);box-shadow:0 0 8px var(--mem-glow)"></span>
+          </span>
+          <span style="font:800 16px/1 var(--f-hero);letter-spacing:-0.01em;flex:none">Pulse</span>
+          <span role="status" style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;flex:none;border-radius:var(--r-pill);background:{{ status.bg }};color:{{ status.ink }};font-size:11px;font-weight:600;white-space:nowrap;transition:background .3s, color .3s">
+            <span style="width:6px;height:6px;border-radius:50%;color:{{ status.dot }};background:currentColor;animation:pulseDot 2s ease-out infinite"></span>
+            <span style="font-variant-numeric:tabular-nums">{{ status.text }}</span>
+          </span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex:none">
+          <sc-if value="{{ isModern }}" hint-placeholder-val="{{ true }}">
+            <button sc-camel-on-click="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="width:28px;height:28px;display:grid;place-items:center;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);color:var(--ink2);cursor:pointer;padding:0" style-hover="color:var(--ink)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <sc-if value="{{ isDark }}" hint-placeholder-val="{{ false }}">
+                <svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+              </sc-if>
+              <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}">
+                <svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>
+              </sc-if>
+            </button>
+          </sc-if>
+          <sc-if value="{{ langPill }}" hint-placeholder-val="{{ true }}">
+            <button sc-camel-on-click="{{ toggleLang }}" aria-label="{{ t.aLang }}" title="{{ t.aLang }}" style="position:relative;width:{{ langW }}px;height:28px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);padding:2px;box-sizing:border-box;border-radius:var(--r-pill);border:1px solid var(--card-b);background:var(--track);box-shadow:var(--field-sh);cursor:pointer" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <span style="position:absolute;top:2px;bottom:2px;width:calc((100% - 4px) / {{ langCount }});inset-inline-start:calc(2px + {{ langIdx }} * (100% - 4px) / {{ langCount }});border-radius:var(--r-pill);background:var(--seg-pill);box-shadow:var(--seg-sh);transition:inset-inline-start .28s cubic-bezier(.2,.8,.2,1)"></span>
+              <sc-for list="{{ langs }}" as="l" hint-placeholder-count="2"><span lang="{{ l.code }}" style="position:relative;display:grid;place-items:center;font:700 12px/1 {{ l.font }};color:{{ l.ink }}">{{ l.label }}</span></sc-for>
+            </button>
+          </sc-if>
+          <sc-if value="{{ langMenuMode }}" hint-placeholder-val="{{ false }}">
+            <div sc-camel-on-blur="{{ langBlur }}" sc-camel-on-key-down="{{ langKey }}" style="position:relative">
+              <button data-lang-trigger="" sc-camel-on-click="{{ toggleLangMenu }}" aria-haspopup="menu" aria-expanded="{{ langMenuOpen }}" aria-label="{{ langMenuLabel }}" title="{{ t.aLang }}" style="height:28px;display:inline-flex;align-items:center;gap:4px;padding-inline:9px 7px;box-sizing:border-box;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);cursor:pointer;font:700 12px/1 {{ langCur.font }}" style-hover="background:var(--card-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+                <span lang="{{ langCur.code }}">{{ langCur.label }}</span>
+                <svg width="10" height="10" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink2)"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
+                <div role="menu" aria-label="{{ t.aLang }}" style="position:absolute;top:calc(100% + 4px);inset-inline-end:0;z-index:8;min-width:168px;max-height:264px;overflow-y:auto;padding:4px;box-sizing:border-box;border-radius:var(--r-tip);background:var(--tip-bg);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--tip-b);box-shadow:var(--tip-sh);display:flex;flex-direction:column;gap:1px">
+                  <sc-for list="{{ langs }}" as="l" hint-placeholder-count="3">
+                    <button role="menuitemradio" aria-checked="{{ l.on }}" lang="{{ l.code }}" dir="{{ l.dir }}" sc-camel-tab-index="-1" sc-camel-on-click="{{ l.onClick }}" style="width:100%;height:30px;display:flex;align-items:center;gap:8px;padding:0 8px;box-sizing:border-box;border:0;border-radius:var(--r-row);background:{{ l.bg }};color:var(--ink);cursor:pointer;text-align:start;font:500 12.5px {{ l.font }}" style-hover="background:var(--hover)" style-focus="outline:2px solid var(--focus);outline-offset:-2px">
+                      <span style="min-width:24px;font-weight:700">{{ l.label }}</span>
+                      <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.name }}</span>
+                      <svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--cpu-ink);visibility:{{ l.check }}"><path d="m5 12 5 5 9-10"></path></svg>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+          <button sc-camel-on-click="{{ openSettings }}" aria-label="{{ t.aSettings }}" aria-pressed="{{ inSettings }}" title="{{ t.aSettings }}" style="width:28px;height:28px;display:grid;place-items:center;border-radius:var(--r-btn);border:1px solid {{ gearBorder }};background:{{ gearBg }};box-shadow:var(--btn-sh);color:{{ gearInk }};cursor:pointer;padding:0" style-hover="color:var(--ink)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+            <svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+          </button>
+        </div>
+      </div>
+
+      <sc-if value="{{ hogShow }}" hint-placeholder-val="{{ true }}">
+        <div role="alert" style="display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:var(--r-card);background:var(--hog-bg);border:1px solid var(--warn-line);box-shadow:var(--card-sh)">
+          <span style="width:28px;height:28px;border-radius:var(--r-badge);background:var(--warn-tint);color:var(--warn-ink);display:grid;place-items:center;flex:none"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.2v.3"></path></svg></span>
+          <div style="flex:1;min-width:0">
+            <div dir="{{ dir }}" title="{{ hogTitle }}" style="font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:start">{{ hogTitle }}</div>
+            <div style="font-size:11px;color:var(--ink2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:start">{{ hogSub }}</div>
+          </div>
+          <button sc-camel-on-click="{{ endHog }}" style="height:28px;padding:0 11px;border-radius:var(--r-btn);border:1px solid var(--warn-line);background:transparent;box-shadow:var(--btn-sh);color:var(--warn-ink);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;flex:none" style-hover="background:var(--warn-tint)" style-focus="outline:2px solid var(--focus);outline-offset:2px">{{ t.endApp }}</button>
+          <button sc-camel-on-click="{{ dismissHog }}" aria-label="{{ t.aDismiss }}" title="{{ t.aDismiss }}" style="width:28px;height:28px;display:grid;place-items:center;border:0;background:transparent;color:var(--ink2);cursor:pointer;padding:0;border-radius:var(--r-btn);flex:none" style-hover="color:var(--ink);background:var(--hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px"><svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ confirm.show }}" hint-placeholder-val="{{ false }}">
+        <div role="alertdialog" aria-label="{{ confirm.title }}" style="display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:var(--r-card);background:var(--card);border:1px solid var(--danger-line);box-shadow:var(--card-sh-hover)">
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <span style="width:28px;height:28px;border-radius:var(--r-badge);background:var(--thm-tint);color:var(--thm-ink);display:grid;place-items:center;flex:none"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v9M6.3 6.3a8 8 0 1 0 11.4 0"></path></svg></span>
+            <div style="flex:1;min-width:0">
+              <div dir="auto" style="font-size:13px;font-weight:700;text-align:start">{{ confirm.title }}</div>
+              <div style="font-size:11.5px;color:var(--ink2);margin-top:3px;text-wrap:pretty">{{ t.confirmSub }}</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:8px">
+            <button sc-camel-on-click="{{ cancelEnd }}" style="height:30px;padding:0 14px;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);font-size:12px;font-weight:600;cursor:pointer" style-hover="background:var(--card-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">{{ t.cancel }}</button>
+            <button sc-camel-on-click="{{ confirmEnd }}" style="height:30px;padding:0 14px;border-radius:var(--r-btn);border:0;background:var(--danger);box-shadow:var(--btn-sh);color:var(--danger-on);font-size:12px;font-weight:700;cursor:pointer" style-focus="outline:2px solid var(--focus);outline-offset:2px">{{ confirm.btn }}</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ toast.show }}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:var(--r-card);background:var(--card);border:1px solid var(--cpu-line);box-shadow:var(--card-sh)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--cpu-tint);color:var(--cpu-ink);display:grid;place-items:center;flex:none"><svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span>
+          <span dir="auto" style="font-size:12px;font-weight:600;flex:1;min-width:0;text-align:start">{{ toast.text }}</span>
+        </div>
+      </sc-if>
+
+      <div style="display:grid;min-width:0">
+
+        <div style="grid-area:1/1;min-width:0;display:flex;flex-direction:column;gap:6px;transition:opacity .28s ease, transform .34s cubic-bezier(.2,.8,.2,1);opacity:{{ mainV.op }};transform:{{ mainV.tf }};visibility:{{ mainV.vis }};max-height:{{ mainV.mh }};overflow:{{ mainV.ov }}">
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(168px, 1fr));gap:6px">
+
+            <div role="button" sc-camel-tab-index="0" sc-camel-on-click="{{ openCpu }}" sc-camel-on-key-down="{{ k.cpu }}" aria-label="{{ t.cpu }}" style="background:var(--card);border:1px solid {{ cpuCard.border }};box-shadow:var(--card-sh);border-radius:var(--r-card);padding:9px 11px 6px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0;transition:background .2s, border-color .2s, transform .2s, box-shadow .2s" style-hover="background:var(--card-hover);border-color:var(--cpu-line);transform:translateY(-1px);box-shadow:var(--card-sh-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:26px;height:26px;border-radius:var(--r-badge);background:var(--cpu-tint);color:var(--cpu-ink);display:grid;place-items:center;flex:none"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="5" width="14" height="14" rx="3"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="1"></rect><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg></span>
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink2);flex:1">{{ t.cpu }}</span>
+                <sc-if value="{{ cpuCard.high }}" hint-placeholder-val="{{ true }}"><span style="height:20px;display:inline-flex;align-items:center;padding:0 7px;border-radius:var(--r-pill);background:var(--warn-tint);color:var(--warn-ink);font-size:11px;font-weight:700;white-space:nowrap">{{ t.high }}</span></sc-if>
+                <svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--ink3);transform:scaleX(var(--flip));flex:none"><path d="m9 6 6 6-6 6"></path></svg>
+              </div>
+              <div>
+                <div style="font:700 28px/1 var(--f-hero);font-variant-numeric:tabular-nums;letter-spacing:-0.02em;color:{{ cpuCard.ink }};transition:color .4s">{{ cpuPct }}</div>
+                <div style="font-size:11px;color:var(--ink2);margin-top:5px;white-space:nowrap">{{ userSys }}</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <div style="display:grid;grid-template-columns:68px minmax(0,1fr) 32px;align-items:center;gap:6px;font-size:11px"><span style="color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ coreA }}</span><span style="height:4px;border-radius:99px;background:var(--track);overflow:hidden"><span style="display:block;height:100%;width:{{ pcW }};border-radius:99px;background:var(--cpu);transition:width .6s"></span></span><span style="text-align:end;font-weight:600;font-variant-numeric:tabular-nums">{{ pcVal }}</span></div>
+                <div style="display:grid;grid-template-columns:68px minmax(0,1fr) 32px;align-items:center;gap:6px;font-size:11px"><span style="color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ coreB }}</span><span style="height:4px;border-radius:99px;background:var(--track);overflow:hidden"><span style="display:block;height:100%;width:{{ ecW }};border-radius:99px;background:var(--cpu-soft);transition:width .6s"></span></span><span style="text-align:end;font-weight:600;font-variant-numeric:tabular-nums">{{ ecVal }}</span></div>
+                <div style="display:grid;grid-template-columns:68px minmax(0,1fr) 32px;align-items:center;gap:6px;font-size:11px"><span style="color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.gpu }}</span><span style="height:4px;border-radius:99px;background:var(--track);overflow:hidden"><span style="display:block;height:100%;width:{{ gpuW }};border-radius:99px;background:var(--gpu);transition:width .6s"></span></span><span style="text-align:end;font-weight:600;font-variant-numeric:tabular-nums">{{ gpuVal }}</span></div>
+              </div>
+              <div style="position:relative;margin-top:auto">
+                <span style="position:absolute;top:-2px;inset-inline-start:0;z-index:1;padding:0 3px;border-radius:3px;background:var(--fly-solid);font-size:10.5px;color:var(--ink3);line-height:1.2;white-space:nowrap">{{ t.min1 }}</span>
+                <svg sc-camel-view-box="0 0 172 28" sc-camel-preserve-aspect-ratio="none" style="width:100%;height:18px;display:block;overflow:visible">
+                  <defs><linearGradient id="pcSpCpu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--cpu);stop-opacity:var(--sp-top)"></stop><stop offset="1" style="stop-color:var(--cpu);stop-opacity:var(--sp-bot)"></stop></linearGradient></defs>
+                  <path d="{{ sp.cpu.area }}" fill="url(#pcSpCpu)"></path>
+                  <path d="{{ sp.cpu.line }}" fill="none" stroke-width="1.6" stroke-linecap="round" vector-effect="non-scaling-stroke" style="stroke:var(--cpu)"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div role="button" sc-camel-tab-index="0" sc-camel-on-click="{{ openMem }}" sc-camel-on-key-down="{{ k.mem }}" aria-label="{{ t.mem }}" style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:9px 11px 6px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0;transition:background .2s, border-color .2s, transform .2s, box-shadow .2s" style-hover="background:var(--card-hover);border-color:var(--mem-line);transform:translateY(-1px);box-shadow:var(--card-sh-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:26px;height:26px;border-radius:var(--r-badge);background:var(--mem-tint);color:var(--mem-ink);display:grid;place-items:center;flex:none"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="7" width="18" height="10" rx="2"></rect><path d="M7.5 10.5v3M12 10.5v3M16.5 10.5v3M6 17v3M18 17v3"></path></svg></span>
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.mem }}</span>
+                <svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--ink3);transform:scaleX(var(--flip));flex:none"><path d="m9 6 6 6-6 6"></path></svg>
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><span style="font:700 28px/1 var(--f-hero);font-variant-numeric:tabular-nums;letter-spacing:-0.02em;flex:none">{{ ramPct }}</span><span title="{{ t.pressure }}" style="display:inline-flex;align-items:center;gap:5px;height:20px;min-width:0;padding:0 8px;border-radius:var(--r-pill);background:var(--cpu-tint);color:var(--cpu-ink);font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:6px;height:6px;border-radius:50%;background:var(--cpu);flex:none"></span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis">{{ t.pressure }}</span></span></div>
+                <div style="font-size:11px;color:var(--ink2);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ memOf }}</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;height:8px;border-radius:var(--r-pill);overflow:hidden;background:var(--track);gap:2px">
+                  <span style="width:{{ mem.w1 }};background:var(--mem);transition:width .6s"></span>
+                  <span style="width:{{ mem.w2 }};background:var(--mem-soft)"></span>
+                  <span style="width:{{ mem.w3 }};background:repeating-linear-gradient(135deg, var(--mem) 0 2px, var(--mem-tint2) 2px 4px)"></span>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:1px 10px;font-size:11px;line-height:1.25;color:var(--ink2);font-variant-numeric:tabular-nums">
+                  <span style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:2px;background:var(--mem)"></span>{{ t.segApp }} {{ mem.v1 }}</span>
+                  <span style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:2px;background:var(--mem-soft)"></span>{{ mem.l2 }} {{ mem.v2 }}</span>
+                  <span style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:2px;background:repeating-linear-gradient(135deg, var(--mem) 0 1.5px, var(--mem-tint2) 1.5px 3px)"></span>{{ mem.l3 }} {{ mem.v3 }}</span>
+                  <span style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:2px;background:var(--track-strong)"></span>{{ t.segFree }} {{ mem.v4 }}</span>
+                </div>
+              </div>
+              <div style="position:relative;margin-top:auto">
+                <span style="position:absolute;top:-2px;inset-inline-start:0;z-index:1;padding:0 3px;border-radius:3px;background:var(--fly-solid);font-size:10.5px;color:var(--ink3);line-height:1.2;white-space:nowrap">{{ t.min1 }}</span>
+                <svg sc-camel-view-box="0 0 172 28" sc-camel-preserve-aspect-ratio="none" style="width:100%;height:18px;display:block;overflow:visible">
+                  <defs><linearGradient id="pcSpMem" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--mem);stop-opacity:var(--sp-top)"></stop><stop offset="1" style="stop-color:var(--mem);stop-opacity:var(--sp-bot)"></stop></linearGradient></defs>
+                  <path d="{{ sp.mem.area }}" fill="url(#pcSpMem)"></path>
+                  <path d="{{ sp.mem.line }}" fill="none" stroke-width="1.6" stroke-linecap="round" vector-effect="non-scaling-stroke" style="stroke:var(--mem)"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div role="button" sc-camel-tab-index="0" sc-camel-on-click="{{ openNrg }}" sc-camel-on-key-down="{{ k.nrg }}" aria-label="{{ t.nrg }}" style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:9px 11px 6px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0;transition:background .2s, border-color .2s, transform .2s, box-shadow .2s" style-hover="background:var(--card-hover);border-color:var(--nrg-line);transform:translateY(-1px);box-shadow:var(--card-sh-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:26px;height:26px;border-radius:var(--r-badge);background:var(--nrg-tint);color:var(--nrg-ink);display:grid;place-items:center;flex:none"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4.5 14H11l-1 8 8.5-12H12l1-8z"></path></svg></span>
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink2);flex:1">{{ t.nrg }}</span>
+                <svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--ink3);transform:scaleX(var(--flip));flex:none"><path d="m9 6 6 6-6 6"></path></svg>
+              </div>
+              <div>
+                <div style="font:700 28px/1 var(--f-hero);font-variant-numeric:tabular-nums;letter-spacing:-0.02em">{{ battPct }}</div>
+                <div style="font-size:11px;color:var(--ink2);margin-top:5px;white-space:nowrap">{{ battSub }}</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                  <span dir="ltr" style="display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:var(--r-pill);background:var(--nrg-tint);color:var(--nrg-ink);border:1px solid var(--nrg-line);font:700 12px var(--f-hero);font-variant-numeric:tabular-nums;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;color:var(--nrg);background:currentColor;animation:pulseDot 1.6s ease-out infinite"></span>{{ flowW }}</span>
+                  <span style="font-size:11px;color:var(--ink2);white-space:nowrap">{{ flowLabel }}</span>
+                </div>
+                <div style="font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap">{{ healthLine }}</div>
+              </div>
+              <div style="position:relative;margin-top:auto">
+                <span style="position:absolute;top:-2px;inset-inline-start:0;z-index:1;padding:0 3px;border-radius:3px;background:var(--fly-solid);font-size:10.5px;color:var(--ink3);line-height:1.2;white-space:nowrap">{{ t.min1 }}</span>
+                <svg sc-camel-view-box="0 0 172 28" sc-camel-preserve-aspect-ratio="none" style="width:100%;height:18px;display:block;overflow:visible">
+                  <defs><linearGradient id="pcSpNrg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--nrg);stop-opacity:var(--sp-top)"></stop><stop offset="1" style="stop-color:var(--nrg);stop-opacity:var(--sp-bot)"></stop></linearGradient></defs>
+                  <path d="{{ sp.nrg.area }}" fill="url(#pcSpNrg)"></path>
+                  <path d="{{ sp.nrg.line }}" fill="none" stroke-width="1.6" stroke-linecap="round" vector-effect="non-scaling-stroke" style="stroke:var(--nrg)"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div role="button" sc-camel-tab-index="0" sc-camel-on-click="{{ openThm }}" sc-camel-on-key-down="{{ k.thm }}" aria-label="{{ t.thm }}" style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:9px 11px 6px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0;transition:background .2s, border-color .2s, transform .2s, box-shadow .2s" style-hover="background:var(--card-hover);border-color:var(--ts-line);transform:translateY(-1px);box-shadow:var(--card-sh-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:26px;height:26px;border-radius:var(--r-badge);background:var(--ts-tint);color:var(--ts-ink);display:grid;place-items:center;flex:none;transition:background .4s, color .4s"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.76V4a2 2 0 1 0-4 0v10.76a4 4 0 1 0 4 0z"></path></svg></span>
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink2);flex:1">{{ t.thm }}</span>
+                <svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--ink3);transform:scaleX(var(--flip));flex:none"><path d="m9 6 6 6-6 6"></path></svg>
+              </div>
+              <div>
+                <div style="font:700 28px/1 var(--f-hero);letter-spacing:-0.02em">{{ thermal.label }}</div>
+                <div style="font-size:11px;color:var(--ink2);margin-top:5px;font-variant-numeric:tabular-nums;white-space:nowrap">{{ tempLine }}</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px" role="meter" aria-valuemin="1" aria-valuemax="4" aria-valuenow="{{ thermal.now }}" aria-label="{{ thermal.label }}">
+                <div style="display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:3px">
+                  <sc-for list="{{ thermal.segs }}" as="g" hint-placeholder-count="4"><span style="height:6px;border-radius:var(--r-pill);background:{{ g.bg }};transition:background .4s"></span></sc-for>
+                </div>
+                <div style="display:flex;justify-content:space-between;gap:4px;font-size:11px;min-width:0">
+                  <sc-for list="{{ thermal.labels }}" as="g" hint-placeholder-count="4"><span title="{{ g.label }}" style="color:{{ g.ink }};font-weight:{{ g.w }};flex:0 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">{{ g.label }}</span></sc-for>
+                </div>
+              </div>
+              <div style="font-size:11px;color:{{ thermal.noteInk }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ thermal.note }}</div>
+              <div style="position:relative;margin-top:auto">
+                <span style="position:absolute;top:-2px;inset-inline-start:0;z-index:1;padding:0 3px;border-radius:3px;background:var(--fly-solid);font-size:10.5px;color:var(--ink3);line-height:1.2;white-space:nowrap">{{ t.min1 }}</span>
+                <svg sc-camel-view-box="0 0 172 28" sc-camel-preserve-aspect-ratio="none" style="width:100%;height:18px;display:block;overflow:visible">
+                  <defs><linearGradient id="pcSpThm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ts);stop-opacity:var(--sp-top)"></stop><stop offset="1" style="stop-color:var(--ts);stop-opacity:var(--sp-bot)"></stop></linearGradient></defs>
+                  <path d="{{ sp.thm.area }}" fill="url(#pcSpThm)"></path>
+                  <path d="{{ sp.thm.line }}" fill="none" stroke-width="1.6" stroke-linecap="round" vector-effect="non-scaling-stroke" style="stroke:var(--ts)"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div role="button" sc-camel-tab-index="0" sc-camel-on-click="{{ openGpu }}" sc-camel-on-key-down="{{ k.gpu }}" aria-label="{{ t.gpu }}" style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:6px 10px;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) minmax(48px,84px) auto auto;align-items:center;gap:8px;min-width:0;transition:background .2s, border-color .2s, transform .2s, box-shadow .2s" style-hover="background:var(--card-hover);border-color:var(--gpu-line);transform:translateY(-1px);box-shadow:var(--card-sh-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+            <span style="width:20px;height:20px;border-radius:var(--r-badge);background:var(--gpu-tint);color:var(--gpu-ink);display:grid;place-items:center;flex:none"><svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="9" cy="12" r="3"></circle><path d="M15.5 10h3M15.5 14h3"></path></svg></span>
+            <span style="min-width:0;display:flex;align-items:baseline;gap:6px;white-space:nowrap;overflow:hidden">
+              <span style="font-size:11.5px;font-weight:600;color:var(--ink2);flex:none">{{ t.gpu }}</span>
+              <span dir="auto" title="{{ gpuName }}" style="font-size:11px;color:var(--ink3);min-width:0;overflow:hidden;text-overflow:ellipsis;text-align:start">{{ gpuName }}</span>
+            </span>
+            <span role="meter" aria-label="{{ t.util }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ gpuNow }}" style="height:5px;border-radius:99px;background:var(--track);overflow:hidden;display:block"><span style="display:block;height:100%;width:{{ gpuW }};border-radius:99px;background:var(--gpu);transition:width .6s"></span></span>
+            <span dir="ltr" title="{{ t.util }}" style="min-width:32px;text-align:end;font:700 13px/1 var(--f-hero);font-variant-numeric:tabular-nums;white-space:nowrap">{{ gpuVal }}</span>
+            <span dir="ltr" style="display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:var(--r-pill);background:var(--gt-tint);color:var(--gt-ink);font:700 11px var(--f-hero);font-variant-numeric:tabular-nums;white-space:nowrap">{{ gpuTempC }}</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:6px">
+            <div role="button" sc-camel-tab-index="0" sc-camel-on-click="{{ openSsd }}" sc-camel-on-key-down="{{ k.ssd }}" aria-label="{{ disk.name }}" style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:0;transition:background .2s, border-color .2s, transform .2s, box-shadow .2s" style-hover="background:var(--card-hover);transform:translateY(-1px);box-shadow:var(--card-sh-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <div style="display:flex;align-items:center;gap:6px;min-width:0">
+                <span style="width:20px;height:20px;border-radius:var(--r-badge);background:var(--cpu-tint);color:var(--cpu-ink);display:grid;place-items:center;flex:none"><svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="7" rx="2"></rect><path d="M5 13l2.5-8h9L19 13"></path></svg></span>
+                <span dir="auto" title="{{ disk.name }}" style="font-size:11.5px;font-weight:600;color:var(--ink2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:start">{{ disk.name }}</span>
+              </div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;min-width:0">
+                <span style="font:700 12.5px/1.1 var(--f-hero);font-variant-numeric:tabular-nums;white-space:nowrap;flex:none">{{ disk.usedTxt }}</span>
+                <span style="font-size:11px;color:var(--ink3);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">{{ disk.freeTxt }}</span>
+              </div>
+              <span role="meter" aria-label="{{ disk.usedTxt }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="49" style="height:5px;border-radius:var(--r-pill);background:var(--track);overflow:hidden;display:block"><span style="display:block;height:100%;width:49%;border-radius:var(--r-pill);background:var(--ssd-fill)"></span></span>
+            </div>
+            <div role="button" sc-camel-tab-index="0" sc-camel-on-click="{{ openNet }}" sc-camel-on-key-down="{{ k.net }}" aria-label="{{ netName }}" style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:0;transition:background .2s, border-color .2s, transform .2s, box-shadow .2s" style-hover="background:var(--card-hover);transform:translateY(-1px);box-shadow:var(--card-sh-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+              <div style="display:flex;align-items:center;gap:6px;min-width:0">
+                <span style="width:20px;height:20px;border-radius:var(--r-badge);background:var(--mem-tint);color:var(--mem-ink);display:grid;place-items:center;flex:none"><svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"></path><circle cx="12" cy="19.5" r="1"></circle></svg></span>
+                <span dir="auto" title="{{ netName }}" style="font-size:11.5px;font-weight:600;color:var(--ink2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:start">{{ netName }}</span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap;min-width:0">
+                <span dir="ltr" aria-label="{{ t.down }}" style="font:700 13px/1.1 var(--f-hero);font-variant-numeric:tabular-nums;color:var(--mem-ink);white-space:nowrap">↓ {{ netDown }}</span>
+                <span dir="ltr" aria-label="{{ t.up }}" style="font:700 12px/1.1 var(--f-hero);font-variant-numeric:tabular-nums;color:var(--cpu-ink);white-space:nowrap">↑ {{ netUp }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:8px 6px 4px;position:relative">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 8px;padding:0 6px 4px">
+              <span style="font-size:12.5px;font-weight:700;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis">{{ t.top }}</span>
+              <div role="tablist" style="position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;width:168px;flex:none;height:28px;padding:2px;box-sizing:border-box;border-radius:var(--r-pill);background:var(--track);box-shadow:var(--field-sh)">
+                <span style="position:absolute;top:2px;bottom:2px;width:calc((100% - 4px) / 3);inset-inline-start:calc(2px + {{ segIdx }} * (100% - 4px) / 3);border-radius:var(--r-pill);background:var(--seg-pill);box-shadow:var(--seg-sh);transition:inset-inline-start .3s cubic-bezier(.2,.8,.2,1)"></span>
+                <sc-for list="{{ sorts }}" as="o" hint-placeholder-count="3">
+                  <button role="tab" aria-selected="{{ o.on }}" sc-camel-on-click="{{ o.onClick }}" style="position:relative;border:0;background:transparent;padding:0;font-size:11px;font-weight:700;color:{{ o.ink }};cursor:pointer;transition:color .2s;white-space:nowrap" style-focus="outline:2px solid var(--focus);outline-offset:1px">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="position:relative">
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+                <div role="button" sc-camel-tab-index="0" aria-label="{{ r.name }}" sc-camel-on-mouse-enter="{{ r.onEnter }}" sc-camel-on-mouse-leave="{{ r.onLeave }}" sc-camel-on-focus="{{ r.onEnter }}" sc-camel-on-blur="{{ r.onLeave }}" sc-camel-on-key-down="{{ r.onKey }}" sc-camel-on-click="{{ r.onClick }}" style="position:relative;height:34px;display:flex;align-items:center;gap:8px;padding:0 6px;border-radius:var(--r-row);background:{{ r.bg }};cursor:pointer;transition:background .15s" style-focus="outline:2px solid var(--focus);outline-offset:-2px">
+                  <span style="width:22px;height:22px;border-radius:var(--r-mono);display:grid;place-items:center;flex:none;background:{{ r.monoBg }};color:{{ r.monoInk }};font:700 11px var(--f-hero)">{{ r.mono }}</span>
+                  <span style="flex:1;min-width:0;display:flex;align-items:center;gap:6px">
+                    <span dir="auto" style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">{{ r.name }}</span>
+                    <sc-if value="{{ r.showProcs }}"><span dir="ltr" style="flex:none;font:600 11px var(--f-hero);font-variant-numeric:tabular-nums;color:var(--ink2);background:var(--track);border-radius:5px;padding:1px 5px">×{{ r.procs }}</span></sc-if>
+                  </span>
+                  <span style="width:56px;height:4px;border-radius:99px;background:var(--track);flex:none;overflow:hidden"><span style="display:block;height:100%;width:{{ r.barW }};background:{{ r.barColor }};border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)"></span></span>
+                  <span dir="ltr" style="width:58px;flex:none;text-align:end;font:600 12px var(--f-hero);font-variant-numeric:tabular-nums;color:{{ r.metricInk }};opacity:{{ r.metricOp }};transition:opacity .15s;white-space:nowrap">{{ r.metric }}</span>
+                  <button sc-camel-on-click="{{ r.onEnd }}" sc-camel-on-focus="{{ r.onEnter }}" sc-camel-on-blur="{{ r.onLeave }}" sc-camel-tab-index="{{ r.endTab }}" aria-label="{{ r.endLabel }}" style="position:absolute;inset-inline-end:6px;top:4px;height:26px;min-width:56px;padding:0 10px;border-radius:var(--r-pill);border:1px solid var(--thm-line);background:var(--card);box-shadow:var(--btn-sh);color:var(--thm-ink);font-size:11.5px;font-weight:700;cursor:pointer;opacity:{{ r.endOp }};pointer-events:{{ r.endPe }};transition:opacity .15s" style-hover="background:var(--thm-tint-solid)" style-focus="outline:2px solid var(--focus);outline-offset:1px">{{ t.end }}</button>
+                </div>
+              </sc-for>
+              <sc-if value="{{ tipShow }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset-inline-end:10px;top:{{ tipTop }}px;width:212px;padding:10px 12px;box-sizing:border-box;border-radius:var(--r-tip);background:var(--tip-bg);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--tip-b);box-shadow:var(--tip-sh);z-index:6;pointer-events:none;font-size:11.5px">
+                  <div dir="auto" style="font-weight:700;font-size:12px;margin-bottom:7px;text-align:start">{{ tip.name }}</div>
+                  <div style="display:flex;flex-direction:column;gap:5px">
+                    <sc-for list="{{ tip.rows }}" as="x" hint-placeholder-count="4">
+                      <div style="display:flex;justify-content:space-between;gap:8px;white-space:nowrap"><span style="color:var(--ink2)">{{ x.k }}</span><span dir="ltr" style="font:600 11.5px var(--f-hero);font-variant-numeric:tabular-nums">{{ x.v }}</span></div>
+                    </sc-for>
+                  </div>
+                  <div style="margin-top:8px;padding-top:7px;border-top:1px solid var(--hair);color:var(--cpu-ink);font-weight:600;font-size:11px">{{ t.tipClick }}</div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div style="grid-area:1/1;min-width:0;display:flex;flex-direction:column;gap:8px;transition:opacity .28s ease, transform .34s cubic-bezier(.2,.8,.2,1);opacity:{{ detV.op }};transform:{{ detV.tf }};visibility:{{ detV.vis }};max-height:{{ detV.mh }};overflow:{{ detV.ov }}">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <button sc-camel-on-click="{{ back }}" style="display:inline-flex;align-items:center;gap:3px;height:30px;padding-inline:6px 11px;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);font-size:12px;font-weight:600;cursor:pointer;flex:none" style-hover="background:var(--card-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="transform:scaleX(var(--flip))"><path d="m15 6-6 6 6 6"></path></svg>{{ t.back }}</button>
+            <span style="display:inline-flex;align-items:center;gap:6px;height:30px;padding-inline:5px 11px;border-radius:var(--r-pill);background:var(--acc-tint);color:var(--acc-ink);font-size:12px;font-weight:700;flex:none;overflow:hidden;max-width:240px">
+              <span style="width:20px;height:20px;border-radius:50%;background:var(--acc-tint);display:grid;place-items:center;flex:none"><span style="width:7px;height:7px;border-radius:50%;color:var(--acc);background:currentColor;animation:pulseDot 1.8s ease-out infinite"></span></span>
+              <span dir="auto" style="white-space:nowrap;flex:none">{{ det.title }}</span>
+            </span>
+            <sc-if value="{{ det.isApp }}" hint-placeholder-val="{{ false }}">
+              <button sc-camel-on-click="{{ endCurrent }}" style="margin-inline-start:auto;height:30px;padding:0 12px;border-radius:var(--r-btn);border:1px solid var(--thm-line);background:transparent;box-shadow:var(--btn-sh);color:var(--thm-ink);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;flex:none" style-hover="background:var(--thm-tint)" style-focus="outline:2px solid var(--focus);outline-offset:2px">{{ t.endApp }}</button>
+            </sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px 10px;padding:2px 2px 0">
+            <span dir="ltr" style="flex:none;font:700 30px/1 var(--f-hero);font-variant-numeric:tabular-nums;letter-spacing:-0.02em;white-space:nowrap">{{ det.hero }}</span>
+            <span style="flex:1 1 140px;min-width:0;font-size:12px;line-height:1.3;color:var(--ink2);text-wrap:pretty">{{ det.sub }}</span>
+          </div>
+
+          <div style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px 8px;margin-bottom:10px">
+              <span style="font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap">{{ t.last10 }}</span>
+              <span style="font-size:11px;color:var(--ink3);font-variant-numeric:tabular-nums;white-space:nowrap">{{ det.stat }}</span>
+              <sc-if value="{{ det.split }}" hint-placeholder-val="{{ false }}">
+                <div style="flex-basis:100%;display:flex;gap:12px;font-size:11px;font-weight:600">
+                  <span style="display:inline-flex;align-items:center;gap:5px;color:var(--acc-ink)"><span style="width:8px;height:8px;border-radius:2px;background:var(--acc)"></span>↑ {{ det.aLabel }}</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px;color:var(--acc2-ink)"><span style="width:8px;height:8px;border-radius:2px;background:var(--acc2)"></span>↓ {{ det.bLabel }}</span>
+                </div>
+              </sc-if>
+            </div>
+            <div dir="ltr" sc-camel-on-mouse-move="{{ chartMove }}" sc-camel-on-mouse-leave="{{ chartLeave }}" style="position:relative;height:140px;cursor:crosshair;background:var(--chart-bg);box-shadow:var(--field-sh)">
+              <svg sc-camel-view-box="0 0 372 140" sc-camel-preserve-aspect-ratio="none" style="position:absolute;inset:0;width:100%;height:140px;display:block;overflow:visible">
+                <defs>
+                  <linearGradient id="pcDetA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--acc);stop-opacity:var(--sp-top)"></stop><stop offset="1" style="stop-color:var(--acc);stop-opacity:var(--sp-bot)"></stop></linearGradient>
+                  <linearGradient id="pcDetB" x1="0" y1="1" x2="0" y2="0"><stop offset="0" style="stop-color:var(--acc2);stop-opacity:var(--sp-top)"></stop><stop offset="1" style="stop-color:var(--acc2);stop-opacity:var(--sp-bot)"></stop></linearGradient>
+                </defs>
+                <path d="M0 35H372M0 105H372" fill="none" stroke-width="1" stroke-dasharray="2 4" vector-effect="non-scaling-stroke" style="stroke:var(--hair)"></path>
+                <path d="M0 70H372" fill="none" stroke-width="1" stroke-dasharray="{{ det.midDash }}" vector-effect="non-scaling-stroke" style="stroke:var(--ink3);opacity:0.45"></path>
+                <path d="{{ det.areaA }}" fill="url(#pcDetA)"></path>
+                <path d="{{ det.lineA }}" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" style="stroke:var(--acc)"></path>
+                <path d="{{ det.areaB }}" fill="url(#pcDetB)"></path>
+                <path d="{{ det.lineB }}" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" style="stroke:var(--acc2)"></path>
+              </svg>
+              <sc-if value="{{ ch.show }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;top:0;bottom:0;left:{{ ch.left }}%;width:0;border-left:1px dashed var(--ink3);pointer-events:none"></div>
+                <div style="position:absolute;left:{{ ch.left }}%;top:{{ ch.yA }}px;width:9px;height:9px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--fly-solid);pointer-events:none"></div>
+                <sc-if value="{{ ch.hasB }}">
+                  <div style="position:absolute;left:{{ ch.left }}%;top:{{ ch.yB }}px;width:9px;height:9px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--acc2);box-shadow:0 0 0 3px var(--fly-solid);pointer-events:none"></div>
+                </sc-if>
+                <div dir="{{ dir }}" style="position:absolute;top:2px;left:{{ ch.pillLeft }}%;transform:translateX(-{{ ch.pillLeft }}%);max-width:100%;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;white-space:nowrap;padding:5px 10px;border-radius:var(--r-pill);background:var(--tip-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--tip-b);box-shadow:var(--tip-sh);color:var(--ink);font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;pointer-events:none">{{ ch.label }}</div>
+              </sc-if>
+            </div>
+            <div dir="ltr" style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--ink3);white-space:nowrap"><span>{{ t.ago10 }}</span><span>{{ t.ago5 }}</span><span>{{ t.now }}</span></div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:8px">
+            <sc-for list="{{ det.tiles }}" as="x" hint-placeholder-count="6">
+              <div style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0">
+                <span style="font-size:11px;color:var(--ink2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ x.k }}</span>
+                <span dir="auto" style="font:700 15.5px/1.2 var(--f-hero);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:start">{{ x.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="grid-area:1/1;min-width:0;display:flex;flex-direction:column;gap:8px;transition:opacity .28s ease, transform .34s cubic-bezier(.2,.8,.2,1);opacity:{{ setV.op }};transform:{{ setV.tf }};visibility:{{ setV.vis }};max-height:{{ setV.mh }};overflow:{{ setV.ov }}">
+          <div style="display:flex;align-items:center;gap:8px">
+            <button sc-camel-on-click="{{ back }}" style="display:inline-flex;align-items:center;gap:3px;height:30px;padding-inline:6px 11px;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);font-size:12px;font-weight:600;cursor:pointer;flex:none" style-hover="background:var(--card-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="transform:scaleX(var(--flip))"><path d="m15 6-6 6 6 6"></path></svg>{{ t.back }}</button>
+            <span style="font:700 15px var(--f-hero)">{{ t.aSettings }}</span>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-sh);border-radius:var(--r-card);padding:4px 12px">
+            <sc-for list="{{ settingsRows }}" as="o" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hair)">
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:12.5px;font-weight:600">{{ o.label }}</div>
+                  <div style="font-size:11px;color:var(--ink2);margin-top:2px">{{ o.sub }}</div>
+                </div>
+                <button role="switch" aria-checked="{{ o.on }}" aria-label="{{ o.label }}" sc-camel-on-click="{{ o.onClick }}" style="position:relative;width:38px;height:22px;flex:none;border-radius:var(--r-pill);border:0;padding:0;background:{{ o.track }};box-shadow:var(--field-sh);cursor:pointer;transition:background .2s" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+                  <span style="position:absolute;top:3px;inset-inline-start:{{ o.knob }}px;width:16px;height:16px;border-radius:var(--r-pill);background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,0.25);transition:inset-inline-start .2s cubic-bezier(.2,.8,.2,1)"></span>
+                </button>
+              </div>
+            </sc-for>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hair)">
+              <div style="flex:1;min-width:0">
+                <div style="font-size:12.5px;font-weight:600"><label for="pulse-lang-pick">{{ t.language }}</label></div>
+                <div style="font-size:11px;color:var(--ink2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.languageSub }}</div>
+              </div>
+              <select id="pulse-lang-pick" value="{{ langSel }}" sc-camel-on-change="{{ pickLang }}" style="height:30px;max-width:150px;min-width:0;padding:0 8px;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);font:600 12px var(--f-ui);cursor:pointer" style-focus="outline:2px solid var(--focus);outline-offset:2px">
+                <sc-for list="{{ langOpts }}" as="o" hint-placeholder-count="3">
+                  <option value="{{ o.value }}">{{ o.name }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hair)">
+              <div style="flex:1;min-width:0;font-size:12.5px;font-weight:600">{{ t.tempUnit }}</div>
+              <div style="display:flex;gap:2px;padding:2px;border-radius:var(--r-pill);background:var(--track);box-shadow:var(--field-sh)">
+                <sc-for list="{{ units }}" as="o" hint-placeholder-count="2">
+                  <button dir="ltr" sc-camel-on-click="{{ o.onClick }}" aria-pressed="{{ o.on }}" style="height:26px;min-width:40px;padding:0 10px;border:0;border-radius:var(--r-pill);background:{{ o.bg }};box-shadow:{{ o.sh }};color:{{ o.ink }};font:700 12px var(--f-hero);cursor:pointer" style-focus="outline:2px solid var(--focus);outline-offset:1px">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
+              <div style="flex:1;min-width:0">
+                <div style="font-size:12.5px;font-weight:600">{{ t.restore }}</div>
+                <div style="font-size:11px;color:var(--ink2);margin-top:2px">{{ restoreSub }}</div>
+              </div>
+              <button sc-camel-on-click="{{ restoreApps }}" style="height:30px;padding:0 12px;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);font-size:12px;font-weight:600;cursor:pointer;opacity:{{ restoreOp }};white-space:nowrap" style-hover="background:var(--card-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">{{ t.restoreBtn }}</button>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--ink3);padding:0 2px">{{ t.simNote }}</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:6px 8px;min-width:0">
+        <button sc-camel-on-click="{{ openMonitor }}" title="{{ monitorLabel }}" style="display:inline-flex;align-items:center;gap:6px;min-width:0;max-width:52%;flex:0 1 auto;height:30px;padding:0 12px;border-radius:var(--r-btn);border:1px solid var(--card-b);background:var(--card);box-shadow:var(--btn-sh);color:var(--ink);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="background:var(--card-hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis">{{ monitorLabel }}</span><svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--ink2);transform:scaleX(var(--flip))"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button>
+        <span title="{{ t.privacy }}" style="display:inline-flex;align-items:center;gap:5px;min-width:0;flex:0 1 auto;font-size:11px;color:var(--ink3);white-space:nowrap"><svg width="11" height="11" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex:none"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span style="min-width:0;overflow:hidden;text-overflow:ellipsis">{{ t.privacy }}</span></span>
+        <button sc-camel-on-click="{{ quitApp }}" style="flex:none;white-space:nowrap;height:30px;padding:0 10px;border-radius:var(--r-btn);border:0;background:transparent;color:var(--ink2);font-size:12px;font-weight:600;cursor:pointer" style-hover="color:var(--thm-ink);background:var(--hover)" style-focus="outline:2px solid var(--focus);outline-offset:2px">{{ t.quit }}</button>
+      </div>
+    </div>
+  </div>
+
+  <section dir="ltr" data-screen-label="RTL guidelines" style="max-width:1280px;margin:28px auto 0;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px 20px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:4px;flex:1 1 360px;min-width:0">
+        <span style="font:800 22px/1.25 'Plus Jakarta Sans', sans-serif;color:var(--page-ink)">RTL design guidelines for Arabic</span>
+        <span dir="rtl" style="font:600 15px 'IBM Plex Sans Arabic', sans-serif;color:var(--page-ink2);text-align:start">إرشادات التصميم من اليمين إلى اليسار</span>
+      </div>
+      <span style="flex:1 1 320px;font:400 13px/1.5 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);max-width:520px;text-wrap:pretty">How Pulse handles Arabic across all six platforms. Switch the flyout to ع above to see each rule in context.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:12px">
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">01</span>Mirror the whole layout</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Set <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">dir="rtl"</code> on the shell. The flyout anchors to the left, and the menu bar, taskbar and header order reverse. Write every offset with logical properties (<code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">inset-inline-end</code>, <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">padding-inline</code>, <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">margin-inline-start</code>), never <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">left</code>/<code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">right</code>.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><div dir="rtl" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Sans Arabic', sans-serif"><span style="width:22px;height:22px;border-radius:7px;background:#10B981"></span><span style="font-weight:700">Pulse</span><span style="flex:1"></span><span style="font-size:12px;color:var(--page-ink2)">الإعدادات</span></div></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">02</span>Time always flows left to right</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Charts and sparklines are never mirrored. Wrap them in <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">dir="ltr"</code> so the past sits on the left and “now” on the right, in both languages. Only the axis labels are translated.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><div dir="ltr"><svg sc-camel-view-box="0 0 200 26" sc-camel-preserve-aspect-ratio="none" style="width:100%;height:26px;display:block"><path d="M0 20 C30 18 40 8 70 12 S120 22 150 9 S185 6 200 4" fill="none" stroke="#0EA5E9" stroke-width="2"></path></svg><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--page-ink2);font-family:'IBM Plex Sans Arabic', sans-serif"><span style="white-space:nowrap">قبل 10 د</span><span style="white-space:nowrap">الآن</span></div></div></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">03</span>Flip direction icons only</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Mirror icons that point along the reading direction: chevrons, Back, external link (<code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">transform: scaleX(-1)</code>). Leave non-directional icons alone: thermometer, battery, Wi-Fi, check marks, the logo and the CPU waveform.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><div dir="rtl" style="display:flex;align-items:center;gap:14px;font-family:'IBM Plex Sans Arabic', sans-serif"><span style="display:inline-flex;align-items:center;gap:3px"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="transform:scaleX(-1)"><path d="m15 6-6 6 6 6"></path></svg>رجوع</span><span style="display:inline-flex;align-items:center;gap:3px">الذاكرة<svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="transform:scaleX(-1)"><path d="m9 6 6 6-6 6"></path></svg></span></div></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">04</span>Isolate numbers with units</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Keep Western digits (0–9) with <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">tabular-nums</code>. The locale engine wraps every value it inserts in Unicode isolates (<code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">U+2068</code> … <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">U+2069</code>); values that stand alone sit in a <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">dir="ltr"</code> span. Without this, the bidi algorithm reorders them.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><span dir="rtl" style="font-family:'IBM Plex Sans Arabic', sans-serif">المعالج ⁦54°C⁩ · الذاكرة ⁦6.1 GB⁩</span></div></div><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-dont)">DON'T</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><span dir="ltr" style="font-family:'IBM Plex Sans Arabic', sans-serif">C°54 المعالج · GB 6.1 الذاكرة</span></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">05</span>Latin names inside Arabic sentences</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">App and brand names stay in Latin (Xcode, Norton AntiVirus, Pulse). A sentence that starts with one must use <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">dir="rtl"</code>, not <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">dir="auto"</code>, or it runs left to right. Fields that hold only a name use <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">dir="auto"</code> so the start of the name is never clipped.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><span dir="rtl" style="display:block;font-family:'IBM Plex Sans Arabic', sans-serif">Xcode يستهلك ⁦52%⁩ من المعالج</span></div></div><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-dont)">DON'T</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><span dir="ltr" style="display:block;font-family:'IBM Plex Sans Arabic', sans-serif">Xcode يستهلك ⁦52%⁩ من المعالج</span></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">06</span>Arabic type and line height</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Use IBM Plex Sans Arabic (macOS, Windows 11), Noto Sans Arabic (ChromeOS, Linux) and Tahoma (XP, 98 SE). Pin <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">line-height: 1.3</code> on the flyout: Arabic fonts add about 80px of height across it otherwise. No letter-spacing, no uppercase, 11px minimum.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><span dir="rtl" style="display:block;font-family:'IBM Plex Sans Arabic', sans-serif;font-size:15px;font-weight:600">أكثر التطبيقات استهلاكاً</span></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">07</span>Use real Arabic plurals</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Arabic has six count forms, picked by CLDR rules on the last two digits: 3–10 and 103–110 share one form, 11–99 another, and 100–102 use the plain form. The rules and forms live in <code style="font:500 12px 'IBM Plex Mono', monospace">locales/ar.json</code>, so code never builds “number + noun”.</div>
+        <div dir="rtl" style="display:grid;grid-template-columns:auto 1fr;gap:4px 16px;padding:8px 10px;border-radius:9px;background:var(--page-track);font-size:13px;color:var(--page-ink);font-family:'IBM Plex Sans Arabic', sans-serif"><span dir="ltr" style="color:var(--page-ink2);white-space:nowrap">1</span><span>عملية واحدة</span><span dir="ltr" style="color:var(--page-ink2);white-space:nowrap">2</span><span>عمليتان</span><span dir="ltr" style="color:var(--page-ink2);white-space:nowrap">3–10</span><span>5 عمليات</span><span dir="ltr" style="color:var(--page-ink2);white-space:nowrap">11–99</span><span>14 عملية</span><span dir="ltr" style="color:var(--page-ink2);white-space:nowrap">100–102</span><span>100 عملية</span></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">08</span>Bars, gradients and sliders start at the start side</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Progress bars fill from the inline start (right). Directional gradients flip to <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">270deg</code>. Sliding pills (segmented control, <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">EN | ع</code>, switches) move with <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">inset-inline-start</code>.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><div dir="rtl" style="display:flex;flex-direction:column;gap:6px"><span style="display:block;height:6px;border-radius:99px;background:var(--page-line);overflow:hidden"><span style="display:block;height:100%;width:49%;background:linear-gradient(270deg,#10B981,#F59E0B)"></span></span><span style="font-size:12px;font-family:'IBM Plex Sans Arabic', sans-serif">مستخدم ⁦49%⁩</span></div></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">09</span>Keep technical identifiers in Latin</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Translate UI copy, but keep units and identifiers as written: PID, GB, MB/s, ZRAM, Wi-Fi 6E, wlp1s0, APFS, °C/°F. Arrows in Arabic copy point left: <bdi dir="rtl" style="font-family:'IBM Plex Sans Arabic', sans-serif">«انقر لعرض آخر 10 دقائق ←»</bdi>.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><span dir="rtl" style="display:block;font-family:'IBM Plex Sans Arabic', sans-serif">9 عمليات · 84 خيطاً · PID 4182</span></div></div></div>
+      </div>
+      <div style="background:var(--page-card);border:1px solid var(--page-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div style="display:block;font:700 15px/1.35 'Plus Jakarta Sans', sans-serif;color:var(--page-ink);text-wrap:balance"><span style="font:700 12px/1 'IBM Plex Mono', monospace;color:var(--page-ink2);margin-inline-end:10px">10</span>Test the longest strings</div>
+        <div style="font:400 13px/1.55 'Plus Jakarta Sans', sans-serif;color:var(--page-ink2);text-wrap:pretty">Arabic labels often run longer than English. Check them at full size: <bdi dir="rtl" style="font-family:'IBM Plex Sans Arabic', sans-serif">«خدمة مكافحة البرمجيات الضارة»</bdi> · <bdi dir="rtl" style="font-family:'IBM Plex Sans Arabic', sans-serif">«أكثر التطبيقات استهلاكاً»</bdi>. Fixed-width labels use <code style="font:500 12px 'IBM Plex Mono', monospace;color:var(--page-ink)">nowrap</code> + ellipsis, which appears on the left in RTL.</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:var(--page-track);min-width:0"><span style="flex:none;font:700 10.5px 'Plus Jakarta Sans', sans-serif;letter-spacing:0.04em;color:var(--page-do)">DO</span><div style="flex:1;min-width:0;font-size:13.5px;color:var(--page-ink)"><span dir="rtl" style="display:block;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'IBM Plex Sans Arabic', sans-serif">خدمة مكافحة البرمجيات الضارة</span></div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;hogAlert&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Simulation&quot;},&quot;charging&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Simulation&quot;},&quot;liveUpdates&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Simulation&quot;}}">

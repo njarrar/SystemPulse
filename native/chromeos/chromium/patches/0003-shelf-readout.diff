@@ -1,0 +1,69 @@
+Tier 1: the Pulse readout in the shelf status area (wave, CPU %, W),
+behind the PulseShelfReadout feature.
+
+--- a/ash/constants/ash_features.h
++++ b/ash/constants/ash_features.h
+@@ -400,6 +400,8 @@
+ COMPONENT_EXPORT(ASH_CONSTANTS)
++BASE_DECLARE_FEATURE(kPulseShelfReadout);
++COMPONENT_EXPORT(ASH_CONSTANTS)
+--- a/ash/constants/ash_features.cc
++++ b/ash/constants/ash_features.cc
+@@ -900,6 +900,10 @@
++// Shows the Pulse system monitor readout in the shelf status area.
++BASE_FEATURE(kPulseShelfReadout,
++             "PulseShelfReadout",
++             base::FEATURE_DISABLED_BY_DEFAULT);
++
+--- a/ash/system/tray/tray_background_view_catalog.h
++++ b/ash/system/tray/tray_background_view_catalog.h
+@@ -40,7 +40,8 @@ enum class TrayBackgroundViewCatalogName {
+   kFocusMode = 30,
+-  kMaxValue = kFocusMode,
++  kPulse = 31,
++  kMaxValue = kPulse,
+ };
+--- a/ash/system/status_area_widget.cc
++++ b/ash/system/status_area_widget.cc
+@@ -40,6 +40,7 @@
+ #include "ash/system/power/power_button_controller.h"
++#include "ash/system/pulse/pulse_tray.h"
+@@ -150,6 +151,11 @@ void StatusAreaWidget::Initialize() {
++  if (features::IsPulseShelfReadoutEnabled()) {
++    // Before the date tray, so the readout sits next to the clock.
++    AddTrayButton(std::make_unique<PulseTray>(shelf_));
++  }
++
+--- a/ash/BUILD.gn
++++ b/ash/BUILD.gn
+@@ -1500,6 +1500,8 @@ component("ash") {
+     "system/privacy_hub/privacy_hub_controller.h",
++    "system/pulse/pulse_tray.cc",
++    "system/pulse/pulse_tray.h",
+--- a/ash/public/cpp/BUILD.gn
++++ b/ash/public/cpp/BUILD.gn
+@@ -300,6 +300,8 @@ component("cpp") {
+     "projector/projector_new_screencast_precondition.h",
++    "pulse/pulse_tray_model.cc",
++    "pulse/pulse_tray_model.h",
+--- a/chrome/browser/ui/ash/BUILD.gn
++++ b/chrome/browser/ui/ash/BUILD.gn
+@@ -200,6 +200,8 @@ static_library("ash") {
++    "pulse/pulse_tray_bridge.cc",
++    "pulse/pulse_tray_bridge.h",
+@@ -500,6 +502,7 @@ static_library("ash") {
++    "//ash/webui/pulse_ui",
+--- a/chrome/browser/ui/ash/chrome_browser_main_extra_parts_ash.cc
++++ b/chrome/browser/ui/ash/chrome_browser_main_extra_parts_ash.cc
+@@ -60,6 +60,7 @@
++#include "chrome/browser/ui/ash/pulse/pulse_tray_bridge.h"
+@@ -400,6 +401,11 @@ void ChromeBrowserMainExtraPartsAsh::PostProfileInit(
++  if (ash::features::IsPulseShelfReadoutEnabled() && !pulse_tray_bridge_) {
++    pulse_tray_bridge_ =
++        std::make_unique<ash::pulse::PulseTrayBridge>(profile);
++  }
++
+--- a/chrome/browser/ui/ash/chrome_browser_main_extra_parts_ash.h
++++ b/chrome/browser/ui/ash/chrome_browser_main_extra_parts_ash.h
+@@ -150,6 +150,7 @@ class ChromeBrowserMainExtraPartsAsh : public ChromeBrowserMainExtraParts,
++  std::unique_ptr<ash::pulse::PulseTrayBridge> pulse_tray_bridge_;

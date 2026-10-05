@@ -1,0 +1,248 @@
+// Copyright 2026 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Interface between chrome://pulse (the Pulse system web app) and ash.
+// Sizes are bytes, rates are bytes per second, temperatures are degrees
+// Celsius and shares are percent of the whole machine (0 to 100).
+module ash.pulse.mojom;
+
+// Stage on the Thermal card. Cool < 48 C, Warm < 70 C, Hot < 90 C, and
+// Throttled when the CPU runs below its rated clock because of heat.
+enum ThermalLevel {
+  kCool,
+  kWarm,
+  kHot,
+  kThrottled,
+};
+
+// From base::MemoryPressureMonitor.
+enum MemoryPressure {
+  kNormal,
+  kModerate,
+  kCritical,
+};
+
+// Process groups shown under Top Active Apps.
+enum ProcessGroupKind {
+  // The browser process and the GPU process: the system UI.
+  kAsh,
+  // Renderers, extensions and utility processes.
+  kChrome,
+  // The crosvm processes of the Linux (Crostini) VM.
+  kCrostini,
+  // The crosvm processes of the Android (ARCVM) VM.
+  kArcvm,
+  // Everything else, such as system daemons.
+  kSystem,
+};
+
+enum NetworkKind {
+  kWiFi,
+  kEthernet,
+  kCellular,
+  kOther,
+};
+
+// Series kept by the sampler for the detail charts.
+enum HistoryMetric {
+  kCpu,
+  kMemory,
+  kPower,
+  kThermal,
+  kGpu,
+  kStorageRead,
+  kStorageWrite,
+  kNetworkDown,
+  kNetworkUp,
+};
+
+struct CpuSnapshot {
+  double usage_percent;
+  double user_percent;
+  double system_percent;
+  // Busy share of the fast and the slow core cluster. When every core has
+  // the same rated clock, `heterogeneous` is false and both hold the average.
+  bool heterogeneous;
+  double perf_cluster_percent;
+  double efficiency_cluster_percent;
+  uint32 physical_cores;
+  uint32 logical_cores;
+  string model_name;
+  double load_average_1m;
+};
+
+struct MemorySnapshot {
+  uint64 total_bytes;
+  uint64 available_bytes;
+  uint64 free_bytes;
+  // Anonymous and file pages that belong to processes.
+  uint64 app_bytes;
+  // Kernel, slab, page tables and buffers.
+  uint64 system_bytes;
+  // RAM that ZRAM itself occupies (mm_stat mem_used_total).
+  uint64 zram_resident_bytes;
+  // Pages swapped into ZRAM before and after compression (mm_stat
+  // orig_data_size and compr_data_size).
+  uint64 zram_original_bytes;
+  uint64 zram_compressed_bytes;
+  // orig_data_size / compr_data_size, or 0 when ZRAM is empty.
+  double zram_ratio;
+  // Resident memory of the Crostini and ARCVM crosvm processes.
+  uint64 crostini_bytes;
+  uint64 arcvm_bytes;
+  MemoryPressure pressure;
+};
+
+struct BatterySnapshot {
+  double charge_percent;
+  // Signed: positive while charging, negative on battery.
+  double power_watts;
+  bool charging;
+  // Minutes to empty on battery, or to full while charging. -1 when unknown.
+  int32 minutes_remaining;
+  double health_percent;
+  uint32 cycle_count;
+  double full_wh;
+  double design_wh;
+  // Rated power of the connected charger from power_manager, 0 when none
+  // is connected or it is unknown.
+  double adapter_watts;
+};
+
+struct ThermalSensor {
+  string name;
+  double celsius;
+};
+
+struct ThermalSnapshot {
+  ThermalLevel level;
+  double cpu_celsius;
+  double? gpu_celsius;
+  double? storage_celsius;
+  double? battery_celsius;
+  // How far below its rated clock the CPU runs, 0 when it is not throttled.
+  double throttle_percent;
+  array<ThermalSensor> sensors;
+};
+
+struct FanSnapshot {
+  // Empty on fanless devices.
+  array<uint32> speeds_rpm;
+};
+
+struct StorageSnapshot {
+  // Device type from cros_healthd, for example "eMMC", "NVMe" or "UFS".
+  string device_type;
+  uint64 total_bytes;
+  uint64 free_bytes;
+  double read_bytes_per_second;
+  double write_bytes_per_second;
+  string filesystem;
+};
+
+struct NetworkSnapshot {
+  NetworkKind kind;
+  string name;
+  bool online;
+  // 0 to 100 for wireless networks, from Shill.
+  uint32? signal_percent;
+  string interface_name;
+  double rx_bytes_per_second;
+  double tx_bytes_per_second;
+  // Totals since boot, from /proc/net/dev.
+  uint64 rx_bytes_total;
+  uint64 tx_bytes_total;
+};
+
+struct GpuSnapshot {
+  string name;
+  // Unset when the driver does not report load.
+  double? usage_percent;
+  uint32? clock_mhz;
+  uint64? shared_memory_bytes;
+};
+
+struct ProcessGroup {
+  ProcessGroupKind kind;
+  // English display name ("Linux (Crostini)"). The page localizes it.
+  string name;
+  int32 representative_pid;
+  uint32 process_count;
+  uint32 thread_count;
+  double cpu_percent;
+  uint64 memory_bytes;
+  double? gpu_percent;
+  // True when ash can stop this group, such as the Crostini VM.
+  bool can_end;
+};
+
+// Set when one group has held more than half of the total CPU for at least
+// two minutes.
+struct HogAlert {
+  ProcessGroupKind kind;
+  string name;
+  double cpu_percent;
+  uint32 seconds_over_threshold;
+  bool can_end;
+};
+
+struct Snapshot {
+  CpuSnapshot cpu;
+  MemorySnapshot memory;
+  BatterySnapshot? battery;
+  ThermalSnapshot thermal;
+  FanSnapshot fans;
+  StorageSnapshot? storage;
+  NetworkSnapshot? network;
+  GpuSnapshot? gpu;
+  array<ProcessGroup> groups;
+  HogAlert? hog;
+};
+
+// Bound by PulseUI when the page loads.
+interface PageHandlerFactory {
+  CreatePageHandler(pending_remote<Page> page,
+                    pending_receiver<PageHandler> handler);
+};
+
+// Browser-side handler for chrome://pulse.
+interface PageHandler {
+  // Latest readings. The page also receives them through Page.OnSnapshot.
+  GetSnapshot() => (Snapshot snapshot);
+
+  // The last ten minutes of `metric`: 121 samples five seconds apart, oldest
+  // first. Shorter while the sampler has run for less than ten minutes.
+  GetHistory(HistoryMetric metric) => (array<double> samples);
+
+  // Same as GetHistory for one process group's CPU share.
+  GetGroupHistory(ProcessGroupKind kind) => (array<double> samples);
+
+  // Stops the group when ProcessGroup.can_end is true. Returns false when
+  // the group cannot be stopped or stopping failed.
+  EndGroup(ProcessGroupKind kind) => (bool ok);
+
+  // Starts a group that EndGroup stopped earlier, such as the Crostini VM.
+  // Returns false when the group cannot be restarted.
+  RestoreGroup(ProcessGroupKind kind) => (bool ok);
+
+  // Pauses (false) or resumes (true) the OnSnapshot pushes for this page.
+  // While paused the sampler keeps the ten-minute history at its 5 second
+  // cadence, and GetSnapshot still answers.
+  SetLiveUpdates(bool enabled);
+
+  // The app language the user picked in Settings or the header switcher:
+  // a locale code such as "ar", or "" to match the system language. Kept
+  // in the profile pref ash.pulse.language.
+  GetLanguage() => (string code);
+  SetLanguage(string code);
+
+  // Opens the Diagnostics app (chrome://diagnostics).
+  OpenDiagnostics();
+};
+
+// Page-side interface, called by the handler.
+interface Page {
+  // Pushed every 1.5 seconds while live updates are on.
+  OnSnapshot(Snapshot snapshot);
+};

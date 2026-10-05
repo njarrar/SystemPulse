@@ -1,0 +1,20 @@
+<Project>
+  <!--
+    Shared settings. Set PULSE_ARTIFACTS to send bin/ and obj/ outside the
+    source tree, for example: PULSE_ARTIFACTS=/tmp/pulse-build dotnet build
+  -->
+  <PropertyGroup Condition="'$(PULSE_ARTIFACTS)' != ''">
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <ArtifactsPath>$(PULSE_ARTIFACTS)</ArtifactsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+    <Authors>njarrar</Authors>
+    <Product>Pulse</Product>
+    <PulseLocalesDir>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '..', 'locales'))</PulseLocalesDir>
+  </PropertyGroup>
+</Project>

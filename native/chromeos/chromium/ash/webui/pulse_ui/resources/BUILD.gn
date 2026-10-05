@@ -1,0 +1,61 @@
+# Copyright 2026 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//ui/webui/resources/tools/build_webui.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+
+assert(is_chromeos)
+
+_catalog_dir = "$root_gen_dir/ash/webui/pulse_ui/catalog"
+
+build_webui("build") {
+  grd_prefix = "ash_pulse_ui"
+
+  static_files = [
+    "app_icon_128.png",
+    "app_icon_256.png",
+    "app_icon_48.png",
+    "index.html",
+    "pulse_tokens.css",
+  ]
+
+  ts_files = [
+    "browser_proxy.ts",
+    "charts.ts",
+    "format.ts",
+    "i18n.ts",
+    "icons.ts",
+    "pulse_app.ts",
+    "pulse_main.ts",
+    "pulse_styles.ts",
+    "vdom.ts",
+  ]
+
+  mojo_files_deps =
+      [ "//ash/webui/pulse_ui/mojom:mojom_ts__generator" ]
+  mojo_files = [ "$root_gen_dir/ash/webui/pulse_ui/mojom/pulse_ui.mojom-webui.ts" ]
+
+  ts_deps = [
+    "//ui/webui/resources/js:build_ts",
+    "//ui/webui/resources/mojo:build_ts",
+  ]
+
+  # pulse_catalog.json, generated from the locale files at build time.
+  extra_grdp_deps = [ ":build_catalog_grdp" ]
+  extra_grdp_files = [ "$target_gen_dir/catalog_resources.grdp" ]
+
+  grit_output_dir = "$root_gen_dir/ash/webui"
+}
+
+generate_grd("build_catalog_grdp") {
+  grd_prefix = "ash_pulse_ui_catalog"
+  out_grd = "$target_gen_dir/catalog_resources.grdp"
+  input_files = [ "pulse_catalog.json" ]
+  input_files_base_dir = rebase_path(_catalog_dir, root_build_dir)
+  deps = [ "//ash/webui/pulse_ui:pulse_catalog" ]
+}
+
+group("resources") {
+  public_deps = [ ":build" ]
+}

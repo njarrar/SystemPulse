@@ -1,0 +1,19 @@
+name: winxp
+on:
+  push:
+    paths: ['native/winxp/**', 'locales/**', 'i18n/test/fixtures/**']
+  pull_request:
+    paths: ['native/winxp/**', 'locales/**', 'i18n/test/fixtures/**']
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mingw-w64
+        run: sudo apt-get update && sudo apt-get install -y mingw-w64
+      - name: Build pulse.exe and run the i18n tests
+        run: sh native/winxp/build.sh test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pulse-winxp
+          path: native/winxp/build/pulse.exe

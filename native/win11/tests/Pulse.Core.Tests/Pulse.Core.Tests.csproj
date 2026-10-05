@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RootNamespace>Pulse.Core.Tests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Pulse.Core\Pulse.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- The shared locale files and the engine's test vectors, never copies. -->
+    <None Include="$(PulseLocalesDir)*.json" Link="data\locales\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(PulseLocalesDir)..\i18n\test\fixtures\*.json" Link="data\fixtures\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="fixtures\intl-plurals.json" Link="data\fixtures\intl-plurals.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

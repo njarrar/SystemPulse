@@ -1,0 +1,23 @@
+name: translations
+
+on:
+  pull_request:
+    paths: ["locales/**", "i18n/**"]
+  push:
+    branches: [main]
+    paths: ["locales/**", "i18n/**"]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check every locale file against en.json
+        run: node i18n/validate.js
+      - name: Plural and direction tests
+        run: node i18n/test/test.js
+      - name: Build the demo page with every language
+        run: python3 prototype/build.py --out /tmp/pulse.html

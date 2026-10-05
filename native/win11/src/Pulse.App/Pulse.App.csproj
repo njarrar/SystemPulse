@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Pulse for Windows 11: WinUI 3 (Windows App SDK) tray app.
+
+    The UI is built in C# with no .xaml files, so the XAML compiler never runs.
+    The catalog step below turns locales/*.json into Strings/<lang>/Resources.resw
+    before every build; MRT Core packs them into resources.pri.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <RootNamespace>Pulse.App</RootNamespace>
+    <AssemblyName>Pulse</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\Pulse.ico</ApplicationIcon>
+    <Platforms>x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <DefaultLanguage>en</DefaultLanguage>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+
+    <!-- Native AOT: Windows App SDK 1.6+ with CsWinRT 2.1+ supports it. -->
+    <PublishAot>true</PublishAot>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishTrimmed>true</PublishTrimmed>
+    <SelfContained Condition="'$(RuntimeIdentifier)' != ''">true</SelfContained>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
+    <!-- Keep CsWinRT's generated code warning-clean under the AOT analyzers. -->
+    <NoWarn>$(NoWarn);CsWinRT1028</NoWarn>
+
+    <PulseStringsDir>$(MSBuildProjectDirectory)\Strings\</PulseStringsDir>
+    <PulseCatalogGen>$(MSBuildProjectDirectory)\..\..\tools\Pulse.CatalogGen\Pulse.CatalogGen.csproj</PulseCatalogGen>
+    <PulseDotnet Condition="'$(DOTNET_HOST_PATH)' != ''">$(DOTNET_HOST_PATH)</PulseDotnet>
+    <PulseDotnet Condition="'$(PulseDotnet)' == ''">dotnet</PulseDotnet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260921001" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4654" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pulse.Core\Pulse.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Pulse.ico" CopyToOutputDirectory="PreserveNewest" />
+    <PulseLocaleFile Include="$(PulseLocalesDir)*.json" Exclude="$(PulseLocalesDir)schema.json" />
+  </ItemGroup>
+
+  <!--
+    locales/*.json to Strings/<lang>/Resources.resw. Runs before resources are
+    processed; adding a locale file needs no change here.
+  -->
+  <!-- The list of locale files is an input too, so a file added with an old
+       timestamp, or a removed file, still triggers the step. -->
+  <Target Name="PulseLocaleList" BeforeTargets="PulseGenerateCatalog">
+    <MakeDir Directories="$(PulseStringsDir)" />
+    <WriteLinesToFile File="$(PulseStringsDir).locales" Lines="@(PulseLocaleFile->'%(Filename)')" Overwrite="true" WriteOnlyWhenDifferent="true" />
+  </Target>
+
+  <Target Name="PulseGenerateCatalog" BeforeTargets="PrepareForBuild"
+          Inputs="@(PulseLocaleFile);$(PulseCatalogGen);$(PulseStringsDir).locales" Outputs="$(PulseStringsDir).stamp">
+    <Exec Command="&quot;$(PulseDotnet)&quot; run --project &quot;$(PulseCatalogGen)&quot; -c Release -- &quot;$(PulseLocalesDir).&quot; &quot;$(PulseStringsDir).&quot;" />
+    <Touch Files="$(PulseStringsDir).stamp" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="PulseAddCatalog" AfterTargets="PulseGenerateCatalog" BeforeTargets="PrepareForBuild">
+    <ItemGroup>
+      <PulseResw Include="$(PulseStringsDir)**\Resources.resw" />
+      <PRIResource Include="@(PulseResw)" />
+      <!-- Plain copies next to the exe: the fallback loader reads them if resources.pri is missing. -->
+      <Content Include="@(PulseResw)" Link="Strings\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+  </Target>
+</Project>

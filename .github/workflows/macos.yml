@@ -1,0 +1,94 @@
+name: macos
+
+on:
+  push:
+    paths:
+      - "native/macos/**"
+      - "locales/**"
+      - "i18n/test/fixtures/**"
+      - ".github/workflows/macos.yml"
+  pull_request:
+    paths:
+      - "native/macos/**"
+      - "locales/**"
+      - "i18n/test/fixtures/**"
+      - ".github/workflows/macos.yml"
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: native/macos
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+          swift --version
+
+      - name: Locale catalog is current
+        run: swift run -c release pulse-catalog --check
+
+      - name: Test PulseCore (plural vectors, catalog round trip, grouping, history)
+        run: swift test
+
+      - name: Build universal Pulse.app
+        run: bash scripts/build-app.sh
+
+      - name: Inspect bundle
+        run: |
+          lipo -info dist/Pulse.app/Contents/MacOS/Pulse
+          plutil -p dist/Pulse.app/Contents/Info.plist
+          codesign --verify --verbose=2 dist/Pulse.app
+
+      - name: Probe real telemetry on the runner
+        timeout-minutes: 2
+        run: dist/Pulse.app/Contents/MacOS/Pulse --probe
+
+      - name: Render flyout screenshots
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          mkdir -p dist/screenshots
+          dist/Pulse.app/Contents/MacOS/Pulse --render "$PWD/dist/screenshots"
+          ls -la dist/screenshots
+
+      - name: Upload app and screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: pulse-macos-universal
+          path: |
+            native/macos/dist/Pulse-macos-universal.zip
+            native/macos/dist/screenshots/*.png
+          if-no-files-found: warn
+
+  publish:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: pulse-macos-universal
+          path: /tmp/mac
+      - name: Put the app in build/macos
+        run: |
+          cp /tmp/mac/Pulse-macos-universal.zip build/macos/Pulse-macos-universal.zip
+          git config user.name "njarrar"
+          git config user.email "njarrar@gmail.com"
+          git add build/macos
+          git diff --cached --quiet && exit 0
+          git commit -m "Update macOS app in build/macos"
+          for i in 1 2 3 4; do git pull --rebase origin main && git push origin HEAD:main && break; sleep $((i*5)); done

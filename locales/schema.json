@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pulse-locale.schema.json",
+  "title": "Pulse locale file",
+  "description": "One file per language. Every key is optional except code; anything missing falls back to en.json.",
+  "type": "object",
+  "required": [
+    "code"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "text": {
+      "type": "string",
+      "description": "May hold {placeholders}. Inserted values are wrapped in Unicode isolates in RTL locales."
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "fontPair": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ui": {
+          "type": "string",
+          "description": "CSS font stack for UI text, placed before the platform stack."
+        },
+        "hero": {
+          "type": "string",
+          "description": "CSS font stack for hero numbers and titles, placed after the platform stack."
+        }
+      }
+    },
+    "forms": {
+      "type": "object",
+      "required": [
+        "other"
+      ],
+      "description": "CLDR categories, plus exact matches such as \"=0\" that win over them.",
+      "patternProperties": {
+        "^(zero|one|two|few|many|other)$": {
+          "$ref": "#/$defs/text"
+        },
+        "^=\\d+$": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+      "description": "BCP 47 tag. Must match the file name."
+    },
+    "label": {
+      "type": "string",
+      "description": "Short label for the switcher, in its own script (EN, ع, DE)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Language name in its own script (English, العربية)."
+    },
+    "dir": {
+      "enum": [
+        "ltr",
+        "rtl"
+      ]
+    },
+    "order": {
+      "type": "number",
+      "description": "Position in the switcher. Defaults: en first, then by code."
+    },
+    "fallback": {
+      "type": "string",
+      "description": "Locale to fall back to. Defaults to en."
+    },
+    "numberingSystem": {
+      "type": "string",
+      "description": "Unicode numbering system for digits (latn, arab, arabext, deva...). Defaults to latn."
+    },
+    "fonts": {
+      "type": "object",
+      "properties": {
+        "ui": {
+          "type": "string",
+          "description": "CSS font stack for UI text, placed before the platform stack."
+        },
+        "hero": {
+          "type": "string",
+          "description": "CSS font stack for hero numbers and titles, placed after the platform stack."
+        },
+        "platforms": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "mac",
+              "win",
+              "chrome",
+              "linux",
+              "xp",
+              "w98"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/fontPair"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pluralRules": {
+      "type": "object",
+      "description": "CLDR plural rules (https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html). Omit to use Intl.PluralRules.",
+      "propertyNames": {
+        "enum": [
+          "zero",
+          "one",
+          "two",
+          "few",
+          "many"
+        ]
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "plurals": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/forms"
+      }
+    },
+    "strings": {
+      "$ref": "#/$defs/table"
+    },
+    "hardware": {
+      "$ref": "#/$defs/table"
+    },
+    "apps": {
+      "$ref": "#/$defs/table",
+      "description": "English app name to localized name. Unlisted apps keep their name."
+    }
+  }
+}

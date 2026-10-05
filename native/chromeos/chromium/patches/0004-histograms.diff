@@ -1,0 +1,12 @@
+Histogram enums for the new SWA type and tray name.
+
+--- a/tools/metrics/histograms/metadata/ash/enums.xml
++++ b/tools/metrics/histograms/metadata/ash/enums.xml
+@@ -2000,6 +2000,7 @@
+ <enum name="SystemWebAppName">
++  <int value="34" label="Pulse"/>
+ </enum>
+@@ -3000,6 +3001,7 @@
+ <enum name="TrayBackgroundViewCatalogName">
++  <int value="31" label="Pulse"/>
+ </enum>

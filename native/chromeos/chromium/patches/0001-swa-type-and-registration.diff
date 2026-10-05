@@ -1,0 +1,80 @@
+Register Pulse as a system web app: the SWA type, its delegate, the WebUI
+config and the Mojo binder.
+
+--- a/ash/webui/system_apps/public/system_web_app_type.h
++++ b/ash/webui/system_apps/public/system_web_app_type.h
+@@ -90,6 +90,9 @@ enum class SystemWebAppType {
+   // A graduated app, see //ash/webui/graduation.
+   GRADUATION = 33,
+ 
+-  kMaxValue = GRADUATION,
++  // The Pulse system monitor, chrome://pulse.
++  PULSE = 34,
++
++  kMaxValue = PULSE,
+ };
+--- a/chrome/browser/ash/system_web_apps/system_web_app_manager.cc
++++ b/chrome/browser/ash/system_web_apps/system_web_app_manager.cc
+@@ -60,6 +60,7 @@
+ #include "chrome/browser/ash/system_web_apps/apps/personalization_app/personalization_system_app_delegate.h"
+ #include "chrome/browser/ash/system_web_apps/apps/print_management_web_app_info.h"
++#include "chrome/browser/ash/system_web_apps/apps/pulse_web_app_info.h"
+ #include "chrome/browser/ash/system_web_apps/apps/scanning_system_web_app_info.h"
+@@ -140,6 +141,7 @@ SystemWebAppDelegateMap CreateSystemWebApps(Profile* profile) {
+   info_vec.push_back(std::make_unique<PrintManagementSystemAppDelegate>(profile));
++  info_vec.push_back(std::make_unique<PulseSystemAppDelegate>(profile));
+   info_vec.push_back(std::make_unique<ScanningSystemAppDelegate>(profile));
+--- a/chrome/browser/ash/system_web_apps/apps/BUILD.gn
++++ b/chrome/browser/ash/system_web_apps/apps/BUILD.gn
+@@ -40,6 +40,10 @@ static_library("apps") {
+     "print_management_web_app_info.h",
++    "pulse/chrome_pulse_ui_delegate.cc",
++    "pulse/chrome_pulse_ui_delegate.h",
++    "pulse_web_app_info.cc",
++    "pulse_web_app_info.h",
+     "scanning_system_web_app_info.cc",
+@@ -120,6 +124,8 @@ static_library("apps") {
+     "//ash/webui/print_management",
++    "//ash/webui/pulse_ui",
++    "//ash/webui/pulse_ui/resources:resources",
+     "//ash/webui/scanning",
+--- a/chrome/browser/ui/webui/ash/config/chrome_web_ui_configs_chromeos.cc
++++ b/chrome/browser/ui/webui/ash/config/chrome_web_ui_configs_chromeos.cc
+@@ -30,6 +30,7 @@
+ #include "ash/webui/print_management/print_management_ui.h"
++#include "ash/webui/pulse_ui/pulse_ui.h"
+ #include "ash/webui/scanning/scanning_ui.h"
+@@ -60,6 +61,7 @@
+ #include "chrome/browser/ash/system_web_apps/apps/personalization_app/personalization_app_utils.h"
++#include "chrome/browser/ash/system_web_apps/apps/pulse/chrome_pulse_ui_delegate.h"
+@@ -250,6 +252,12 @@ void RegisterAshChromeWebUIConfigs() {
+   map.AddWebUIConfig(std::make_unique<PrintManagementUIConfig>(...));
++  map.AddWebUIConfig(std::make_unique<pulse::PulseUIConfig>(
++      base::BindRepeating([](content::WebUI* web_ui)
++                              -> std::unique_ptr<pulse::PulseUIDelegate> {
++        return std::make_unique<pulse::ChromePulseUIDelegate>(web_ui);
++      })));
+   map.AddWebUIConfig(std::make_unique<ScanningUIConfig>(...));
+--- a/chrome/browser/chrome_browser_interface_binders_webui_parts_chromeos.cc
++++ b/chrome/browser/chrome_browser_interface_binders_webui_parts_chromeos.cc
+@@ -40,6 +40,7 @@
+ #include "ash/webui/print_management/print_management_ui.h"
++#include "ash/webui/pulse_ui/pulse_ui.h"
+@@ -300,6 +301,9 @@ void PopulateChromeWebUIFrameBindersPartsCros(
++  RegisterWebUIControllerInterfaceBinder<
++      ash::pulse::mojom::PageHandlerFactory, ash::pulse::PulseUI>(map);
++
+--- a/ash/webui/BUILD.gn
++++ b/ash/webui/BUILD.gn
+@@ -60,6 +60,7 @@ source_set("unit_tests") {
+     "//ash/webui/print_management:unit_tests",
++    "//ash/webui/pulse_ui:unit_tests",
+     "//ash/webui/scanning:unit_tests",
+--- a/chrome/browser/prefs/browser_prefs.cc
++++ b/chrome/browser/prefs/browser_prefs.cc
+@@ -200,6 +200,7 @@
+ #include "ash/webui/print_management/print_management_ui.h"
++#include "ash/webui/pulse_ui/pulse_ui.h"
+@@ -1900,6 +1901,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry,
+   ash::printing::print_management::PrintManagementUI::RegisterProfilePrefs(registry);
++  ash::pulse::PulseUI::RegisterProfilePrefs(registry);

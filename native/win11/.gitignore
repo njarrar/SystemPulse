@@ -1,0 +1,6 @@
+bin/
+obj/
+artifacts/
+src/Pulse.App/Strings/
+*.user
+.vs/

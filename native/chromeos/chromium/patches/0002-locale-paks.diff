@@ -1,0 +1,13 @@
+Merge the generated Pulse strings into every locale pak.
+
+--- a/chrome/chrome_repack_locales.gni
++++ b/chrome/chrome_repack_locales.gni
+@@ -60,6 +60,7 @@ template("chrome_repack_locales") {
+     if (is_chromeos) {
+       source_patterns += [
++        "${root_gen_dir}/ash/webui/pulse_ui/pulse_strings_",
+         "${root_gen_dir}/ash/strings/ash_strings_",
+@@ -80,6 +81,7 @@ template("chrome_repack_locales") {
+       deps += [
++        "//ash/webui/pulse_ui:pulse_strings",
+         "//ash/strings",

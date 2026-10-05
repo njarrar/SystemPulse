@@ -1,0 +1,208 @@
+/* Copyright 2026 The Chromium Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+/* Pulse design tokens for ChromeOS, Material 3 naming.
+ *   --pulse-ref-*   raw palette
+ *   --pulse-sys-*   roles the components use (surface, on-surface, outline)
+ *   --pulse-shape-* corner radii for the ChromeOS shape scale
+ *   --pulse-type-*  type roles (Google Sans display, Google Sans Text body)
+ * Light is the default. Dark follows the system unless the page sets
+ * data-theme on <html>. */
+
+:root {
+  color-scheme: light;
+
+  /* Shape scale: ChromeOS rounds harder than the other platforms. */
+  --pulse-shape-window: 24px;
+  --pulse-shape-card: 20px;
+  --pulse-shape-button: 999px;
+  --pulse-shape-badge: 10px;
+  --pulse-shape-row: 12px;
+  --pulse-shape-pill: 999px;
+  --pulse-shape-mono: 8px;
+  --pulse-shape-tip: 16px;
+  --pulse-shape-logo: 12px;
+
+  /* Type families. pulse_app.ts sets --pulse-font-hero and --pulse-font-text
+   * on its host, putting the locale's own family first when it has one. */
+  --pulse-type-family-display: "Google Sans", "Google Sans Flex", "Plus Jakarta Sans", Roboto, sans-serif;
+  --pulse-type-family-text: "Google Sans Text", "Google Sans", "Google Sans Flex", Roboto, sans-serif;
+  --pulse-font-hero: var(--pulse-type-family-display);
+  --pulse-font-text: var(--pulse-type-family-text);
+
+  /* Reference palette (Part 1 light). */
+  --pulse-ref-emerald: #10B981;
+  --pulse-ref-sky: #0EA5E9;
+  --pulse-ref-amber: #F59E0B;
+  --pulse-ref-rose: #F43F5E;
+  --pulse-ref-teal: #14B8A6;
+  --pulse-ref-orange: #F97316;
+  --pulse-ref-red: #EF4444;
+
+  /* System roles. */
+  --pulse-sys-surface: #F5F8F6;
+  --pulse-sys-surface-glass: rgba(245, 248, 246, 0.82);
+  --pulse-sys-surface-container: rgba(255, 255, 255, 0.78);
+  --pulse-sys-surface-container-high: rgba(255, 255, 255, 0.96);
+  --pulse-sys-outline-variant: rgba(14, 30, 25, 0.06);
+  --pulse-sys-outline: rgba(14, 30, 25, 0.10);
+  --pulse-sys-on-surface: #0E1E19;
+  --pulse-sys-on-surface-variant: #4B635B;
+  --pulse-sys-on-surface-subtle: #5E746C;
+  --pulse-sys-track: rgba(14, 30, 25, 0.07);
+  --pulse-sys-track-strong: rgba(14, 30, 25, 0.2);
+  --pulse-sys-hover: rgba(14, 30, 25, 0.045);
+  --pulse-sys-elevation-1: 0 2px 10px rgba(14, 30, 25, 0.04);
+  --pulse-sys-elevation-2: 0 8px 22px rgba(14, 30, 25, 0.09);
+  --pulse-sys-tooltip: rgba(255, 255, 255, 0.94);
+  --pulse-sys-tooltip-outline: rgba(14, 30, 25, 0.06);
+  --pulse-sys-tooltip-shadow: 0 14px 36px rgba(14, 30, 25, 0.16);
+  --pulse-sys-segment: #FFFFFF;
+  --pulse-sys-segment-shadow: 0 1px 3px rgba(14, 30, 25, 0.14);
+  --pulse-sys-logo: linear-gradient(150deg, #FFFFFF, #E2F2EB);
+  --pulse-sys-danger: #DC2626;
+  --pulse-sys-on-danger: #FFFFFF;
+  --pulse-sys-spark-top: 0.28;
+
+  /* Metric accents and their text-safe inks (4.5:1 on the card). */
+  --pulse-cpu: var(--pulse-ref-emerald);
+  --pulse-mem: var(--pulse-ref-sky);
+  --pulse-nrg: var(--pulse-ref-amber);
+  --pulse-thm: var(--pulse-ref-rose);
+  --pulse-gpu: var(--pulse-ref-teal);
+  --pulse-warn: var(--pulse-ref-orange);
+  --pulse-crit: var(--pulse-ref-red);
+  --pulse-cpu-ink: #047857;
+  --pulse-mem-ink: #0369A1;
+  --pulse-nrg-ink: #B45309;
+  --pulse-thm-ink: #BE123C;
+  --pulse-gpu-ink: #0F766E;
+  --pulse-warn-ink: #C2410C;
+  --pulse-crit-ink: #B91C1C;
+  --pulse-thm-tint-solid: #FFF0F2;
+
+  --pulse-desk: radial-gradient(42% 46% at 78% 30%, oklch(0.86 0.08 165 / 0.95), transparent 70%), radial-gradient(40% 40% at 88% 82%, oklch(0.9 0.08 75 / 0.95), transparent 70%), radial-gradient(45% 45% at 14% 80%, oklch(0.88 0.05 225 / 0.85), transparent 70%), #E6ECE9;
+}
+
+/* Dark roles, used when the system is dark (unless the page forces light)
+ * and when the page forces dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --pulse-sys-surface: #0F1A16;
+    --pulse-sys-surface-glass: rgba(12, 21, 18, 0.80);
+    --pulse-sys-surface-container: rgba(255, 255, 255, 0.055);
+    --pulse-sys-surface-container-high: rgba(255, 255, 255, 0.09);
+    --pulse-sys-outline-variant: rgba(255, 255, 255, 0.08);
+    --pulse-sys-outline: rgba(255, 255, 255, 0.10);
+    --pulse-sys-on-surface: #ECFDF5;
+    --pulse-sys-on-surface-variant: rgba(236, 253, 245, 0.68);
+    --pulse-sys-on-surface-subtle: rgba(236, 253, 245, 0.52);
+    --pulse-sys-track: rgba(255, 255, 255, 0.08);
+    --pulse-sys-track-strong: rgba(255, 255, 255, 0.22);
+    --pulse-sys-hover: rgba(255, 255, 255, 0.05);
+    --pulse-sys-elevation-1: none;
+    --pulse-sys-elevation-2: 0 8px 22px rgba(0, 0, 0, 0.35);
+    --pulse-sys-tooltip: rgba(20, 32, 28, 0.94);
+    --pulse-sys-tooltip-outline: rgba(255, 255, 255, 0.08);
+    --pulse-sys-tooltip-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+    --pulse-sys-segment: rgba(255, 255, 255, 0.16);
+    --pulse-sys-segment-shadow: none;
+    --pulse-sys-logo: linear-gradient(150deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+    --pulse-sys-danger: #F87171;
+    --pulse-sys-on-danger: #2A0E00;
+    --pulse-cpu: #34D399;
+    --pulse-mem: #38BDF8;
+    --pulse-nrg: #FBBF24;
+    --pulse-thm: #FB7185;
+    --pulse-gpu: #2DD4BF;
+    --pulse-warn: #FB923C;
+    --pulse-crit: #F87171;
+    --pulse-cpu-ink: #34D399;
+    --pulse-mem-ink: #38BDF8;
+    --pulse-nrg-ink: #FBBF24;
+    --pulse-thm-ink: #FB7185;
+    --pulse-gpu-ink: #2DD4BF;
+    --pulse-warn-ink: #FDBA74;
+    --pulse-crit-ink: #FCA5A5;
+    --pulse-thm-tint-solid: rgba(251, 113, 133, 0.16);
+    --pulse-desk: radial-gradient(42% 46% at 78% 30%, oklch(0.36 0.08 165 / 0.9), transparent 70%), radial-gradient(40% 40% at 88% 82%, oklch(0.33 0.06 85 / 0.8), transparent 70%), radial-gradient(45% 45% at 14% 80%, oklch(0.32 0.06 225 / 0.8), transparent 70%), #0A1310;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --pulse-sys-surface: #0F1A16;
+  --pulse-sys-surface-glass: rgba(12, 21, 18, 0.80);
+  --pulse-sys-surface-container: rgba(255, 255, 255, 0.055);
+  --pulse-sys-surface-container-high: rgba(255, 255, 255, 0.09);
+  --pulse-sys-outline-variant: rgba(255, 255, 255, 0.08);
+  --pulse-sys-outline: rgba(255, 255, 255, 0.10);
+  --pulse-sys-on-surface: #ECFDF5;
+  --pulse-sys-on-surface-variant: rgba(236, 253, 245, 0.68);
+  --pulse-sys-on-surface-subtle: rgba(236, 253, 245, 0.52);
+  --pulse-sys-track: rgba(255, 255, 255, 0.08);
+  --pulse-sys-track-strong: rgba(255, 255, 255, 0.22);
+  --pulse-sys-hover: rgba(255, 255, 255, 0.05);
+  --pulse-sys-elevation-1: none;
+  --pulse-sys-elevation-2: 0 8px 22px rgba(0, 0, 0, 0.35);
+  --pulse-sys-tooltip: rgba(20, 32, 28, 0.94);
+  --pulse-sys-tooltip-outline: rgba(255, 255, 255, 0.08);
+  --pulse-sys-tooltip-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+  --pulse-sys-segment: rgba(255, 255, 255, 0.16);
+  --pulse-sys-segment-shadow: none;
+  --pulse-sys-logo: linear-gradient(150deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  --pulse-sys-danger: #F87171;
+  --pulse-sys-on-danger: #2A0E00;
+  --pulse-cpu: #34D399;
+  --pulse-mem: #38BDF8;
+  --pulse-nrg: #FBBF24;
+  --pulse-thm: #FB7185;
+  --pulse-gpu: #2DD4BF;
+  --pulse-warn: #FB923C;
+  --pulse-crit: #F87171;
+  --pulse-cpu-ink: #34D399;
+  --pulse-mem-ink: #38BDF8;
+  --pulse-nrg-ink: #FBBF24;
+  --pulse-thm-ink: #FB7185;
+  --pulse-gpu-ink: #2DD4BF;
+  --pulse-warn-ink: #FDBA74;
+  --pulse-crit-ink: #FCA5A5;
+  --pulse-thm-tint-solid: rgba(251, 113, 133, 0.16);
+  --pulse-desk: radial-gradient(42% 46% at 78% 30%, oklch(0.36 0.08 165 / 0.9), transparent 70%), radial-gradient(40% 40% at 88% 82%, oklch(0.33 0.06 85 / 0.8), transparent 70%), radial-gradient(45% 45% at 14% 80%, oklch(0.32 0.06 225 / 0.8), transparent 70%), #0A1310;
+}
+
+/* Tints, derived so they track both themes. */
+:root {
+  --pulse-cpu-tint: color-mix(in srgb, var(--pulse-cpu) 12%, transparent);
+  --pulse-mem-tint: color-mix(in srgb, var(--pulse-mem) 12%, transparent);
+  --pulse-nrg-tint: color-mix(in srgb, var(--pulse-nrg) 13%, transparent);
+  --pulse-thm-tint: color-mix(in srgb, var(--pulse-thm) 12%, transparent);
+  --pulse-gpu-tint: color-mix(in srgb, var(--pulse-gpu) 13%, transparent);
+  --pulse-warn-tint: color-mix(in srgb, var(--pulse-warn) 16%, transparent);
+  --pulse-crit-tint: color-mix(in srgb, var(--pulse-crit) 13%, transparent);
+  --pulse-mem-tint2: color-mix(in srgb, var(--pulse-mem) 30%, transparent);
+  --pulse-cpu-soft: color-mix(in srgb, var(--pulse-cpu) 55%, transparent);
+  --pulse-mem-soft: color-mix(in srgb, var(--pulse-mem) 55%, transparent);
+  --pulse-cpu-line: color-mix(in srgb, var(--pulse-cpu) 35%, transparent);
+  --pulse-mem-line: color-mix(in srgb, var(--pulse-mem) 35%, transparent);
+  --pulse-nrg-line: color-mix(in srgb, var(--pulse-nrg) 30%, transparent);
+  --pulse-thm-line: color-mix(in srgb, var(--pulse-thm) 32%, transparent);
+  --pulse-gpu-line: color-mix(in srgb, var(--pulse-gpu) 35%, transparent);
+  --pulse-warn-line: color-mix(in srgb, var(--pulse-warn) 34%, transparent);
+  --pulse-crit-line: color-mix(in srgb, var(--pulse-crit) 40%, transparent);
+  --pulse-cpu-glow: color-mix(in srgb, var(--pulse-cpu) 60%, transparent);
+  --pulse-mem-glow: color-mix(in srgb, var(--pulse-mem) 60%, transparent);
+  --pulse-focus: var(--pulse-mem);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--pulse-sys-surface);
+  color: var(--pulse-sys-on-surface);
+  font: 400 12px/1.3 var(--pulse-type-family-text);
+  -webkit-font-smoothing: antialiased;
+}

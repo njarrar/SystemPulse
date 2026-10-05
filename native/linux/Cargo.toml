@@ -1,0 +1,39 @@
+[package]
+name = "pulse"
+version = "1.0.0"
+edition = "2021"
+description = "Pulse system vitals for GNOME: a top bar entry and a 420px flyout"
+license = "MIT"
+build = "build.rs"
+
+[[bin]]
+name = "pulse"
+path = "src/main.rs"
+
+[[bin]]
+name = "pulse-catalog"
+path = "src/bin/pulse-catalog.rs"
+
+[lib]
+name = "pulse"
+path = "src/lib.rs"
+
+[dependencies]
+gtk = { package = "gtk4", version = "0.11", features = ["v4_14"] }
+adw = { package = "libadwaita", version = "0.9", features = ["v1_5"] }
+gdk4-x11 = { version = "0.11", features = ["xlib"] }
+pangocairo = "0.22"
+async-channel = "2"
+zbus = { version = "5", default-features = false, features = ["blocking-api", "async-io"] }
+serde_json = "1"
+libc = "0.2"
+
+[build-dependencies]
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
