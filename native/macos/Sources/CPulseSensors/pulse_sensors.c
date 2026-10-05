@@ -14,12 +14,14 @@ typedef CFTypeRef PulseHIDClient;
 typedef CFTypeRef PulseHIDService;
 typedef CFTypeRef PulseHIDEvent;
 
-extern PulseHIDClient IOHIDEventSystemClientCreate(CFAllocatorRef allocator);
-extern int IOHIDEventSystemClientSetMatching(PulseHIDClient client, CFDictionaryRef match);
-extern CFArrayRef IOHIDEventSystemClientCopyServices(PulseHIDClient client);
-extern PulseHIDEvent IOHIDServiceClientCopyEvent(PulseHIDService service, int64_t type, int32_t options, int64_t timestamp);
-extern CFTypeRef IOHIDServiceClientCopyProperty(PulseHIDService service, CFStringRef key);
-extern double IOHIDEventGetFloatValue(PulseHIDEvent event, int32_t field);
+// Declared under local names bound to the IOKit symbols, so they never clash
+// with the SDK headers that declare some of them with stricter types.
+extern PulseHIDClient pulse_IOHIDEventSystemClientCreate(CFAllocatorRef allocator) __asm__("_IOHIDEventSystemClientCreate");
+extern int pulse_IOHIDEventSystemClientSetMatching(PulseHIDClient client, CFDictionaryRef match) __asm__("_IOHIDEventSystemClientSetMatching");
+extern CFArrayRef pulse_IOHIDEventSystemClientCopyServices(PulseHIDClient client) __asm__("_IOHIDEventSystemClientCopyServices");
+extern PulseHIDEvent pulse_IOHIDServiceClientCopyEvent(PulseHIDService service, int64_t type, int32_t options, int64_t timestamp) __asm__("_IOHIDServiceClientCopyEvent");
+extern CFTypeRef pulse_IOHIDServiceClientCopyProperty(PulseHIDService service, CFStringRef key) __asm__("_IOHIDServiceClientCopyProperty");
+extern double pulse_IOHIDEventGetFloatValue(PulseHIDEvent event, int32_t field) __asm__("_IOHIDEventGetFloatValue");
 
 #define PULSE_HID_TEMPERATURE 15
 #define PULSE_HID_FIELD_BASE(type) ((type) << 16)
@@ -32,7 +34,7 @@ int pulse_hid_read(PulseHIDTemps *out) {
     out->cpu = out->cpuMax = out->gpu = out->gpuMax = out->storage = out->battery = -1;
     out->sensorCount = 0;
     if (hidClient == NULL) {
-        hidClient = IOHIDEventSystemClientCreate(kCFAllocatorDefault);
+        hidClient = pulse_IOHIDEventSystemClientCreate(kCFAllocatorDefault);
         if (hidClient == NULL) return 0;
         int page = 0xff00, usage = 5;
         CFNumberRef pageNum = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &page);
@@ -41,12 +43,12 @@ int pulse_hid_read(PulseHIDTemps *out) {
         const void *vals[] = { pageNum, usageNum };
         CFDictionaryRef match = CFDictionaryCreate(kCFAllocatorDefault, keys, vals, 2,
                                                    &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-        IOHIDEventSystemClientSetMatching(hidClient, match);
+        pulse_IOHIDEventSystemClientSetMatching(hidClient, match);
         CFRelease(match);
         CFRelease(pageNum);
         CFRelease(usageNum);
     }
-    CFArrayRef services = IOHIDEventSystemClientCopyServices(hidClient);
+    CFArrayRef services = pulse_IOHIDEventSystemClientCopyServices(hidClient);
     if (services == NULL) return 0;
 
     double accSum = 0, tdieSum = 0, gpuSum = 0, accMax = -1, tdieMax = -1, gpuMax = -1;
@@ -54,16 +56,16 @@ int pulse_hid_read(PulseHIDTemps *out) {
     CFIndex count = CFArrayGetCount(services);
     for (CFIndex k = 0; k < count; k++) {
         PulseHIDService svc = (PulseHIDService)CFArrayGetValueAtIndex(services, k);
-        CFTypeRef nameRef = IOHIDServiceClientCopyProperty(svc, CFSTR("Product"));
+        CFTypeRef nameRef = pulse_IOHIDServiceClientCopyProperty(svc, CFSTR("Product"));
         if (nameRef == NULL) continue;
         char name[128] = {0};
         if (CFGetTypeID(nameRef) == CFStringGetTypeID()) {
             CFStringGetCString((CFStringRef)nameRef, name, sizeof name, kCFStringEncodingUTF8);
         }
         CFRelease(nameRef);
-        PulseHIDEvent ev = IOHIDServiceClientCopyEvent(svc, PULSE_HID_TEMPERATURE, 0, 0);
+        PulseHIDEvent ev = pulse_IOHIDServiceClientCopyEvent(svc, PULSE_HID_TEMPERATURE, 0, 0);
         if (ev == NULL) continue;
-        double t = IOHIDEventGetFloatValue(ev, PULSE_HID_FIELD_BASE(PULSE_HID_TEMPERATURE));
+        double t = pulse_IOHIDEventGetFloatValue(ev, PULSE_HID_FIELD_BASE(PULSE_HID_TEMPERATURE));
         CFRelease(ev);
         if (!(t > 0 && t < 150)) continue;
         out->sensorCount++;
