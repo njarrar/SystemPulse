@@ -167,17 +167,22 @@ public sealed partial class FlyoutView : Grid
 
     UIElement Logo()
     {
-        var canvas = new Canvas { Width = 18, Height = 12 };
-        var a = new Microsoft.UI.Xaml.Shapes.Ellipse { Width = 11, Height = 11, StrokeThickness = 2, Stroke = c.T.Brush("cpu") };
-        var b = new Microsoft.UI.Xaml.Shapes.Ellipse { Width = 11, Height = 11, StrokeThickness = 2, Stroke = c.T.Brush("mem") };
-        Canvas.SetLeft(b, 7);
-        canvas.Children.Add(a);
-        canvas.Children.Add(b);
+        // Five vital bars: CPU, energy, memory, thermal, GPU
+        (string Key, double Frac)[] bars = [("cpu", 0.52), ("nrg", 0.79), ("mem", 0.64), ("thm", 1.0), ("gpu", 0.73)];
+        var canvas = new Canvas { Width = 18, Height = 14 };
+        for (int i = 0; i < bars.Length; i++)
+        {
+            double h = 14 * bars[i].Frac;
+            var bar = new Microsoft.UI.Xaml.Shapes.Rectangle { Width = 2.6, Height = h, RadiusX = 1.3, RadiusY = 1.3, Fill = c.T.Brush(bars[i].Key) };
+            Canvas.SetLeft(bar, i * 3.85);
+            Canvas.SetTop(bar, 14 - h);
+            canvas.Children.Add(bar);
+        }
         return new Border
         {
             Width = 28, Height = 28, CornerRadius = new CornerRadius(Theme.RLogo),
             Background = c.T.Brush("badge-bg"), BorderBrush = c.T.Brush("card-b"), BorderThickness = new Thickness(1),
-            Child = new Viewbox { Width = 18, Height = 12, Child = canvas, FlowDirection = FlowDirection.LeftToRight }
+            Child = new Viewbox { Width = 18, Height = 14, Child = canvas, FlowDirection = FlowDirection.LeftToRight }
         };
     }
 

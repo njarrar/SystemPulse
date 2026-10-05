@@ -1,3 +1,5 @@
+<img src="brand/pulse-icon.svg" width="96" alt="Pulse icon">
+
 # Pulse
 
 Your system's vitals, in a flash. صحة جهازك بنظرة واحدة.
@@ -35,6 +37,12 @@ Each folder's README says how to run it.
 
 ## What's new
 
+**1.2.0** (October 5, 2026)
+
+- New icon: five bars, one for each vital (CPU, energy, memory, thermal, GPU), on a white tile. Every app uses it as its program icon and as the logo in its header. macOS gets an app icon for the first time.
+- `brand/` holds the icon as SVG, a 512 px PNG and the GitHub social preview. `node brand/render.mjs` redraws every icon file from the SVG.
+- Rebuilt every app in `build/`.
+
 **1.1.0** (October 5, 2026)
 
 - The memory badge shows pressure by color: normal below 70%, high from 70%, critical from 90%.
@@ -61,6 +69,7 @@ native/        one app per platform (see native/README.md)
 prototype/     source of the design page
 build/         ready-to-run apps
 docs/          screenshots
+brand/         icon and social preview (render.mjs redraws them)
 .github/       builds and checks that run on every push
 ```
 

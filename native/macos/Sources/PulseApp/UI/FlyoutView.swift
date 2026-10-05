@@ -82,15 +82,18 @@ struct FlyoutRoot: View {
     }
 }
 
-/// Two rings, the Pulse mark.
+/// Five vital bars, the Pulse mark.
 @MainActor
 struct LogoMark: View {
     @Environment(\.palette) private var pal
+    private static let bars: [(Accent, CGFloat)] = [(.cpu, 0.52), (.nrg, 0.79), (.mem, 0.64), (.thm, 1.0), (.gpu, 0.73)]
     var body: some View {
-        ZStack {
-            Circle().stroke(pal.color(.cpu), lineWidth: 2.6).frame(width: 15, height: 15).offset(x: -3.5)
-            Circle().stroke(pal.color(.mem), lineWidth: 2.6).frame(width: 15, height: 15).offset(x: 3.5)
+        HStack(alignment: .bottom, spacing: 1.5) {
+            ForEach(0..<Self.bars.count, id: \.self) { i in
+                Capsule().fill(pal.color(Self.bars[i].0)).frame(width: 2.8, height: 15 * Self.bars[i].1)
+            }
         }
+        .frame(height: 15, alignment: .bottom)
         .frame(width: 30, height: 30)
         .background(RoundedRectangle(cornerRadius: Radius.logo, style: .continuous)
             .fill(LinearGradient(colors: [pal.card, pal.tint(.cpu, 18)], startPoint: .topLeading, endPoint: .bottomTrailing)))

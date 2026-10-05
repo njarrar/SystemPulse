@@ -554,11 +554,14 @@ static void badge_icon(int which, float x, float y, int acc) {
     icon(which, x + 3, y + 3, 16, ACC_INK[acc]);
 }
 static void logo(float x, float y, float s) {
+    /* Five vital bars: CPU, energy, memory, thermal, GPU */
+    static const UINT32 c[5] = {0xFF10B981, 0xFFF59E0B, 0xFF0EA5E9, 0xFFF43F5E, 0xFF14B8A6};
+    static const float f[5] = {0.52f, 0.79f, 0.64f, 1.0f, 0.73f};
     card(x, y, s, s, C_CARD, C_CARD_B);
-    float r = s * 0.25f, cy = y + s / 2;
-    Pen p1(col(0xFF10B981), s * 0.09f), p2(col(0xFF0EA5E9), s * 0.09f);
-    G->DrawEllipse(&p1, x + s / 2 - r * 1.55f, cy - r, r * 2, r * 2);
-    G->DrawEllipse(&p2, x + s / 2 - r * 0.45f, cy - r, r * 2, r * 2);
+    float bw = s * 0.11f, gap = s * 0.06f, tall = s * 0.56f, bottom = y + s * 0.78f;
+    float x0 = x + (s - 5 * bw - 4 * gap) / 2;
+    for (int i = 0; i < 5; i++)
+        fill_round(x0 + i * (bw + gap), bottom - tall * f[i], bw, tall * f[i], bw / 2, c[i]);
 }
 
 /* ---- pills, buttons, bars -------------------------------------------------- */

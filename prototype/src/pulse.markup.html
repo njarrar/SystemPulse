@@ -820,9 +820,12 @@ button{font-family:inherit}
 
   <div dir="ltr" style="max-width:1280px;margin:0 auto 10px;display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;font-family:'Plus Jakarta Sans', sans-serif">
     <div style="display:flex;align-items:center;gap:12px;min-width:0">
-      <span style="position:relative;width:36px;height:36px;border-radius:11px;background:linear-gradient(150deg,#FFFFFF,#E2F2EB);border:1px solid rgba(14,30,25,0.06);flex:none;overflow:hidden;box-sizing:border-box">
-        <span style="position:absolute;left:6px;top:9px;width:13px;height:13px;border-radius:50%;border:2px solid #10B981;box-shadow:0 0 9px rgba(16,185,129,0.6)"></span>
-        <span style="position:absolute;left:13px;top:9px;width:13px;height:13px;border-radius:50%;border:2px solid #0EA5E9;box-shadow:0 0 9px rgba(14,165,233,0.6)"></span>
+      <span style="display:flex;direction:ltr;align-items:flex-end;justify-content:center;gap:2px;padding-bottom:9px;width:36px;height:36px;border-radius:11px;background:linear-gradient(180deg,#FFFFFF,#E8F5EF);border:1px solid rgba(14,30,25,0.08);flex:none;overflow:hidden;box-sizing:border-box">
+        <span style="width:4px;height:9px;border-radius:2px;background:#10B981"></span>
+        <span style="width:4px;height:13px;border-radius:2px;background:#F59E0B"></span>
+        <span style="width:4px;height:11px;border-radius:2px;background:#0EA5E9"></span>
+        <span style="width:4px;height:17px;border-radius:2px;background:#F43F5E"></span>
+        <span style="width:4px;height:12px;border-radius:2px;background:#14B8A6"></span>
       </span>
       <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
         <span style="font:800 20px/1 'Plus Jakarta Sans', sans-serif;letter-spacing:-0.01em;color:var(--page-ink)">Pulse</span>
@@ -1009,9 +1012,12 @@ button{font-family:inherit}
 
       <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
         <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 auto">
-          <span style="position:relative;width:32px;height:32px;border-radius:var(--r-logo);background:var(--badge-bg);border:1px solid var(--card-b);box-shadow:var(--btn-sh);flex:none;overflow:hidden;box-sizing:border-box">
-            <span style="position:absolute;left:5px;top:8px;width:12px;height:12px;border-radius:50%;border:2px solid var(--cpu);box-shadow:0 0 8px var(--cpu-glow)"></span>
-            <span style="position:absolute;left:11px;top:8px;width:12px;height:12px;border-radius:50%;border:2px solid var(--mem);box-shadow:0 0 8px var(--mem-glow)"></span>
+          <span style="display:flex;direction:ltr;align-items:flex-end;justify-content:center;gap:2px;padding-bottom:8px;width:32px;height:32px;border-radius:var(--r-logo);background:var(--badge-bg);border:1px solid var(--card-b);box-shadow:var(--btn-sh);flex:none;overflow:hidden;box-sizing:border-box">
+            <span style="width:3px;height:8px;border-radius:2px;background:var(--cpu)"></span>
+            <span style="width:3px;height:12px;border-radius:2px;background:var(--nrg)"></span>
+            <span style="width:3px;height:10px;border-radius:2px;background:var(--mem)"></span>
+            <span style="width:3px;height:15px;border-radius:2px;background:var(--thm)"></span>
+            <span style="width:3px;height:11px;border-radius:2px;background:var(--gpu)"></span>
           </span>
           <span style="font:800 16px/1 var(--f-hero);letter-spacing:-0.01em;flex:none">Pulse</span>
           <span role="status" style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;flex:none;border-radius:var(--r-pill);background:{{ status.bg }};color:{{ status.ink }};font-size:11px;font-weight:600;white-space:nowrap;transition:background .3s, color .3s">

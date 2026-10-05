@@ -52,13 +52,18 @@ button { font: inherit; color: inherit; }
 .head-start { display: flex; align-items: center; gap: 8px; min-inline-size: 0; flex: 1 1 auto; }
 .head-end { display: flex; align-items: center; gap: 6px; flex: none; }
 .logo {
-  position: relative; inline-size: 32px; block-size: 32px; flex: none; overflow: hidden;
+  display: flex; direction: ltr; align-items: flex-end; justify-content: center; gap: 2px;
+  box-sizing: border-box; padding-block-end: 8px;
+  inline-size: 32px; block-size: 32px; flex: none; overflow: hidden;
   border-radius: var(--pulse-shape-logo); background: var(--pulse-sys-logo);
   border: 1px solid var(--pulse-sys-outline-variant);
 }
-.logo span { position: absolute; inset-block-start: 8px; inline-size: 12px; block-size: 12px; border-radius: 50%; }
-.logo .a { left: 5px; border: 2px solid var(--pulse-cpu); box-shadow: 0 0 8px var(--pulse-cpu-glow); }
-.logo .b { left: 11px; border: 2px solid var(--pulse-mem); box-shadow: 0 0 8px var(--pulse-mem-glow); }
+.logo span { inline-size: 3px; border-radius: 2px; }
+.logo .cpu { block-size: 8px; background: var(--pulse-cpu); }
+.logo .nrg { block-size: 12px; background: var(--pulse-nrg); }
+.logo .mem { block-size: 10px; background: var(--pulse-mem); }
+.logo .thm { block-size: 15px; background: var(--pulse-thm); }
+.logo .gpu { block-size: 11px; background: var(--pulse-gpu); }
 .brand { font: 800 16px/1 var(--pulse-font-hero); letter-spacing: -0.01em; flex: none; }
 .status {
   display: inline-flex; align-items: center; gap: 6px; block-size: 22px; padding: 0 9px; min-inline-size: 0;

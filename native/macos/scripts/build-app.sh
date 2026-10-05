@@ -7,7 +7,7 @@
 #
 # Steps: regenerate Localizable.xcstrings from ../../locales/*.json, build each
 # architecture with SwiftPM, merge them with lipo, write Info.plist
-# (LSUIElement), copy the catalog into Contents/Resources, sign ad hoc.
+# (LSUIElement), copy the catalog and icon into Contents/Resources, sign ad hoc.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -16,7 +16,7 @@ LOCALES="$ROOT/../../locales"
 BUILD="${PULSE_BUILD_DIR:-$ROOT/.build}"
 OUT="${PULSE_OUT:-$ROOT/dist}"
 ARCHS="${PULSE_ARCHS:-arm64 x86_64}"
-VERSION="${PULSE_VERSION:-1.1.0}"
+VERSION="${PULSE_VERSION:-1.2.0}"
 BUILD_NUMBER="${PULSE_BUILD_NUMBER:-1}"
 BUNDLE_ID="${PULSE_BUNDLE_ID:-app.pulse.monitor}"
 MIN_MACOS="13.0"
@@ -49,6 +49,7 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 lipo -create -output "$APP/Contents/MacOS/Pulse" "${BINS[@]}"
 cp "$BUNDLED_CATALOG" "$APP/Contents/Resources/Localizable.xcstrings"
+cp "$ROOT/Assets/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 
 LOCS=""
 for c in $CODES; do
@@ -68,6 +69,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <string>Pulse</string>
     <key>CFBundleExecutable</key>
     <string>Pulse</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
     <key>CFBundleIdentifier</key>
     <string>$BUNDLE_ID</string>
     <key>CFBundleInfoDictionaryVersion</key>

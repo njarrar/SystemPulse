@@ -661,8 +661,14 @@ static int header(int y)
     /* Logo badge */
     fill(L, y, 32, 32, GetSysColor(COLOR_3DFACE));
     raised(L, y, 32, 32);
-    ellipse(L + 12, y + 16, 6, (COLORREF)-1, C_CPU, 2);
-    ellipse(L + 19, y + 16, 6, (COLORREF)-1, C_MEM, 2);
+    {   /* Five vital bars: CPU, energy, memory, thermal, GPU */
+        static const int bh[5] = {9, 13, 11, 17, 12};
+        COLORREF bc[5];
+        int i;
+        bc[0] = C_CPU; bc[1] = C_NRG; bc[2] = C_MEM; bc[3] = C_THM; bc[4] = C_GPU;
+        for (i = 0; i < 5; i++)
+            fill(L + 6 + i * 4, y + 25 - bh[i], 3, bh[i], bc[i]);
+    }
     x = L + 40;
     x += text(x, y, 80, 32, "Pulse", f_brand, C_INK, TA_START_) + 12;
     /* Status */

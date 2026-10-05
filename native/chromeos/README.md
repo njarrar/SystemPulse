@@ -21,7 +21,8 @@ The files under `chromium/` mirror their paths in a Chromium checkout.
 
 ## Build in a Chromium checkout
 
-1. Run `sh tools/make_icons.sh` to draw the app icons from `app_icon.svg`.
+1. The app icons ship as PNGs next to `app_icon.svg`. To redraw them, run
+   `sh tools/make_icons.sh` (or `node ../../brand/render.mjs` from the repo).
 2. Copy `chromium/` over the checkout and copy the Pulse `locales/*.json`
    to `ash/webui/pulse_ui/locales/` (or set the GN arg
    `pulse_locales_dir`).

@@ -228,19 +228,18 @@ pub fn icon(name: &'static str, size: i32, mirror: bool) -> gtk::DrawingArea {
     da
 }
 
-/// The dual-ring Pulse emblem.
+/// The Pulse mark: five vital bars (CPU, energy, memory, thermal, GPU).
 pub fn logo(size: i32) -> gtk::DrawingArea {
     let da = gtk::DrawingArea::builder().content_width(size).content_height(size).build();
     da.set_draw_func(|_, cr, w, h| {
         let s = w.min(h) as f64;
-        let r = s * 0.26;
-        cr.set_line_width(s * 0.1);
-        Rgba::hex(0x10B981).set(cr);
-        cr.arc(s * 0.38, s / 2.0, r, 0.0, 2.0 * PI);
-        cr.stroke().ok();
-        Rgba::hex(0x0EA5E9).set(cr);
-        cr.arc(s * 0.62, s / 2.0, r, 0.0, 2.0 * PI);
-        cr.stroke().ok();
+        let (bw, gap, bottom, tall) = (s * 0.12, s * 0.065, s * 0.82, s * 0.64);
+        let bars = [(0x10B981, 0.52), (0xF59E0B, 0.79), (0x0EA5E9, 0.64), (0xF43F5E, 1.0), (0x14B8A6, 0.73)];
+        for (i, (hex, f)) in bars.iter().enumerate() {
+            Rgba::hex(*hex).set(cr);
+            rrect(cr, s * 0.07 + i as f64 * (bw + gap), bottom - tall * f, bw, tall * f, bw / 2.0);
+            cr.fill().ok();
+        }
     });
     da
 }

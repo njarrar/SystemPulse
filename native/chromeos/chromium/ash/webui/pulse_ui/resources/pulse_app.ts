@@ -639,7 +639,7 @@ export class PulseAppElement extends HTMLElement {
     return h('header', {'class': 'head'},
       h('div', {'class': 'head-start'},
         h('span', {'class': 'logo', 'aria-hidden': 'true'},
-          h('span', {'class': 'a'}), h('span', {'class': 'b'})),
+          ...['cpu', 'nrg', 'mem', 'thm', 'gpu'].map(k => h('span', {'class': k}))),
         h('span', {'class': 'brand'}, 'Pulse'),
         h('span', {'class': 'status ' + (hog ? 'hog' : 'calm'), 'role': 'status'},
           h('span', {'class': 'dot'}),
