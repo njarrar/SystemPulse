@@ -161,6 +161,8 @@ jobs:
         run: |
           sudo apt-get install -y zip >/dev/null
           for rid in win-x64 win-arm64; do
+            # zip adds to an existing archive, so start from an empty one.
+            rm -f build/windows-11/Pulse-$rid.zip
             (cd /tmp/win/Pulse-win11-$rid && zip -qr $GITHUB_WORKSPACE/build/windows-11/Pulse-$rid.zip .)
           done
           git config user.name "njarrar"
