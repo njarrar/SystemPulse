@@ -121,6 +121,11 @@ public static unsafe partial class Win32
     [LibraryImport("user32.dll", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
     public static partial nint CreateWindowExW(uint exStyle, string className, string windowName, uint style, int x, int y, int w, int h, nint parent, nint menu, nint instance, nint param);
 
+    [LibraryImport("user32.dll", StringMarshalling = StringMarshalling.Utf16)]
+    public static partial int MessageBoxW(nint hwnd, string text, string caption, uint type);
+
+    public const uint MB_ICONERROR = 0x10;
+
     [LibraryImport("user32.dll")]
     public static partial nint DefWindowProcW(nint hwnd, uint msg, nint wParam, nint lParam);
 

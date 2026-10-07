@@ -64,16 +64,16 @@ jobs:
         run: dotnet build src/Pulse.App/Pulse.App.csproj -c Release -p:Platform=${{ matrix.platform }} -r ${{ matrix.rid }}
       - name: Publish with Native AOT (${{ matrix.platform }})
         run: dotnet publish src/Pulse.App/Pulse.App.csproj -c Release -p:Platform=${{ matrix.platform }} -r ${{ matrix.rid }} -o publish/${{ matrix.rid }}
-      - name: Check the published app
+      - name: Publish the launcher (${{ matrix.platform }})
+        run: dotnet publish src/Pulse.Launcher/Pulse.Launcher.csproj -c Release -r ${{ matrix.rid }} -o publish/launcher-${{ matrix.rid }}
+      - name: Lay out the package (Pulse.exe, data, lang)
         run: |
-          $exe = "publish/${{ matrix.rid }}/Pulse.exe"
-          if (-not (Test-Path $exe)) { throw "Pulse.exe missing" }
-          if (-not (Test-Path "publish/${{ matrix.rid }}/resources.pri") -and -not (Test-Path "publish/${{ matrix.rid }}/Pulse.pri")) { Write-Warning "no .pri found; the app will fall back to Strings/*.resw" }
-          Get-ChildItem publish/${{ matrix.rid }} | Sort-Object Length -Descending | Select-Object -First 15 Name, Length
+          ./tools/package.ps1 -App publish/${{ matrix.rid }} -Launcher publish/launcher-${{ matrix.rid }} -Out package/${{ matrix.rid }}
+          Get-ChildItem package/${{ matrix.rid }}/data | Sort-Object Length -Descending | Select-Object -First 10 Name, Length
       - uses: actions/upload-artifact@v4
         with:
           name: Pulse-win11-${{ matrix.rid }}
-          path: native/win11/publish/${{ matrix.rid }}
+          path: native/win11/package/${{ matrix.rid }}
 
   # Unzip the app into an empty folder and start it, the way a user would on a
   # clean PC. Two machines: Windows Server for x64, Windows 11 on Arm for ARM64.
@@ -105,24 +105,40 @@ jobs:
           Expand-Archive $zip $dir
           Get-ChildItem $dir | Select-Object Name, Length | Format-Table -AutoSize
           $start = Get-Date
-          $p = Start-Process "$dir/Pulse.exe" -WorkingDirectory $env:RUNNER_TEMP -PassThru -RedirectStandardError "$env:RUNNER_TEMP/stderr.txt" -RedirectStandardOutput "$env:RUNNER_TEMP/stdout.txt"
+          $top = Get-ChildItem $dir | Where-Object { -not $_.PSIsContainer }
+          if (($top.Name -join ',') -ne 'Pulse.exe') { throw "Top folder should hold only Pulse.exe and folders, found: $($top.Name -join ', ')" }
+          # A crash writes crash.log and exits instead of waiting on a message box.
+          $env:PULSE_NO_DIALOG = '1'
+          $launcher = Start-Process "$dir/Pulse.exe" -WorkingDirectory $env:RUNNER_TEMP -PassThru
+          $launcher.WaitForExit(15000) | Out-Null
+          "Launcher exit code: $($launcher.ExitCode)"
           Start-Sleep -Seconds 20
-          $alive = -not $p.HasExited
+          $app = (Resolve-Path "$dir/data/Pulse.exe").Path
+          $p = Get-Process Pulse -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $app }
+          $alive = $null -ne $p
           if ($alive) {
-            $p.Refresh()
-            "Pulse is running: pid $($p.Id), $([math]::Round($p.WorkingSet64/1MB)) MB, window '$($p.MainWindowTitle)'"
+            "Pulse is running: pid $($p.Id), $([math]::Round($p.WorkingSet64/1MB)) MB"
+            try {
+              Add-Type -AssemblyName System.Windows.Forms, System.Drawing
+              $b = [System.Windows.Forms.SystemInformation]::VirtualScreen
+              $bmp = New-Object System.Drawing.Bitmap $b.Width, $b.Height
+              [System.Drawing.Graphics]::FromImage($bmp).CopyFromScreen($b.Left, $b.Top, 0, 0, $bmp.Size)
+              $bmp.Save("$env:RUNNER_TEMP/screen.png")
+            } catch { "No screenshot: $_" }
             Stop-Process -Id $p.Id -Force
-          } else {
-            "Pulse exited with code 0x{0:X8}" -f $p.ExitCode
           }
-          "--- stderr"; Get-Content "$env:RUNNER_TEMP/stderr.txt" -ErrorAction SilentlyContinue
-          "--- stdout"; Get-Content "$env:RUNNER_TEMP/stdout.txt" -ErrorAction SilentlyContinue
           "--- crash log"; Get-Content "$env:LOCALAPPDATA/Pulse/crash.log" -ErrorAction SilentlyContinue
           "--- event log"
           Get-WinEvent -FilterHashtable @{ LogName = 'Application'; StartTime = $start } -ErrorAction SilentlyContinue |
             Where-Object { $_.ProviderName -in 'Application Error', '.NET Runtime', 'Windows Error Reporting', 'SideBySide', 'Application Hang' } |
             ForEach-Object { "[$($_.ProviderName)] $($_.Message)" }
           if (-not $alive) { throw "Pulse did not stay up" }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screen-${{ matrix.rid }}
+          path: ${{ runner.temp }}/screen.png
+          if-no-files-found: ignore
 
   publish:
     needs: [build, smoke]

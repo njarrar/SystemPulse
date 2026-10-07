@@ -4,15 +4,21 @@ using Pulse.Core.I18n;
 namespace Pulse.App.Localization;
 
 /// <summary>
-/// Loads every generated locale back into the i18n engine. The primary source
-/// is MRT Core (resources.pri built from Strings/&lt;lang&gt;/Resources.resw); each
-/// language is read with its own ResourceContext so switching needs no restart.
-/// If resources.pri is missing, the plain .resw copies next to the exe are read.
+/// Loads every generated locale back into the i18n engine. The shipped app
+/// sits in data\ and reads lang\&lt;code&gt;\Resources.resw beside that folder,
+/// one folder per language. A dev build (no lang folder) reads MRT Core
+/// (resources.pri, each language through its own ResourceContext), then the
+/// Strings\ copies next to the exe.
 /// </summary>
 public static class Catalog
 {
+    /// <summary>lang\ next to the data\ folder that holds the exe.</summary>
+    public static string LangDir => Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "lang"));
+
     public static LocaleRegistry Load()
     {
+        var shipped = FromReswFiles(LangDir);
+        if (shipped.Count > 0) return shipped;
         try
         {
             var reg = FromMrt();
@@ -53,7 +59,10 @@ public static class Catalog
         foreach (var sub in Directory.EnumerateDirectories(dir))
         {
             string file = Path.Combine(sub, "Resources.resw");
-            if (File.Exists(file)) reg.Register(ReswCatalog.Decode(ReswCatalog.ReadResw(File.ReadAllText(file)), out _));
+            if (!File.Exists(file)) continue;
+            // One broken file must not take the other languages down with it.
+            try { reg.Register(ReswCatalog.Decode(ReswCatalog.ReadResw(File.ReadAllText(file)), out _)); }
+            catch (Exception) { }
         }
         return reg;
     }

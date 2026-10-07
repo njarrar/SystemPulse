@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    The Pulse.exe at the top of the zip. It starts data\Pulse.exe (the real
+    app, with the Windows App SDK files beside it) and exits, so the top
+    folder holds only this exe, data\ and lang\.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>Pulse</AssemblyName>
+    <RootNamespace>Pulse.Launcher</RootNamespace>
+    <Version>1.2.0</Version>
+    <ApplicationIcon>..\Pulse.App\Assets\Pulse.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PublishAot>true</PublishAot>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
+    <OptimizationPreference>Size</OptimizationPreference>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+</Project>
