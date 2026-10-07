@@ -9,7 +9,7 @@ namespace Pulse.App.Tray;
 /// right-click or Shift+F10 raises <see cref="ContextMenu"/> with screen coordinates.
 /// Re-adds itself when Explorer restarts (TaskbarCreated).
 /// </summary>
-public sealed unsafe class TrayIcon : IDisposable
+public sealed unsafe partial class TrayIcon : IDisposable
 {
     const uint CallbackMessage = Win32.WM_APP + 1;
     const uint IconId = 1;

@@ -28,8 +28,10 @@ src/Pulse.App/           net8.0-windows10.0.19041.0, the WinUI 3 app
   Tray/                  Shell_NotifyIcon icon and the icon renderer
   Localization/          loads the generated catalog through MRT Core
   UI/                    theme tokens, the flyout views and window
+src/Pulse.Launcher/      the small Pulse.exe at the top of the zip; starts data\Pulse.exe
 tests/Pulse.Core.Tests/  xUnit tests for Pulse.Core
 tools/Pulse.CatalogGen/  locales/*.json to Strings/<lang>/Resources.resw
+tools/package.ps1        lays out the zip: Pulse.exe, data\, lang\
 ```
 
 The UI is built in C#, with no `.xaml` files. That keeps the XAML compiler out
@@ -55,10 +57,28 @@ the publish folder runs as is. Only one copy runs per sign-in. Settings
 (language, theme, temperature unit, live updates) live in
 `%LOCALAPPDATA%\Pulse\settings.json`.
 
+To make the same layout as the zip:
+
+```
+dotnet publish src/Pulse.Launcher/Pulse.Launcher.csproj -c Release -r win-x64 -o publish/launcher-x64
+./tools/package.ps1 -App publish/x64 -Launcher publish/launcher-x64 -Out package/x64
+```
+
+The zip holds `Pulse.exe` (the launcher), `data\` (the real app with the
+Windows App SDK files, which must sit beside it) and `lang\<code>\Resources.resw`
+(one folder per language). The app reads `lang\` first. The many culture
+folders in `data\` (such as `fr-FR`) hold WinUI's own control text; Windows
+only finds them beside WinUI's DLLs, so they stay in `data\`.
+
+If start-up fails, Pulse writes `%LOCALAPPDATA%\Pulse\crash.log` and shows a
+message box. Set `PULSE_NO_DIALOG=1` to skip the box (CI does this).
+
 Set `PULSE_ARTIFACTS` to a folder to keep `bin/` and `obj/` out of the tree.
 
-CI: `.github/workflows/win11.yml` runs the tests, then builds and publishes
-x64 and ARM64 on `windows-latest`.
+CI: `.github/workflows/win11.yml` runs the tests, builds and publishes x64
+and ARM64 on `windows-latest`, lays out the zip, then unzips it into an empty
+folder and starts it on two machines: x64 on Windows Server 2025 and ARM64 on
+Windows 11 (`windows-11-arm`). The job fails if Pulse does not stay up.
 
 ## Add a language
 
@@ -94,8 +114,8 @@ At run time `Catalog` reads each language through its own MRT
 `i18n/pulse-i18n.js`: CLDR plural rules compiled from the file (exact `=0`
 forms win), `{placeholder}` fill, FSI/PDI isolates around inserted values in
 RTL, English fallback then the key, `ar-EG` resolving to `ar`, and digits in
-the file's numbering system. If `resources.pri` is missing, it reads the
-`.resw` copies placed next to the exe.
+the file's numbering system. The zip's `lang\` folder comes first; a dev
+build without it uses `resources.pri`, then the `.resw` copies next to the exe.
 
 Settings has a **Language** row: a drop-down with "Match system" and every
 locale the catalog holds, each shown by its own `name` in its own script.

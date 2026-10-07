@@ -26,7 +26,7 @@ Ready-to-run apps live in `build/`, one folder per platform:
 | Folder | What is in it |
 |---|---|
 | `build/macos/` | `Pulse.app` (zip), built by GitHub Actions on macOS |
-| `build/windows-11/` | `Pulse.exe` for x64 and ARM64, built by GitHub Actions on Windows |
+| `build/windows-11/` | Zips for x64 and ARM64 (extract, then run `Pulse.exe`), built and test-started by GitHub Actions on Windows |
 | `build/linux/` | `pulse`, one binary (needs GTK 4 and libadwaita) |
 | `build/windows-xp/` | `pulse.exe`, 32-bit, runs on XP SP2 and later |
 | `build/windows-98/` | `pulse98.exe`, 32-bit, runs on Windows 98 SE and later |
@@ -36,6 +36,13 @@ Ready-to-run apps live in `build/`, one folder per platform:
 Each folder's README says how to run it.
 
 ## What's new
+
+**1.2.1** (October 7, 2026)
+
+- Windows 11: Pulse now opens. Before, it closed at once on every PC, because some of its screen parts lacked a code marking that the fast-start build needs, so Windows could not lay them out. The build now stops if that marking is missing.
+- Windows 11: the zip is tidy. The top holds only `Pulse.exe` plus the `data` and `lang` folders; each language has its own folder in `lang`.
+- Windows 11: if Pulse ever fails to start, it says so in a message box and saves the details to `%LOCALAPPDATA%\Pulse\crash.log`.
+- Windows 11: each build is now started from a clean folder on two Windows machines (Windows 11 on Arm and Windows Server) before it is published.
 
 **1.2.0** (October 5, 2026)
 

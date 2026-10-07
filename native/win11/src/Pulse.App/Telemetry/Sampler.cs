@@ -56,7 +56,7 @@ public sealed class HistoryStore
 /// snapshot to the UI thread. A failing reader leaves its part empty and
 /// never stops the others.
 /// </summary>
-public sealed class Sampler : IDisposable
+public sealed partial class Sampler : IDisposable
 {
     /// <summary>Polling period from the spec: every 1.5 s.</summary>
     public static readonly TimeSpan Interval = TimeSpan.FromSeconds(1.5);

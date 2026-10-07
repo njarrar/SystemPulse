@@ -12,7 +12,7 @@ namespace Pulse.App.Telemetry;
 /// list adds the channel frequency. Windows 11 24H2 may hide BSS details from
 /// apps without location access; those fields then show a dash.
 /// </summary>
-public sealed unsafe class NetReader : IDisposable
+public sealed unsafe partial class NetReader : IDisposable
 {
     readonly RateMeter _down = new(), _up = new();
     readonly DailyCounter _today = new();

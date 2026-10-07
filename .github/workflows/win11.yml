@@ -133,6 +133,7 @@ jobs:
             Where-Object { $_.ProviderName -in 'Application Error', '.NET Runtime', 'Windows Error Reporting', 'SideBySide', 'Application Hang' } |
             ForEach-Object { "[$($_.ProviderName)] $($_.Message)" }
           if (-not $alive) { throw "Pulse did not stay up" }
+          if (Test-Path "$env:LOCALAPPDATA/Pulse/crash.log") { throw "Pulse wrote a crash log" }
       - uses: actions/upload-artifact@v4
         if: always()
         with:

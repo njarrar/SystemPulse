@@ -13,7 +13,7 @@
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <RootNamespace>Pulse.App</RootNamespace>
     <AssemblyName>Pulse</AssemblyName>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets\Pulse.ico</ApplicationIcon>
     <Platforms>x64;ARM64</Platforms>
@@ -33,8 +33,9 @@
     <SelfContained Condition="'$(RuntimeIdentifier)' != ''">true</SelfContained>
     <InvariantGlobalization>false</InvariantGlobalization>
     <CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
-    <!-- Keep CsWinRT's generated code warning-clean under the AOT analyzers. -->
-    <NoWarn>$(NoWarn);CsWinRT1028</NoWarn>
+    <!-- A WinUI subclass that is not partial gets no AOT glue from CsWinRT, and
+         XAML's layout calls into it then fail at run time. Make that a build error. -->
+    <WarningsAsErrors>$(WarningsAsErrors);CsWinRT1028</WarningsAsErrors>
 
     <PulseStringsDir>$(MSBuildProjectDirectory)\Strings\</PulseStringsDir>
     <PulseCatalogGen>$(MSBuildProjectDirectory)\..\..\tools\Pulse.CatalogGen\Pulse.CatalogGen.csproj</PulseCatalogGen>

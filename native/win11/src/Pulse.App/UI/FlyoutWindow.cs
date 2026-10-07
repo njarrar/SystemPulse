@@ -14,7 +14,7 @@ namespace Pulse.App.UI;
 /// is unavailable), rounded corners from DWM, placed above the tray icon and
 /// hidden when it loses focus.
 /// </summary>
-public sealed unsafe class FlyoutWindow : Window
+public sealed unsafe partial class FlyoutWindow : Window
 {
     const double Margin = 12;
     readonly AppWindow _app;

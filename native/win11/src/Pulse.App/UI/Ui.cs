@@ -189,7 +189,7 @@ public static class Ui
 }
 
 /// <summary>A rounded meter whose fill grows from the start edge (the right edge in RTL).</summary>
-public sealed class Meter : Grid
+public sealed partial class Meter : Grid
 {
     readonly ColumnDefinition _fill = new(), _rest = new();
     readonly Border _bar;
@@ -221,7 +221,7 @@ public sealed class Meter : Grid
 /// A smooth line with a soft area under it, drawn in a fixed coordinate space
 /// and stretched to fit. Time runs left to right in every locale.
 /// </summary>
-public sealed class Sparkline : Grid
+public sealed partial class Sparkline : Grid
 {
     readonly Microsoft.UI.Xaml.Shapes.Path _line = new() { StrokeThickness = 1.6, StrokeLineJoin = PenLineJoin.Round };
     readonly Microsoft.UI.Xaml.Shapes.Path _area = new();

@@ -12,7 +12,7 @@ namespace Pulse.App.Telemetry;
 /// drivers that report them. If the node query fails, utilization falls back to
 /// the "GPU Engine" counters.
 /// </summary>
-public sealed unsafe class GpuReader : IDisposable
+public sealed unsafe partial class GpuReader : IDisposable
 {
     void* _factory;
     void* _adapter3;

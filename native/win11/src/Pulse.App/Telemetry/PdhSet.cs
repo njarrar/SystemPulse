@@ -8,7 +8,7 @@ namespace Pulse.App.Telemetry;
 /// Counter paths use English names (PdhAddEnglishCounterW), so they work on
 /// any display language. Missing counters are skipped.
 /// </summary>
-public sealed unsafe class PdhSet : IDisposable
+public sealed unsafe partial class PdhSet : IDisposable
 {
     nint _query;
     readonly Dictionary<string, nint> _counters = new(StringComparer.Ordinal);
