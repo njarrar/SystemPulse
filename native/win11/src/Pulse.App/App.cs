@@ -62,7 +62,12 @@ public sealed partial class App : Application, IXamlMetadataProvider, IFlyoutHos
         Rebuild();
         UpdateTray(new Snapshot(), force: true);
         Sampler.Start();
-        _dispatcher.TryEnqueue(DispatcherQueuePriority.Low, () => _window.ShowAt(_tray.Bounds(), _view?.DesiredHeight() ?? 600));
+        _dispatcher.TryEnqueue(DispatcherQueuePriority.Low, () =>
+        {
+            _window.ShowAt(_tray.Bounds(), _view?.DesiredHeight() ?? 600);
+            // Let the first layout and focus pass run before counting the start as done.
+            _dispatcher.TryEnqueue(DispatcherQueuePriority.Low, () => Program.Started = true);
+        });
     }
 
     bool SystemIsDark()

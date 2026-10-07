@@ -302,7 +302,11 @@ public sealed partial class FlyoutView : Grid
         _scroll.ChangeView(null, 0, null, true);
         Update(_snap);
         // Move keyboard focus into the new view so screen readers follow.
-        if (view is FrameworkElement fe) fe.Loaded += (_, _) => FocusManager.TryMoveFocus(FocusNavigationDirection.Next, new FindNextElementOptions { SearchRoot = fe });
+        // (TryMoveFocus with a SearchRoot only takes Up, Down, Left or Right, so find the first stop directly.)
+        if (view is FrameworkElement fe) fe.Loaded += (_, _) =>
+        {
+            if (FocusManager.FindFirstFocusableElement(fe) is UIElement first) first.Focus(FocusState.Programmatic);
+        };
     }
 
     public void Update(Snapshot s)

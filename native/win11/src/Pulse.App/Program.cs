@@ -21,7 +21,9 @@ public static class Program
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherQueueSynchronizationContext(DispatcherQueue.GetForCurrentThread()));
                 var app = new App();
-                app.UnhandledException += (_, e) => { e.Handled = true; Fail(e.Exception); };
+                // Before the flyout is up, an error means Pulse cannot start. After that,
+                // log it and keep the app running rather than vanish from the tray.
+                app.UnhandledException += (_, e) => { e.Handled = true; if (Started) Log(e.Exception); else Fail(e.Exception); };
                 GC.KeepAlive(app);
             });
         }
@@ -33,21 +35,29 @@ public static class Program
         return 0;
     }
 
+    /// <summary>Set once OnLaunched has finished.</summary>
+    public static bool Started { get; set; }
+
+    static string LogPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pulse", "crash.log");
+
+    public static void Log(Exception? e)
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(LogPath)!);
+            File.AppendAllText(LogPath, $"{DateTime.Now:u} Pulse {typeof(Program).Assembly.GetName().Version}\r\n{e?.ToString() ?? "Unknown error"}\r\n\r\n");
+        }
+        catch (Exception) { }
+    }
+
     /// <summary>
     /// A crash should never look like "nothing happened". Write the error to
     /// %LOCALAPPDATA%\Pulse\crash.log, say so in a message box, and quit.
     /// </summary>
     public static void Fail(Exception? e)
     {
-        string text = e?.ToString() ?? "Unknown error";
-        string log = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pulse", "crash.log");
-        try
-        {
-            Directory.CreateDirectory(Path.GetDirectoryName(log)!);
-            File.AppendAllText(log, $"{DateTime.Now:u} Pulse {typeof(Program).Assembly.GetName().Version}\r\n{text}\r\n\r\n");
-        }
-        catch (Exception) { }
-        Console.Error.WriteLine(text);
+        Log(e);
+        string log = LogPath;
         // Headless test runs set PULSE_NO_DIALOG so a crash ends the process instead of waiting on a click.
         if (Environment.GetEnvironmentVariable("PULSE_NO_DIALOG") is null)
             Win32.MessageBoxW(0, $"Pulse could not start.\n\n{e?.Message}\n\nDetails: {log}", "Pulse", Win32.MB_ICONERROR);
