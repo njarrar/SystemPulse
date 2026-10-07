@@ -75,8 +75,57 @@ jobs:
           name: Pulse-win11-${{ matrix.rid }}
           path: native/win11/publish/${{ matrix.rid }}
 
-  publish:
+  # Unzip the app into an empty folder and start it, the way a user would on a
+  # clean PC. Two machines: Windows Server for x64, Windows 11 on Arm for ARM64.
+  smoke:
     needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x64
+            os: windows-2025
+          - rid: win-arm64
+            os: windows-11-arm
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: .
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Pulse-win11-${{ matrix.rid }}
+          path: ${{ runner.temp }}/unzipped
+      - name: Start Pulse.exe and check it stays up
+        run: |
+          $zip = "$env:RUNNER_TEMP/Pulse-${{ matrix.rid }}.zip"
+          Compress-Archive -Path "$env:RUNNER_TEMP/unzipped/*" -DestinationPath $zip
+          $dir = "$env:RUNNER_TEMP/clean"
+          Expand-Archive $zip $dir
+          Get-ChildItem $dir | Select-Object Name, Length | Format-Table -AutoSize
+          $start = Get-Date
+          $p = Start-Process "$dir/Pulse.exe" -WorkingDirectory $env:RUNNER_TEMP -PassThru -RedirectStandardError "$env:RUNNER_TEMP/stderr.txt" -RedirectStandardOutput "$env:RUNNER_TEMP/stdout.txt"
+          Start-Sleep -Seconds 20
+          $alive = -not $p.HasExited
+          if ($alive) {
+            $p.Refresh()
+            "Pulse is running: pid $($p.Id), $([math]::Round($p.WorkingSet64/1MB)) MB, window '$($p.MainWindowTitle)'"
+            Stop-Process -Id $p.Id -Force
+          } else {
+            "Pulse exited with code 0x{0:X8}" -f $p.ExitCode
+          }
+          "--- stderr"; Get-Content "$env:RUNNER_TEMP/stderr.txt" -ErrorAction SilentlyContinue
+          "--- stdout"; Get-Content "$env:RUNNER_TEMP/stdout.txt" -ErrorAction SilentlyContinue
+          "--- crash log"; Get-Content "$env:LOCALAPPDATA/Pulse/crash.log" -ErrorAction SilentlyContinue
+          "--- event log"
+          Get-WinEvent -FilterHashtable @{ LogName = 'Application'; StartTime = $start } -ErrorAction SilentlyContinue |
+            Where-Object { $_.ProviderName -in 'Application Error', '.NET Runtime', 'Windows Error Reporting', 'SideBySide', 'Application Hang' } |
+            ForEach-Object { "[$($_.ProviderName)] $($_.Message)" }
+          if (-not $alive) { throw "Pulse did not stay up" }
+
+  publish:
+    needs: [build, smoke]
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
