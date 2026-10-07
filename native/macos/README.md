@@ -58,6 +58,23 @@ CI: `.github/workflows/macos.yml` runs on `macos-14`. It checks the catalog
 is current, runs `swift test`, builds the universal app, runs `--probe` on the
 runner, renders screenshots, and uploads the zip and PNGs.
 
+## Signing and notarization
+
+`scripts/build-app.sh` signs the app ad hoc, so macOS warns that it "couldn't
+be verified" when someone downloads it. `scripts/sign-and-notarize.sh` signs it
+with a Developer ID certificate and the hardened runtime, has Apple notarize
+it, staples the ticket and rebuilds the zip. CI runs it when these repository
+secrets exist (Settings > Secrets and variables > Actions) and skips it
+otherwise:
+
+| Secret | Value |
+|---|---|
+| `MACOS_CERT_P12` | The "Developer ID Application" certificate and its private key, exported from Keychain Access as a .p12, then base64: `base64 -i cert.p12 \| pbcopy` |
+| `MACOS_CERT_PASSWORD` | The password set when exporting the .p12 |
+| `APPLE_ID` | The email of the Apple Developer account |
+| `APPLE_APP_PASSWORD` | An app-specific password made at account.apple.com > Sign-In and Security |
+| `APPLE_TEAM_ID` | The 10-character Team ID shown at developer.apple.com/account > Membership details |
+
 ## Languages
 
 `locales/*.json` is the only place copy lives. `pulse-catalog` reads every

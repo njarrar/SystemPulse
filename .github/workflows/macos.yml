@@ -22,7 +22,9 @@ defaults:
 jobs:
   build:
     runs-on: macos-14
-    timeout-minutes: 30
+    timeout-minutes: 60
+    env:
+      CAN_NOTARIZE: ${{ secrets.MACOS_CERT_P12 != '' && secrets.MACOS_CERT_PASSWORD != '' && secrets.APPLE_ID != '' && secrets.APPLE_APP_PASSWORD != '' && secrets.APPLE_TEAM_ID != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -41,11 +43,26 @@ jobs:
       - name: Build universal Pulse.app
         run: bash scripts/build-app.sh
 
+      # Signs with Developer ID, notarizes and staples, so Macs open the app
+      # with no "couldn't be verified" warning. Skipped until the five
+      # repository secrets exist; the app then stays signed ad hoc.
+      - name: Sign and notarize
+        if: env.CAN_NOTARIZE == 'true'
+        timeout-minutes: 40
+        env:
+          MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+          MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: bash scripts/sign-and-notarize.sh
+
       - name: Inspect bundle
         run: |
           lipo -info dist/Pulse.app/Contents/MacOS/Pulse
           plutil -p dist/Pulse.app/Contents/Info.plist
           codesign --verify --verbose=2 dist/Pulse.app
+          codesign --display --verbose=2 dist/Pulse.app 2>&1 | grep -E 'Authority|Signature|flags' || true
 
       - name: Probe real telemetry on the runner
         timeout-minutes: 2
