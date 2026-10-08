@@ -79,6 +79,7 @@ jobs:
   # clean PC. Two machines: Windows Server for x64, Windows 11 on Arm for ARM64.
   smoke:
     needs: build
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -138,9 +139,14 @@ jobs:
           '@
             $tray = [W.U]::FindWindowW('PulseTrayWindow', [NullString]::Value)
             if ($tray -eq [IntPtr]::Zero) { throw "No tray window" }
-            [W.U]::PostMessageW($tray, 0x8001, [IntPtr](200 + (200 -shl 16)), [IntPtr](0x7B + (1 -shl 16))) | Out-Null
-            Start-Sleep -Seconds 2
-            $menuWnd = [W.U]::FindWindowW('#32768', [NullString]::Value)
+            $menuWnd = [IntPtr]::Zero
+            for ($try = 0; $try -lt 3 -and $menuWnd -eq [IntPtr]::Zero; $try++) {
+              [W.U]::PostMessageW($tray, 0x8001, [IntPtr](200 + (200 -shl 16)), [IntPtr](0x7B + (1 -shl 16))) | Out-Null
+              for ($i = 0; $i -lt 10 -and $menuWnd -eq [IntPtr]::Zero; $i++) {
+                Start-Sleep -Milliseconds 500
+                $menuWnd = [W.U]::FindWindowW('#32768', [NullString]::Value)
+              }
+            }
             if ($menuWnd -eq [IntPtr]::Zero) { throw "Right-click did not open a menu" }
             $hmenu = [W.U]::SendMessageW($menuWnd, 0x01E1, [IntPtr]::Zero, [IntPtr]::Zero)
             $items = for ($i = 0; $i -lt [W.U]::GetMenuItemCount($hmenu); $i++) {
@@ -191,7 +197,9 @@ jobs:
           # Start Pulse, then update it from the command line the way the menu does.
           Start-Process "$dir/Pulse.exe" | Out-Null
           Start-Sleep -Seconds 10
-          Start-Process "$dir/data/Pulse.exe" -ArgumentList '--update' -Wait -NoNewWindow -RedirectStandardOutput "$env:RUNNER_TEMP/update.txt" -RedirectStandardError "$env:RUNNER_TEMP/update-err.txt"
+          # Not -Wait: that also waits for the Pulse the update starts, which keeps running.
+          $u = Start-Process "$dir/data/Pulse.exe" -ArgumentList '--update' -PassThru -NoNewWindow -RedirectStandardOutput "$env:RUNNER_TEMP/update.txt" -RedirectStandardError "$env:RUNNER_TEMP/update-err.txt"
+          if (-not $u.WaitForExit(120000)) { throw "--update did not finish" }
           "update: $(Get-Content "$env:RUNNER_TEMP/update.txt" -Raw) $(Get-Content "$env:RUNNER_TEMP/update-err.txt" -Raw)"
           $app = (Resolve-Path "$dir/data/Pulse.exe").Path
           $ok = $false
