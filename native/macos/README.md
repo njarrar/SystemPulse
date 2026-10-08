@@ -19,10 +19,11 @@ Sources/
     Formatting.swift    %, °C/°F, W, GB, MB/s, durations, "4m ago"
     History.swift       ring buffers, 1 min sparkline + 10 min history, hog rule, chart math
     Telemetry.swift     snapshot models, process grouping, CPU tick math
+    UpdateManifest.swift  latest.json model, version comparison
   PulseCatalog/     `pulse-catalog`: writes Localizable.xcstrings from ../../locales/*.json
   CPulseSensors/    C shim: SMC keys, IOHID temperature sensors, responsible pid
   PulseApp/         the app (AppKit + SwiftUI + IOKit, behind #if canImport(AppKit))
-    Shell/            NSStatusItem, non-activating NSPanel + NSVisualEffectView, app delegate
+    Shell/            NSStatusItem and its menu, non-activating NSPanel + NSVisualEffectView, app delegate, updater
     Store/            PulseStore: sampling timer, histories, settings, actions
     Telemetry/        Mach, sysctl, IOKit, libproc, getifaddrs, CoreWLAN readers
     UI/               SwiftUI flyout, cards, detail charts, settings, tokens
@@ -51,12 +52,32 @@ SwiftPM resource bundle. Useful flags:
 dist/Pulse.app/Contents/MacOS/Pulse --probe          # print two rounds of real telemetry and exit
 dist/Pulse.app/Contents/MacOS/Pulse --render DIR     # write flyout PNGs (en/ar, light/dark, detail, settings)
 dist/Pulse.app/Contents/MacOS/Pulse --open           # open the flyout at launch
+dist/Pulse.app/Contents/MacOS/Pulse --update-check   # print "current=<v> latest=<v>" from latest.json and exit
 PULSE_PSEUDO=1 bash scripts/build-app.sh             # bundle the 40% longer en-XA locale too (3+ locales -> menu)
 ```
 
 CI: `.github/workflows/macos.yml` runs on `macos-14`. It checks the catalog
 is current, runs `swift test`, builds the universal app, runs `--probe` on the
-runner, renders screenshots, and uploads the zip and PNGs.
+runner, checks `--update-check` against a local `latest.json`, renders
+screenshots, and uploads the zip and PNGs. On `main` it copies the zip to
+`build/macos` and writes `build/macos/latest.json` with
+`tools/update_manifest.py`.
+
+## Menu and updates
+
+A left click on the menu bar item opens or closes the flyout. A right click
+or control-click shows a menu: Open Pulse, Check for Updates…, Quit.
+
+Check for Updates reads `build/macos/latest.json` from
+`https://raw.githubusercontent.com/njarrar/SystemPulse/main/` (set
+`PULSE_UPDATE_URL` to use another base URL) and compares its version with the
+app's `CFBundleShortVersionString`. If it is newer and the user picks Update,
+Pulse downloads the zip the manifest names, checks its SHA-256, unzips it with
+`ditto`, quits, and a small shell script puts the new Pulse.app where the old
+one was, clears the quarantine flag and opens it. When macOS runs Pulse from
+a translocated copy or its folder is not writable, Pulse asks the user to move
+it to Applications first. Nothing is checked automatically; Pulse only goes
+online when someone picks Check for Updates.
 
 ## Signing and notarization
 
@@ -108,7 +129,7 @@ full text on hover.
 ## Telemetry: what is real
 
 All values come from the Mac Pulse runs on. Nothing is simulated, and Pulse
-makes no network requests.
+makes no network requests except Check for Updates.
 
 | Area | Source |
 |---|---|

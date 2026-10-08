@@ -68,6 +68,21 @@ jobs:
         timeout-minutes: 2
         run: dist/Pulse.app/Contents/MacOS/Pulse --probe
 
+      # Serves a fake latest.json from a local server and checks the app reads it.
+      - name: Update check against a local manifest
+        timeout-minutes: 2
+        run: |
+          site="$(mktemp -d)"
+          mkdir -p "$site/build/macos"
+          echo '{"version":"9.9.9","files":{"universal":{"path":"build/macos/Pulse-macos-universal.zip","sha256":"00","size":1}}}' > "$site/build/macos/latest.json"
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory "$site" >/dev/null 2>&1 &
+          server=$!
+          for i in $(seq 1 20); do curl -fs http://127.0.0.1:8765/build/macos/latest.json >/dev/null && break; sleep 0.5; done
+          out="$(PULSE_UPDATE_URL=http://127.0.0.1:8765/ dist/Pulse.app/Contents/MacOS/Pulse --update-check)"
+          kill $server
+          echo "$out"
+          echo "$out" | grep -q 'latest=9.9.9'
+
       - name: Render flyout screenshots
         continue-on-error: true
         timeout-minutes: 3
@@ -103,6 +118,7 @@ jobs:
       - name: Put the app in build/macos
         run: |
           cp /tmp/mac/Pulse-macos-universal.zip build/macos/Pulse-macos-universal.zip
+          python3 tools/update_manifest.py macos universal=build/macos/Pulse-macos-universal.zip
           git config user.name "njarrar"
           git config user.email "njarrar@gmail.com"
           git add build/macos

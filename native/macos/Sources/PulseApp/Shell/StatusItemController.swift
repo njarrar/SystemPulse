@@ -2,17 +2,20 @@
 import AppKit
 import Combine
 
-/// Tier 1: the menu bar readouts. Clicking them opens the flyout.
+/// Tier 1: the menu bar readouts. Clicking them opens the flyout; a right
+/// click or control-click shows a small menu (Open, Check for Updates, Quit).
 @MainActor
 final class StatusItemController: NSObject {
     private let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     private let store: PulseStore
     private let flyout: FlyoutController
+    private let updater: Updater
     private var bag = Set<AnyCancellable>()
 
     init(store: PulseStore, flyout: FlyoutController) {
         self.store = store
         self.flyout = flyout
+        self.updater = Updater(store: store)
         super.init()
         if let button = item.button {
             button.target = self
@@ -24,14 +27,49 @@ final class StatusItemController: NSObject {
             button.image = image
             FlyoutController.statusButton = button
         }
+        updater.onProgress = { [weak self] text in self?.item.button?.toolTip = text }
         store.$snapshot.sink { [weak self] _ in Task { @MainActor [weak self] in self?.render() } }.store(in: &bag)
         store.$localeCode.sink { [weak self] _ in Task { @MainActor [weak self] in self?.render() } }.store(in: &bag)
         render()
     }
 
     @objc private func clicked(_ sender: NSStatusBarButton) {
+        if let e = NSApp.currentEvent,
+           e.type == .rightMouseUp || e.type == .rightMouseDown || e.modifierFlags.contains(.control) {
+            showMenu(sender)
+            return
+        }
         flyout.toggle(from: sender)
     }
+
+    private func showMenu(_ button: NSStatusBarButton) {
+        if flyout.isOpen { flyout.close() }
+        let menu = NSMenu()
+        menu.userInterfaceLayoutDirection = store.lc.isRTL ? .rightToLeft : .leftToRight
+        func add(_ key: String, _ action: Selector) {
+            let entry = NSMenuItem(title: store.t(key), action: action, keyEquivalent: "")
+            entry.target = self
+            menu.addItem(entry)
+        }
+        add("openPulse", #selector(openFlyout))
+        menu.addItem(.separator())
+        add("checkUpdates", #selector(checkForUpdates))
+        menu.addItem(.separator())
+        add("quit", #selector(quit))
+        // Attach the menu only for this click so a left click still opens the flyout.
+        item.menu = menu
+        button.performClick(nil)
+        item.menu = nil
+    }
+
+    @objc private func openFlyout() {
+        guard let button = item.button else { return }
+        flyout.open(from: button)
+    }
+
+    @objc private func checkForUpdates() { updater.check() }
+
+    @objc private func quit() { NSApp.terminate(nil) }
 
     private func render() {
         guard let button = item.button else { return }
