@@ -93,6 +93,9 @@ jobs:
         shell: pwsh
         working-directory: .
     steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - uses: actions/download-artifact@v4
         with:
           name: Pulse-win11-${{ matrix.rid }}
@@ -125,6 +128,31 @@ jobs:
               [System.Drawing.Graphics]::FromImage($bmp).CopyFromScreen($b.Left, $b.Top, 0, 0, $bmp.Size)
               $bmp.Save("$env:RUNNER_TEMP/screen.png")
             } catch { "No screenshot: $_" }
+            # Right-click the tray icon (the message Explorer sends) and read the menu that opens.
+            Add-Type -Namespace W -Name U -MemberDefinition @'
+              [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern IntPtr FindWindowW(string c, string n);
+              [DllImport("user32.dll")] public static extern bool PostMessageW(IntPtr h, uint m, IntPtr w, IntPtr l);
+              [DllImport("user32.dll")] public static extern IntPtr SendMessageW(IntPtr h, uint m, IntPtr w, IntPtr l);
+              [DllImport("user32.dll")] public static extern int GetMenuItemCount(IntPtr m);
+              [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int GetMenuStringW(IntPtr m, uint i, System.Text.StringBuilder s, int n, uint f);
+          '@
+            $tray = [W.U]::FindWindowW('PulseTrayWindow', $null)
+            if ($tray -eq [IntPtr]::Zero) { throw "No tray window" }
+            [W.U]::PostMessageW($tray, 0x8001, [IntPtr](200 + (200 -shl 16)), [IntPtr](0x7B + (1 -shl 16))) | Out-Null
+            Start-Sleep -Seconds 2
+            $menuWnd = [W.U]::FindWindowW('#32768', $null)
+            if ($menuWnd -eq [IntPtr]::Zero) { throw "Right-click did not open a menu" }
+            $hmenu = [W.U]::SendMessageW($menuWnd, 0x01E1, [IntPtr]::Zero, [IntPtr]::Zero)
+            $items = for ($i = 0; $i -lt [W.U]::GetMenuItemCount($hmenu); $i++) {
+              $sb = New-Object System.Text.StringBuilder 256
+              [void][W.U]::GetMenuStringW($hmenu, [uint32]$i, $sb, 256, 0x400); $sb.ToString()
+            }
+            "Tray menu: $(($items | Where-Object { $_ }) -join ' | ')"
+            foreach ($want in 'Open Pulse', 'Check for Updates', 'Quit') {
+              if (-not ($items | Where-Object { $_ -like "$want*" })) { throw "Tray menu has no '$want'" }
+            }
+            [W.U]::PostMessageW($menuWnd, 0x0100, [IntPtr]0x1B, [IntPtr]::Zero) | Out-Null
+            Start-Sleep -Seconds 1
             # Quit the way a user does (same path as the tray menu's Quit) and check it closes cleanly.
             Start-Process "$dir/Pulse.exe" -ArgumentList '--quit' -Wait
             if ($p.WaitForExit(15000)) { "Pulse quit cleanly" }
@@ -136,6 +164,52 @@ jobs:
             Where-Object { $_.ProviderName -in 'Application Error', '.NET Runtime', 'Windows Error Reporting', 'SideBySide', 'Application Hang' } |
             ForEach-Object { "[$($_.ProviderName)] $($_.Message)" }
           if (-not $alive) { throw "Pulse did not stay up" }
+          if (Test-Path "$env:LOCALAPPDATA/Pulse/crash.log") { throw "Pulse wrote a crash log" }
+      - name: Update from a local server (9.9.9) and check Pulse restarts on the new files
+        run: |
+          $dir = "$env:RUNNER_TEMP/clean"
+          $env:PULSE_NO_DIALOG = '1'
+          # The "new release": the same package plus a marker file, served like GitHub would.
+          $srv = "$env:RUNNER_TEMP/srv"
+          New-Item -ItemType Directory -Force "$srv/new", "$srv/build/windows-11" | Out-Null
+          Copy-Item -Recurse "$env:RUNNER_TEMP/unzipped/*" "$srv/new"
+          Set-Content "$srv/new/data/update-marker.txt" '9.9.9'
+          $zip = "$srv/build/windows-11/Pulse-${{ matrix.rid }}.zip"
+          Compress-Archive -Path "$srv/new/*" -DestinationPath $zip
+          $sha = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLower()
+          @{ version = '9.9.9'; files = @{ '${{ matrix.rid }}' = @{ path = 'build/windows-11/Pulse-${{ matrix.rid }}.zip'; sha256 = $sha } } } |
+            ConvertTo-Json -Depth 5 | Set-Content "$srv/build/windows-11/latest.json"
+          $server = Start-Process python -ArgumentList '-m', 'http.server', '8765', '--bind', '127.0.0.1' -WorkingDirectory $srv -PassThru -WindowStyle Hidden
+          Start-Sleep -Seconds 3
+          $env:PULSE_UPDATE_URL = 'http://127.0.0.1:8765/'
+
+          Start-Process "$dir/data/Pulse.exe" -ArgumentList '--update-check' -Wait -NoNewWindow -RedirectStandardOutput "$env:RUNNER_TEMP/check.txt"
+          $check = Get-Content "$env:RUNNER_TEMP/check.txt" -Raw
+          "update-check: $check"
+          if ($check -notmatch 'latest=9\.9\.9') { throw "update-check did not see 9.9.9" }
+
+          # Start Pulse, then update it from the command line the way the menu does.
+          Start-Process "$dir/Pulse.exe" | Out-Null
+          Start-Sleep -Seconds 10
+          Start-Process "$dir/data/Pulse.exe" -ArgumentList '--update' -Wait -NoNewWindow -RedirectStandardOutput "$env:RUNNER_TEMP/update.txt" -RedirectStandardError "$env:RUNNER_TEMP/update-err.txt"
+          "update: $(Get-Content "$env:RUNNER_TEMP/update.txt" -Raw) $(Get-Content "$env:RUNNER_TEMP/update-err.txt" -Raw)"
+          $app = (Resolve-Path "$dir/data/Pulse.exe").Path
+          $ok = $false
+          for ($i = 0; $i -lt 60; $i++) {
+            Start-Sleep -Seconds 1
+            $p = Get-Process Pulse -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $app }
+            if ((Test-Path "$dir/data/update-marker.txt") -and $p) { $ok = $true; break }
+          }
+          Get-ChildItem $dir | Select-Object Name | Format-Table -AutoSize
+          if (-not $ok) { throw "Pulse was not replaced and restarted" }
+          "Updated and running again: pid $($p.Id)"
+          Start-Sleep -Seconds 5
+          Start-Process "$dir/Pulse.exe" -ArgumentList '--quit' -Wait
+          if (-not $p.WaitForExit(15000)) { throw "Updated Pulse did not quit" }
+          Stop-Process -Id $server.Id -Force -ErrorAction SilentlyContinue
+          $left = Get-ChildItem $dir -Directory | Where-Object Name -like '*.old-*'
+          if ($left) { throw "Backup folders left behind: $($left.Name -join ', ')" }
+          "--- crash log"; Get-Content "$env:LOCALAPPDATA/Pulse/crash.log" -ErrorAction SilentlyContinue
           if (Test-Path "$env:LOCALAPPDATA/Pulse/crash.log") { throw "Pulse wrote a crash log" }
       - uses: actions/upload-artifact@v4
         if: always()
@@ -170,6 +244,7 @@ jobs:
           done
           git config user.name "njarrar"
           git config user.email "njarrar@gmail.com"
+          python3 tools/update_manifest.py windows-11 win-x64=build/windows-11/Pulse-win-x64.zip win-arm64=build/windows-11/Pulse-win-arm64.zip
           git add build/windows-11
           git diff --cached --quiet && exit 0
           git commit -m "Update Windows 11 app in build/windows-11"

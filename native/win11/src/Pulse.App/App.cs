@@ -65,6 +65,9 @@ public sealed partial class App : Application, IXamlMetadataProvider, IFlyoutHos
         UpdateTray(new Snapshot(), force: true);
         Sampler.Start();
 
+        // Files left in %TEMP% by the update that started this copy.
+        Task.Delay(TimeSpan.FromSeconds(30)).ContinueWith(_ => Update.Updater.CleanUp());
+
         _quitSignal = new EventWaitHandle(false, EventResetMode.AutoReset, Program.QuitEventName);
         ThreadPool.RegisterWaitForSingleObject(_quitSignal, (_, _) => _dispatcher.TryEnqueue(Quit), null, Timeout.Infinite, executeOnlyOnce: true);
         _dispatcher.TryEnqueue(DispatcherQueuePriority.Low, () =>
@@ -160,6 +163,8 @@ public sealed partial class App : Application, IXamlMetadataProvider, IFlyoutHos
             (1, L.T("openPulse")),
             (2, L.T("openMonitor", ("monitor", _ctx.X.Monitor))),
             (0, null),
+            (4, L.T("checkUpdates")),
+            (0, null),
             (3, L.T("quit"))
         ], L.Rtl);
         switch (id)
@@ -167,7 +172,45 @@ public sealed partial class App : Application, IXamlMetadataProvider, IFlyoutHos
             case 1: _window.ShowAt(_tray.Bounds(), _view?.DesiredHeight() ?? 600); break;
             case 2: OpenTaskManager(); break;
             case 3: Quit(); break;
+            case 4: CheckForUpdates(); break;
         }
+    }
+
+    bool _checking;
+
+    /// <summary>Tray menu: asks GitHub for a newer Pulse and, if the user agrees, installs it and restarts.</summary>
+    void CheckForUpdates()
+    {
+        if (_checking || _ctx is null) return;
+        _checking = true;
+        var L = _ctx.L;
+        string current = Update.Updater.CurrentVersion;
+        uint dir = L.Rtl ? Win32.MB_RTLREADING | Win32.MB_RIGHT : 0;
+        int Ask(string text, uint flags) => Win32.MessageBoxW(_tray.Hwnd, text, "Pulse", flags | dir | Win32.MB_SETFOREGROUND);
+        // Off the UI thread: the download can take a while and the tray keeps updating.
+        Task.Run(async () =>
+        {
+            try
+            {
+                var root = Update.Updater.InstallRoot ?? throw new InvalidOperationException("Pulse was not started from its zip folder");
+                var latest = await Update.Updater.LatestAsync();
+                if (Update.Updater.Compare(latest.Version, current) <= 0)
+                {
+                    Ask(L.T("updateNone", ("current", current)), Win32.MB_ICONINFORMATION);
+                    return;
+                }
+                if (Ask(L.T("updateAvailable", ("version", latest.Version), ("current", current)), Win32.MB_YESNO | Win32.MB_ICONINFORMATION) != Win32.IDYES) return;
+                string files = await Update.Updater.DownloadAsync(latest);
+                Update.Updater.StartApply(files, root);
+                _dispatcher.TryEnqueue(Quit);
+            }
+            catch (Exception e)
+            {
+                Program.Log(e);
+                Ask(L.T("updateFailed", ("error", e.Message)), Win32.MB_ICONERROR);
+            }
+            finally { _checking = false; }
+        });
     }
 
     // IFlyoutHost ---------------------------------------------------------

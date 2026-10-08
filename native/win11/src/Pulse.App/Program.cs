@@ -9,6 +9,10 @@ public static class Program
     [STAThread]
     static int Main()
     {
+        var args = Environment.GetCommandLineArgs().Skip(1).ToArray();
+        if (args.Contains("--update-check", StringComparer.OrdinalIgnoreCase) || args.Contains("--update", StringComparer.OrdinalIgnoreCase))
+            return CommandLineUpdate(args.Contains("--update", StringComparer.OrdinalIgnoreCase));
+
         // "Pulse.exe --quit" asks the running copy to close, as the tray menu's Quit does.
         if (Environment.GetCommandLineArgs().Skip(1).Any(a => a.Equals("--quit", StringComparison.OrdinalIgnoreCase)))
         {
@@ -40,6 +44,32 @@ public static class Program
             return 1;
         }
         return 0;
+    }
+
+    /// <summary>
+    /// --update-check prints the running and latest versions. --update also
+    /// installs a newer one: the running Pulse is asked to quit, and the new
+    /// launcher swaps the files and starts it again. Used by scripts and CI.
+    /// </summary>
+    static int CommandLineUpdate(bool install)
+    {
+        try
+        {
+            var latest = Update.Updater.LatestAsync().GetAwaiter().GetResult();
+            string current = Update.Updater.CurrentVersion;
+            Console.WriteLine($"current={current} latest={latest.Version}");
+            if (!install || Update.Updater.Compare(latest.Version, current) <= 0) return 0;
+            var root = Update.Updater.InstallRoot ?? throw new InvalidOperationException("Pulse was not started from its zip folder");
+            string files = Update.Updater.DownloadAsync(latest).GetAwaiter().GetResult();
+            Update.Updater.StartApply(files, root);
+            Console.WriteLine($"installing {latest.Version} into {root}");
+            return 0;
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine($"update failed: {e.Message}");
+            return 1;
+        }
     }
 
     public const string QuitEventName = @"Local\Pulse.Win11.Quit";

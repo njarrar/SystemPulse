@@ -4,7 +4,9 @@ using Pulse.App.Interop;
 namespace Pulse.App.Tray;
 
 /// <summary>
-/// Notification-area icon owned by a message-only window on the UI thread.
+/// Notification-area icon owned by a hidden top-level window on the UI thread.
+/// (Not a message-only window: those cannot own a popup menu and never get
+/// the TaskbarCreated broadcast.)
 /// Uses NOTIFYICON_VERSION_4: a click or Enter raises <see cref="Selected"/>,
 /// right-click or Shift+F10 raises <see cref="ContextMenu"/> with screen coordinates.
 /// Re-adds itself when Explorer restarts (TaskbarCreated).
@@ -44,7 +46,7 @@ public sealed unsafe partial class TrayIcon : IDisposable
             };
             Win32.RegisterClassExW(&wc);
         }
-        _hwnd = Win32.CreateWindowExW(0, ClassName, "Pulse", 0, 0, 0, 0, 0, Win32.HWND_MESSAGE, 0, hinst, 0);
+        _hwnd = Win32.CreateWindowExW(Win32.WS_EX_TOOLWINDOW, ClassName, "Pulse", Win32.WS_POPUP, 0, 0, 0, 0, 0, 0, hinst, 0);
     }
 
     public void Update(nint icon, string tip)
@@ -99,7 +101,9 @@ public sealed unsafe partial class TrayIcon : IDisposable
                 else Win32.AppendMenuW(menu, Win32.MF_STRING, (nuint)id, label);
             Win32.SetForegroundWindow(_hwnd); // so the menu closes when focus moves away
             uint flags = Win32.TPM_RIGHTBUTTON | Win32.TPM_RETURNCMD | Win32.TPM_BOTTOMALIGN | (rtl ? Win32.TPM_LAYOUTRTL : 0);
-            return Win32.TrackPopupMenuEx(menu, flags, x, y, _hwnd, 0);
+            int chosen = Win32.TrackPopupMenuEx(menu, flags, x, y, _hwnd, 0);
+            Win32.PostMessageW(_hwnd, 0, 0, 0); // WM_NULL: lets the next right-click open the menu again
+            return chosen;
         }
         finally { Win32.DestroyMenu(menu); }
     }

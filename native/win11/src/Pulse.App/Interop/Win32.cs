@@ -124,7 +124,9 @@ public static unsafe partial class Win32
     [LibraryImport("user32.dll", StringMarshalling = StringMarshalling.Utf16)]
     public static partial int MessageBoxW(nint hwnd, string text, string caption, uint type);
 
-    public const uint MB_ICONERROR = 0x10;
+    public const uint MB_ICONERROR = 0x10, MB_YESNO = 0x4, MB_ICONINFORMATION = 0x40, MB_RIGHT = 0x80000, MB_RTLREADING = 0x100000, MB_SETFOREGROUND = 0x10000;
+    public const int IDYES = 6;
+    public const uint WS_POPUP = 0x80000000, WS_EX_TOOLWINDOW = 0x80;
 
     [LibraryImport("user32.dll")]
     public static partial nint DefWindowProcW(nint hwnd, uint msg, nint wParam, nint lParam);
