@@ -4,7 +4,7 @@
 
 Your system's vitals, in a flash. صحة جهازك بنظرة واحدة.
 
-Pulse is a small, local-only system monitor (no network use) with one native app per platform: macOS, Windows 11, Linux (GNOME), ChromeOS, Windows XP and Windows 98 SE. A tray or menu bar readout opens a 420px panel with CPU, memory, energy, thermal, GPU, storage, network and top apps, each with a 10-minute history.
+Pulse is a small, local system monitor (it goes online only when you ask it to check for updates) with one native app per platform: macOS, Windows 11, Linux (GNOME), ChromeOS, Windows XP and Windows 98 SE. A tray or menu bar readout opens a 420px panel with CPU, memory, energy, thermal, GPU, storage, network and top apps, each with a 10-minute history.
 
 ## Screenshots
 
@@ -36,6 +36,15 @@ Ready-to-run apps live in `build/`, one folder per platform:
 Each folder's README says how to run it.
 
 ## What's new
+
+**1.3.0** (October 8, 2026)
+
+- Windows 11, macOS and Linux: right-click the tray or menu bar icon for a menu with Open Pulse, Check for Updates and Quit. On a Mac, Control-click works too.
+- Check for Updates asks GitHub for the newest Pulse. If there is one, Pulse asks first, then downloads it, checks the file against the SHA-256 sum in `build/<platform>/latest.json`, swaps in the new files and starts again. Pulse never checks on its own; it goes online only when you pick this.
+- Windows 11: keep the unzipped folder somewhere you can write to, such as Downloads or Documents. If the update fails, Pulse puts the old files back.
+- macOS: move Pulse.app into Applications (or any folder you can write to) first. Pulse can't replace itself while macOS runs it from a locked copy.
+- From a terminal: `--update-check` prints the current and newest versions on all three. On Windows 11 and Linux, `--update` installs the newest without asking.
+- Each build is tested in CI against a local server: on Windows 11 (x64 and Arm) the test installs a fake newer version and checks that Pulse comes back up on the new files.
 
 **1.2.2** (October 8, 2026)
 
