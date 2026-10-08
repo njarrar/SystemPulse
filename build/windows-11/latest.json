@@ -1,0 +1,15 @@
+{
+  "version": "1.3.0",
+  "files": {
+    "win-x64": {
+      "path": "build/windows-11/Pulse-win-x64.zip",
+      "sha256": "e3a3301f580c6c18ebe2315d560f9698fd47febcbdf5ade6e4db67d4fb04fd41",
+      "size": 48716375
+    },
+    "win-arm64": {
+      "path": "build/windows-11/Pulse-win-arm64.zip",
+      "sha256": "0ff373d781df22d0915a129d6ff84524757ad1d846f2de2c37721dcd6be3eb43",
+      "size": 46458905
+    }
+  }
+}
