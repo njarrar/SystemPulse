@@ -13,6 +13,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             DevTools.probe()
             return
         }
+        // `--update-check` prints "current=<v> latest=<v>" and exits (no UI).
+        if args.contains("--update-check") {
+            Updater.commandLineCheck()
+            return
+        }
         if let i = args.firstIndex(of: "--render"), i + 1 < args.count {
             store = PulseStore()
             DevTools.render(store: store, to: URL(fileURLWithPath: args[i + 1]))

@@ -6,6 +6,7 @@ import SwiftUI
 /// Command-line checks used by CI and for screenshots:
 ///   Pulse --probe          print two rounds of real telemetry and exit
 ///   Pulse --render DIR     render the flyout to PNG files (light, dark, en, ar) and exit
+///   Pulse --update-check   print "current=<v> latest=<v>" from latest.json and exit (Updater.swift)
 @MainActor
 enum DevTools {
     static func probe() {

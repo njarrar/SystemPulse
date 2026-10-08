@@ -1926,6 +1926,23 @@
         }
       }
     },
+    "strings.checkUpdates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التحقق من وجود تحديثات…"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check for Updates…"
+          }
+        }
+      }
+    },
     "strings.chromeTime" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4229,6 +4246,129 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Up"
+          }
+        }
+      }
+    },
+    "strings.updateAvailable" : {
+      "comment" : "Arguments: 1=version 2=current",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يتوفر Pulse %1$@. لديك %2$@. هل تريد تنزيله وتثبيته الآن؟"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulse %1$@ is available. You have %2$@. Download and install it now?"
+          }
+        }
+      }
+    },
+    "strings.updateFailed" : {
+      "comment" : "Arguments: 1=error",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تعذّر تحديث Pulse: %1$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't update Pulse: %1$@"
+          }
+        }
+      }
+    },
+    "strings.updateInstall" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تحديث"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update"
+          }
+        }
+      }
+    },
+    "strings.updateLater" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ليس الآن"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Now"
+          }
+        }
+      }
+    },
+    "strings.updateMove" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انقل Pulse إلى مجلد التطبيقات، ثم أعد المحاولة."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move Pulse to your Applications folder, then try again."
+          }
+        }
+      }
+    },
+    "strings.updateNone" : {
+      "comment" : "Arguments: 1=current",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لديك أحدث إصدار من Pulse (%1$@)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have the latest Pulse (%1$@)."
+          }
+        }
+      }
+    },
+    "strings.updating" : {
+      "comment" : "Arguments: 1=version",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ تنزيل Pulse %1$@…"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading Pulse %1$@…"
           }
         }
       }
