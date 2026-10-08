@@ -113,6 +113,7 @@ jobs:
           if (($top.Name -join ',') -ne 'Pulse.exe') { throw "Top folder should hold only Pulse.exe and folders, found: $($top.Name -join ', ')" }
           # A crash writes crash.log and exits instead of waiting on a message box.
           $env:PULSE_NO_DIALOG = '1'
+          $env:PULSE_TRACE = '1'
           $launcher = Start-Process "$dir/Pulse.exe" -WorkingDirectory $env:RUNNER_TEMP -PassThru
           $launcher.WaitForExit(15000) | Out-Null
           "Launcher exit code: $($launcher.ExitCode)"
@@ -147,7 +148,11 @@ jobs:
                 $menuWnd = [W.U]::FindWindowW('#32768', [NullString]::Value)
               }
             }
-            if ($menuWnd -eq [IntPtr]::Zero) { throw "Right-click did not open a menu" }
+            if ($menuWnd -eq [IntPtr]::Zero) {
+              Get-Content "$env:LOCALAPPDATA/Pulse/crash.log", "$env:LOCALAPPDATA/Pulse/trace.log" -ErrorAction SilentlyContinue
+              Get-Process | Where-Object MainWindowTitle | Select-Object ProcessName, MainWindowTitle | Format-Table -AutoSize
+              throw "Right-click did not open a menu"
+            }
             $hmenu = [W.U]::SendMessageW($menuWnd, 0x01E1, [IntPtr]::Zero, [IntPtr]::Zero)
             $items = for ($i = 0; $i -lt [W.U]::GetMenuItemCount($hmenu); $i++) {
               $sb = New-Object System.Text.StringBuilder 256

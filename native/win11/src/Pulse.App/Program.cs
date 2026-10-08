@@ -77,14 +77,16 @@ public static class Program
     /// <summary>Set once OnLaunched has finished.</summary>
     public static bool Started { get; set; }
 
-    static string LogPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pulse", "crash.log");
+    static string LogPath => LogFile("crash.log");
 
-    public static void Log(Exception? e)
+    static string LogFile(string name) => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pulse", name);
+
+    public static void Log(Exception? e, string file = "crash.log")
     {
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(LogPath)!);
-            File.AppendAllText(LogPath, $"{DateTime.Now:u} Pulse {typeof(Program).Assembly.GetName().Version}\r\n{e?.ToString() ?? "Unknown error"}\r\n\r\n");
+            File.AppendAllText(LogFile(file), $"{DateTime.Now:u} Pulse {typeof(Program).Assembly.GetName().Version}\r\n{e?.ToString() ?? "Unknown error"}\r\n\r\n");
         }
         catch (Exception) { }
     }

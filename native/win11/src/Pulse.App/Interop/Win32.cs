@@ -153,7 +153,7 @@ public static unsafe partial class Win32
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool AppendMenuW(nint menu, uint flags, nuint id, string? text);
 
-    [LibraryImport("user32.dll")]
+    [LibraryImport("user32.dll", SetLastError = true)]
     public static partial int TrackPopupMenuEx(nint menu, uint flags, int x, int y, nint hwnd, nint tpm);
 
     [LibraryImport("user32.dll")]

@@ -93,6 +93,8 @@ public sealed unsafe partial class TrayIcon : IDisposable
     /// <summary>Shows a native popup menu and returns the chosen id, or 0.</summary>
     public int ShowMenu(int x, int y, IEnumerable<(int Id, string? Label)> items, bool rtl)
     {
+        if (Environment.GetEnvironmentVariable("PULSE_TRACE") is not null)
+            Program.Log(new Exception($"trace: tray menu at {x},{y}"), "trace.log");
         nint menu = Win32.CreatePopupMenu();
         try
         {
@@ -102,6 +104,8 @@ public sealed unsafe partial class TrayIcon : IDisposable
             Win32.SetForegroundWindow(_hwnd); // so the menu closes when focus moves away
             uint flags = Win32.TPM_RIGHTBUTTON | Win32.TPM_RETURNCMD | Win32.TPM_BOTTOMALIGN | (rtl ? Win32.TPM_LAYOUTRTL : 0);
             int chosen = Win32.TrackPopupMenuEx(menu, flags, x, y, _hwnd, 0);
+            if (chosen == 0 && Marshal.GetLastPInvokeError() is int err and not 0)
+                Program.Log(new InvalidOperationException($"Tray menu did not open (error {err})"));
             Win32.PostMessageW(_hwnd, 0, 0, 0); // WM_NULL: lets the next right-click open the menu again
             return chosen;
         }
