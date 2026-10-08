@@ -3,6 +3,7 @@
 
 mod sni;
 mod ui;
+mod update;
 
 use adw::prelude::*;
 use pulse::i18n::Registry;
@@ -23,6 +24,10 @@ const HELP: &str = "Usage: pulse [options]
   --hog-after SECS     time above 50% CPU before the hog alert (default 120)
   --screenshot FILE    write the flyout to FILE (PNG) after --screenshot-delay
   --screenshot-delay S seconds to wait before the screenshot (default 4)
+  --update-check       print \"current=<version> latest=<version>\" and exit
+  --update             install a newer Pulse over this binary and exit
+                       (the manifest comes from PULSE_UPDATE_URL, default
+                       the GitHub repository)
   -h, --help           show this help";
 
 fn main() -> gtk::glib::ExitCode {
@@ -57,6 +62,8 @@ fn main() -> gtk::glib::ExitCode {
             "--hog-after" => hog_after = args.next().and_then(|s| s.parse().ok()).unwrap_or(hog_after),
             "--screenshot" => shot = args.next().map(PathBuf::from),
             "--screenshot-delay" => delay = args.next().and_then(|s| s.parse().ok()).unwrap_or(delay),
+            "--update-check" => return gtk::glib::ExitCode::from(update::cli(false) as u8),
+            "--update" => return gtk::glib::ExitCode::from(update::cli(true) as u8),
             "-h" | "--help" => {
                 println!("{HELP}");
                 return gtk::glib::ExitCode::SUCCESS;

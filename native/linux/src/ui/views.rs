@@ -1667,6 +1667,8 @@ pub fn tray_state(c: &Ctx) -> TrayState {
         tooltip: hog.clone().unwrap_or_else(|| c.lc.t("calm")),
         wave: c.st.hist.spark("cpu"),
         hog: hog.is_some(),
+        menu: [c.lc.t("openPulse"), c.lc.t("checkUpdates"), c.lc.t("quit")],
+        rtl: c.lc.rtl(),
     }
 }
 

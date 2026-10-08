@@ -16,6 +16,21 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - run: cargo test
       - run: cargo build --release
+      - name: Update check against a local 9.9.9 manifest
+        run: |
+          served=$(mktemp -d)
+          mkdir -p "$served/build/linux"
+          cp target/release/pulse "$served/build/linux/pulse"
+          sha=$(sha256sum target/release/pulse | cut -d' ' -f1)
+          size=$(stat -c %s target/release/pulse)
+          printf '{"version":"9.9.9","files":{"%s":{"path":"build/linux/pulse","sha256":"%s","size":%s}}}\n' "$(uname -m)" "$sha" "$size" > "$served/build/linux/latest.json"
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory "$served" &
+          server=$!
+          for i in $(seq 20); do curl -sf http://127.0.0.1:8765/build/linux/latest.json >/dev/null && break; sleep 0.5; done
+          out=$(PULSE_UPDATE_URL=http://127.0.0.1:8765/ target/release/pulse --update-check)
+          echo "$out"
+          kill $server
+          echo "$out" | grep -q 'latest=9.9.9'
       - uses: actions/upload-artifact@v4
         with:
           name: pulse-linux

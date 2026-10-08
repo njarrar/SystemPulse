@@ -903,6 +903,7 @@ dependencies = [
  "libadwaita",
  "libc",
  "pangocairo",
+ "serde",
  "serde_json",
  "zbus",
 ]
