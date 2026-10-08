@@ -37,6 +37,11 @@ Each folder's README says how to run it.
 
 ## What's new
 
+**1.2.2** (October 8, 2026)
+
+- Windows 11: quitting Pulse no longer writes a crash log. The background reader stopped with an error when told to stop; it now stops quietly and closes its sensors itself, so it never reads a sensor that was already closed.
+- Windows 11: `Pulse.exe --quit` closes a running Pulse, the same as Quit in the tray menu. The CI test now quits Pulse this way on both machines and fails if a crash log appears.
+
 **1.2.1** (October 7, 2026)
 
 - Windows 11: Pulse now opens. Before, it closed at once on every PC, because some of its screen parts lacked a code marking that the fast-start build needs, so Windows could not lay them out. The build now stops if that marking is missing.

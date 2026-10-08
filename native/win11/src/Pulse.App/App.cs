@@ -33,6 +33,8 @@ public sealed partial class App : Application, IXamlMetadataProvider, IFlyoutHos
     FlyoutView? _view;
     UiContext? _ctx;
     string _lastTip = "";
+    EventWaitHandle? _quitSignal;
+    bool _quitting;
     (int Cpu, int Ram, bool Hog, bool Light) _lastIcon = (-1, -1, false, false);
 
     public Settings Settings { get; } = Settings.Load();
@@ -62,6 +64,9 @@ public sealed partial class App : Application, IXamlMetadataProvider, IFlyoutHos
         Rebuild();
         UpdateTray(new Snapshot(), force: true);
         Sampler.Start();
+
+        _quitSignal = new EventWaitHandle(false, EventResetMode.AutoReset, Program.QuitEventName);
+        ThreadPool.RegisterWaitForSingleObject(_quitSignal, (_, _) => _dispatcher.TryEnqueue(Quit), null, Timeout.Infinite, executeOnlyOnce: true);
         _dispatcher.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
             _window.ShowAt(_tray.Bounds(), _view?.DesiredHeight() ?? 600);
@@ -204,6 +209,8 @@ public sealed partial class App : Application, IXamlMetadataProvider, IFlyoutHos
 
     public void Quit()
     {
+        if (_quitting) return;
+        _quitting = true;
         _window.Hide();
         _tray.Dispose();
         Sampler.Dispose();

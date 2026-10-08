@@ -125,7 +125,10 @@ jobs:
               [System.Drawing.Graphics]::FromImage($bmp).CopyFromScreen($b.Left, $b.Top, 0, 0, $bmp.Size)
               $bmp.Save("$env:RUNNER_TEMP/screen.png")
             } catch { "No screenshot: $_" }
-            Stop-Process -Id $p.Id -Force
+            # Quit the way a user does (same path as the tray menu's Quit) and check it closes cleanly.
+            Start-Process "$dir/Pulse.exe" -ArgumentList '--quit' -Wait
+            if ($p.WaitForExit(15000)) { "Pulse quit cleanly" }
+            else { Stop-Process -Id $p.Id -Force; throw "Pulse did not close after --quit" }
           }
           "--- crash log"; Get-Content "$env:LOCALAPPDATA/Pulse/crash.log" -ErrorAction SilentlyContinue
           "--- event log"

@@ -103,22 +103,36 @@ public sealed partial class Sampler : IDisposable
 
     AppSample? _realHog;
 
+    Thread? _thread;
+
     public void Start()
     {
-        var thread = new Thread(Loop) { IsBackground = true, Name = "Pulse sampler", Priority = ThreadPriority.BelowNormal };
-        thread.Start();
+        _thread = new Thread(Loop) { IsBackground = true, Name = "Pulse sampler", Priority = ThreadPriority.BelowNormal };
+        _thread.Start();
     }
 
     void Loop()
     {
-        _pdh.Collect(); // PDH rates need two collections
-        using var timer = new PeriodicTimer(Interval);
-        do
+        try
         {
-            if (_paused) continue;
-            try { Tick(); }
-            catch (Exception) { /* keep sampling */ }
-        } while (!_stop.IsCancellationRequested && timer.WaitForNextTickAsync(_stop.Token).AsTask().GetAwaiter().GetResult());
+            _pdh.Collect(); // PDH rates need two collections
+            using var timer = new PeriodicTimer(Interval);
+            do
+            {
+                if (_paused) continue;
+                try { Tick(); }
+                catch (Exception) { /* keep sampling */ }
+            } while (!_stop.IsCancellationRequested && timer.WaitForNextTickAsync(_stop.Token).AsTask().GetAwaiter().GetResult());
+        }
+        catch (OperationCanceledException) { /* Dispose: stop quietly */ }
+        finally
+        {
+            // Close the readers here, on the sampling thread, so a tick in progress
+            // never reads a handle that Dispose already closed.
+            _gpu.Dispose();
+            _net.Dispose();
+            _pdh.Dispose();
+        }
     }
 
     void Tick()
@@ -155,12 +169,18 @@ public sealed partial class Sampler : IDisposable
         catch (Exception) { return fallback; }
     }
 
+    /// <summary>Stops sampling. The loop closes the readers once its current tick ends.</summary>
     public void Dispose()
     {
+        Sampled = null;
         _stop.Cancel();
-        _gpu.Dispose();
-        _net.Dispose();
-        _pdh.Dispose();
+        if (_thread is null)
+        {
+            _gpu.Dispose();
+            _net.Dispose();
+            _pdh.Dispose();
+        }
+        else _thread.Join(TimeSpan.FromSeconds(3));
     }
 }
 

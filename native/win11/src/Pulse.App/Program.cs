@@ -9,11 +9,18 @@ public static class Program
     [STAThread]
     static int Main()
     {
+        // "Pulse.exe --quit" asks the running copy to close, as the tray menu's Quit does.
+        if (Environment.GetCommandLineArgs().Skip(1).Any(a => a.Equals("--quit", StringComparison.OrdinalIgnoreCase)))
+        {
+            if (EventWaitHandle.TryOpenExisting(QuitEventName, out var quit)) using (quit) quit.Set();
+            return 0;
+        }
+
         // One Pulse per sign-in session.
         using var single = new Mutex(true, @"Local\Pulse.Win11.SingleInstance", out bool first);
         if (!first) return 0;
 
-        AppDomain.CurrentDomain.UnhandledException += (_, e) => Fail(e.ExceptionObject as Exception);
+        AppDomain.CurrentDomain.UnhandledException += (_, e) => { if (Started) Log(e.ExceptionObject as Exception); else Fail(e.ExceptionObject as Exception); };
         try
         {
             WinRT.ComWrappersSupport.InitializeComWrappers();
@@ -34,6 +41,8 @@ public static class Program
         }
         return 0;
     }
+
+    public const string QuitEventName = @"Local\Pulse.Win11.Quit";
 
     /// <summary>Set once OnLaunched has finished.</summary>
     public static bool Started { get; set; }

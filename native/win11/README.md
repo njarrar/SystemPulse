@@ -73,6 +73,10 @@ only finds them beside WinUI's DLLs, so they stay in `data\`.
 If start-up fails, Pulse writes `%LOCALAPPDATA%\Pulse\crash.log` and shows a
 message box. Set `PULSE_NO_DIALOG=1` to skip the box (CI does this).
 
+`Pulse.exe --quit` closes a running copy (it signals the `Local\Pulse.Win11.Quit`
+event), the same as Quit in the tray menu. Errors after start-up go to
+`crash.log` without closing Pulse.
+
 Set `PULSE_ARTIFACTS` to a folder to keep `bin/` and `obj/` out of the tree.
 
 CI: `.github/workflows/win11.yml` runs the tests, builds and publishes x64
