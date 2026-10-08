@@ -21,7 +21,7 @@ path = "src/lib.rs"
 
 [features]
 default = ["gui"]
-gui = ["dep:gtk", "dep:adw", "dep:gdk4-x11", "dep:pangocairo", "dep:async-channel", "dep:zbus"]
+gui = ["dep:gtk", "dep:adw", "dep:gdk4-x11", "dep:pangocairo", "dep:async-channel", "dep:zbus", "dep:serde"]
 
 [dependencies]
 gtk = { package = "gtk4", version = "0.11", features = ["v4_14"], optional = true }
@@ -30,6 +30,7 @@ gdk4-x11 = { version = "0.11", features = ["xlib"], optional = true }
 pangocairo = { version = "0.22", optional = true }
 async-channel = { version = "2", optional = true }
 zbus = { version = "5", default-features = false, features = ["blocking-api", "async-io"], optional = true }
+serde = { version = "1", features = ["derive"], optional = true }
 serde_json = "1"
 libc = "0.2"
 

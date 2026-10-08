@@ -58,6 +58,7 @@ pub struct Ctl {
     tray: RefCell<Option<sni::Tray>>,
     toast_gen: Cell<u64>,
     built: RefCell<Option<(View, String, bool, bool)>>,
+    updating: Cell<bool>,
 }
 
 impl Ctl {
@@ -84,6 +85,7 @@ impl Ctl {
             tray: RefCell::new(None),
             toast_gen: Cell::new(0),
             built: RefCell::new(None),
+            updating: Cell::new(false),
         });
         if let Some(d) = opts.dark {
             ctl.st.borrow_mut().dark = d;
@@ -146,6 +148,9 @@ impl Ctl {
             let c7 = ctl.clone();
             *ctl.tray.borrow_mut() = sni::Tray::spawn(move |ev| match ev {
                 sni::TrayEvent::Activate => c7.toggle(),
+                sni::TrayEvent::Open => c7.open(),
+                sni::TrayEvent::CheckUpdates => c7.check_updates(),
+                sni::TrayEvent::Quit => c7.quit(),
             });
         }
         ctl.rebuild();
@@ -190,6 +195,77 @@ impl Ctl {
             self.win.present();
             self.rebuild();
         }
+    }
+
+    pub fn open(self: &Rc<Self>) {
+        if self.win.is_visible() {
+            self.win.present();
+        } else {
+            self.toggle();
+        }
+    }
+
+    /// Check for Updates… in the top bar menu: reads the manifest and asks
+    /// before installing a newer build.
+    pub fn check_updates(self: &Rc<Self>) {
+        if self.updating.replace(true) {
+            return;
+        }
+        let c = self.clone();
+        glib::spawn_future_local(async move {
+            let res = crate::update::check().await;
+            let lc = c.locale();
+            let current = crate::update::CURRENT.to_string();
+            match res {
+                Err(e) => c.alert(lc.tp("updateFailed", &[("error", e)]), None),
+                Ok(chk) => match chk.offer() {
+                    None => c.alert(lc.tp("updateNone", &[("current", current)]), None),
+                    Some(r) => c.alert(lc.tp("updateAvailable", &[("version", r.version.clone()), ("current", current)]), Some(r.clone())),
+                },
+            }
+        });
+    }
+
+    /// Shows a message, or with `offer` asks whether to install it. Parented
+    /// to the flyout when it is open; otherwise libadwaita gives the dialog
+    /// its own window.
+    fn alert(self: &Rc<Self>, body: String, offer: Option<crate::update::Release>) {
+        let lc = self.locale();
+        let d = adw::AlertDialog::new(Some("Pulse"), Some(&body));
+        match &offer {
+            Some(_) => {
+                d.add_responses(&[("later", &lc.t("updateLater")), ("install", &lc.t("updateInstall"))]);
+                d.set_response_appearance("install", adw::ResponseAppearance::Suggested);
+                d.set_default_response(Some("install"));
+                d.set_close_response("later");
+            }
+            None => {
+                d.add_response("close", &lc.t("aClose"));
+                d.set_close_response("close");
+            }
+        }
+        let c = self.clone();
+        d.connect_response(None, move |_, resp| match (&offer, resp) {
+            (Some(r), "install") => c.install_update(r.clone()),
+            _ => c.updating.set(false),
+        });
+        let parent = self.win.is_visible().then_some(&self.win);
+        d.present(parent);
+    }
+
+    fn install_update(self: &Rc<Self>, r: crate::update::Release) {
+        let lc = self.locale();
+        if self.win.is_visible() {
+            self.toast(lc.tp("updating", &[("version", r.version.clone())]));
+        }
+        let c = self.clone();
+        glib::spawn_future_local(async move {
+            let res = crate::update::download(&r).await.and_then(|d| crate::update::install(&d)).and_then(|exe| crate::update::relaunch(&exe));
+            match res {
+                Ok(()) => c.quit(),
+                Err(e) => c.alert(c.locale().tp("updateFailed", &[("error", e)]), None),
+            }
+        });
     }
 
     /// X11: anchor the flyout to the top-end corner under the top bar.

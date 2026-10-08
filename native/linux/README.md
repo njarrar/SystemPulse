@@ -1,6 +1,6 @@
 # Pulse for Linux (GNOME)
 
-Rust, gtk4-rs and libadwaita. Pulse puts an entry in the top bar and opens a 420px flyout with three tiers: the top bar readout, the overview, and the 10-minute detail and settings views. It reads live data from `/proc`, `/sys` and netlink every 1.5 s and makes no network connections.
+Rust, gtk4-rs and libadwaita. Pulse puts an entry in the top bar and opens a 420px flyout with three tiers: the top bar readout, the overview, and the 10-minute detail and settings views. It reads live data from `/proc`, `/sys` and netlink every 1.5 s and makes no network connections, except when you ask it to check for updates.
 
 ## Build
 
@@ -22,6 +22,8 @@ pulse --show-flyout         # open the flyout now and keep it open (no tray host
 pulse --lang ar             # language for this run; default is the saved choice
 pulse --view cpu            # cpu, mem, nrg, thm, gpu, ssd, net, settings, app:<key>
 pulse --theme dark
+pulse --update-check        # print "current=<version> latest=<version>" and exit
+pulse --update              # install a newer build over this binary and exit
 pulse --help                # all options
 ```
 
@@ -30,6 +32,12 @@ Esc goes back to the overview, then closes the flyout. The flyout closes when it
 ### Top bar entry
 
 Pulse publishes a D-Bus `StatusNotifierItem`. The icon is a status dot (green, or orange during a hog alert) and a 6-bar CPU wave. The `CPU % RAM % ⚡ W ↓ Net` readout goes out as the Ayatana label, which the AppIndicator extension prints next to the icon. Stock GNOME Shell needs the AppIndicator extension (Ubuntu ships it on). KDE, Budgie, Cinnamon and others show the item natively.
+
+Right-click the entry for its menu: Open Pulse, Check for Updates…, Quit. The menu is a `com.canonical.dbusmenu` object at `/MenuBar`, in the app language and direction; switching language updates it live.
+
+### Updates
+
+Check for Updates… (or `--update-check` and `--update`) reads `build/linux/latest.json` from `PULSE_UPDATE_URL`, by default `https://raw.githubusercontent.com/njarrar/SystemPulse/main/`. The manifest gives the version and, per CPU (`x86_64`, `aarch64`), the file path, SHA-256 and size; `tools/update_manifest.py linux x86_64=build/linux/pulse` writes it. When the version is newer, Pulse asks, downloads over GIO (HTTPS through glib-networking), checks the SHA-256, writes `<binary>.new` next to the running binary, renames it over the binary and restarts with the same options. A folder you cannot write to is reported as an error. Pulse never checks on its own.
 
 Placement: on X11 the flyout opens at the top-end corner under the bar (top-left in RTL). Wayland does not let apps place windows, so GNOME on Wayland puts it where it likes.
 
@@ -102,7 +110,8 @@ build.rs              locales/*.json -> .po and .mo, embedded
 src/catalog.rs        JSON to catalog entries, .po and .mo writer, .mo reader
 src/i18n.rs           CLDR plural engine, interpolation, isolation, fallback
 src/telemetry/        cpu, mem, power, thermal, gpu, disk, net, nl80211, procs
-src/sni.rs            StatusNotifierItem over D-Bus (zbus)
+src/sni.rs            StatusNotifierItem and its dbusmenu over D-Bus (zbus)
+src/update.rs         update check, download, SHA-256 check and replace
 src/ui/               flyout window, views, drawing, tokens, CSS and saved settings
 src/bin/pulse-catalog.rs   converts extra locale files
 tests/                plural vectors and engine tests, telemetry tests
